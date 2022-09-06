@@ -1,5 +1,8 @@
 ﻿using System;
+using ExpressionTree;
+using Godot;
 using TinyScreen.framework.interfaces;
+using TinyScreen.models;
 
 namespace TinyScreen.services {
     public class DatabaseSettingsService: ISettingsInterface {
@@ -16,15 +19,20 @@ namespace TinyScreen.services {
         }
 
         public void InstallApp() {
-            _databaseService.CreateDatabase();
+            _databaseService.InitDatabase();
         }
 
-        public void Set(Setting setting) {
-            
+        public void Set(Setting setting, string value) {
+            _databaseService.Insert(new Settings {
+                Name = setting.ToString(),
+                Value = value
+            });
         }
 
         public string Get(Setting setting) {
-            return "Temporary value";
+            var record = _databaseService.Select<Settings>(new Expr("name", OperatorEnum.Equals,Setting.Author));
+            if (record != null) return record.Value;
+            throw new Exception($"Setting {setting.ToString()} was not found");
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using DatabaseWrapper.Core;
+using ExpressionTree;
 using Godot;
 using TinyScreen.framework.interfaces;
 using TinyScreen.models;
@@ -18,11 +19,19 @@ namespace TinyScreen.services {
             return System.IO.File.Exists(GetDatabasePath());
         }
 
-        public void CreateDatabase() {
+        public void InitDatabase() {
             DatabaseSettings settings = new DatabaseSettings(GetDatabasePath());
             _watson = new WatsonORM(settings);
             _watson.InitializeDatabase();
             _watson.InitializeTable(typeof(Settings));
+        }
+
+        public void Insert<T>(T record) where T : class, new() {
+            _watson.Insert(record);
+        }
+
+        public T Select<T>(Expr expr, ResultOrder[] ro = null) where T : class, new() {
+            return _watson.SelectFirst<T>(expr, ro);
         }
     }
 }

@@ -11,7 +11,7 @@ namespace TinyScreen.models {
         [Column("name", false, DataTypes.Nvarchar, 64, false)]
         public string Name { get; set; }
         
-        [Column("value", false, DataTypes.Blob, 64, false)]
+        [Column("value", false, DataTypes.Nvarchar, 64, false)]
         public string Value { get; set; }
     }
 }
