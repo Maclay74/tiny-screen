@@ -3,4 +3,8 @@
     <TargetFramework>net472</TargetFramework>
     <RootNamespace>TinyScreen</RootNamespace>
   </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="Lib.Harmony" Version="2.2.2" />
+    <PackageReference Include="SimpleInjector" Version="5.4.0" />
+  </ItemGroup>
 </Project>
