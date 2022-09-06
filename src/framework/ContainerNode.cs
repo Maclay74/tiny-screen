@@ -17,8 +17,8 @@ public class ContainerNode : Node {
         base._EnterTree();
         
         _container = new Container();
-        _container.Register<IDatabaseService, DatabaseService>(Lifestyle.Singleton);
-        _container.Register<ILauncherService, SteamService>(Lifestyle.Singleton);
+        _container.Register<IDatabaseService, WatsonDatabaseService>(Lifestyle.Singleton);
+        _container.Register<ISettingsInterface, DatabaseSettingsService>(Lifestyle.Singleton);
         InjectDI();
 
     }

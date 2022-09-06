@@ -5,11 +5,24 @@ using TinyScreen.framework.interfaces;
 namespace TinyScreen.scripts {
     public class RootNode: Control {
 
-        [Inject] public ILauncherService _Launcher;
+        [Inject] public ISettingsInterface _settingsService;
         
         public override void _Ready() {
             base._Ready();
-            GD.Print(_Launcher);
+            
+            // Application is not installing, we need onboarding!
+            if (!_settingsService.IsAppInstalled()) {
+            
+                // Install application
+                _settingsService.InstallApp();
+            }
+            
+            // Application is installed, show it
+            else {
+                
+                
+            }
+            
         }
     }
 }
