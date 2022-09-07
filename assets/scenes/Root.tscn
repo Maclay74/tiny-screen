@@ -9,4 +9,4 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 theme = ExtResource( 2 )
 script = ExtResource( 1 )
-OnboardingPath = ExtResource( 3 )
+Onboarding = ExtResource( 3 )
