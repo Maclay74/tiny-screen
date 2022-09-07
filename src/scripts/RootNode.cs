@@ -8,17 +8,22 @@ namespace TinyScreen.scripts {
         [Inject] public ISettingsInterface _settingsService;
         [Inject] public IDatabaseService _databaseService;
 
+        [Export] private PackedScene Onboarding;
+        [Export] private PackedScene Application;
+
         public override void _Ready() {
             base._Ready();
             
             // Application is not installed, we need onboarding!
             if (!_settingsService.IsAppInstalled()) {
+                
+                AddChild(Onboarding.Instance());
             
                 // Install application
-                _settingsService.InstallApp();
+                //_settingsService.InstallApp();
                 
                 // Add some settings during the onboarding, for example
-                _settingsService.Set(Setting.Author, "Mike!");
+                //_settingsService.Set(Setting.Author, "Mike!");
             }
             
             // Application is installed, show it
