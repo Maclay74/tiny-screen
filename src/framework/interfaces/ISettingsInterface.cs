@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace TinyScreen.framework.interfaces {
+namespace TinyScreen.Framework.Interfaces {
     
     public interface ISettingsInterface {
         bool IsAppInstalled();

@@ -1,12 +1,27 @@
-[gd_scene format=2]
+[gd_scene load_steps=3 format=2]
 
-[node name="Welcome" type="MarginContainer"]
+[ext_resource path="res://src/scripts/onboarding/Update.cs" type="Script" id=1]
+[ext_resource path="res://assets/themes/default.tres" type="Theme" id=2]
+
+[node name="Update" type="MarginContainer"]
 anchor_right = 1.0
 anchor_bottom = 1.0
+theme = ExtResource( 2 )
 custom_constants/margin_right = 20
 custom_constants/margin_top = 20
 custom_constants/margin_left = 20
 custom_constants/margin_bottom = 20
+script = ExtResource( 1 )
+SubTitlePath = NodePath("CenterContainer/VBoxContainer/Subtitle")
+UpdateSizePath = NodePath("CenterContainer/VBoxContainer/Buttons/UpdateButton/UpdateSize")
+CurrentVersionPath = NodePath("CenterContainer/VBoxContainer/Versions/Current/Value")
+LatestVersionPath = NodePath("CenterContainer/VBoxContainer/Versions/Latest/Value")
+VersionsListPath = NodePath("CenterContainer/VBoxContainer/Versions")
+SkipButtonPath = NodePath("CenterContainer/VBoxContainer/Buttons/SkipButton")
+ChangelogButtonPath = NodePath("CenterContainer/VBoxContainer/Buttons/ChangesButton")
+UpdateButtonPath = NodePath("CenterContainer/VBoxContainer/Buttons/UpdateButton")
+TryAgainButtonPath = NodePath("CenterContainer/VBoxContainer/Buttons/TryAgainButton")
+ProgressBarPath = NodePath("CenterContainer/VBoxContainer/ProgressBar")
 
 [node name="CenterContainer" type="CenterContainer" parent="."]
 margin_left = 20.0
@@ -15,38 +30,120 @@ margin_right = 1004.0
 margin_bottom = 580.0
 
 [node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer"]
-margin_left = 339.0
-margin_top = 230.0
-margin_right = 644.0
-margin_bottom = 330.0
+margin_left = 242.0
+margin_top = 193.0
+margin_right = 741.0
+margin_bottom = 366.0
 alignment = 1
 
 [node name="Title" type="Label" parent="CenterContainer/VBoxContainer"]
-margin_right = 305.0
-margin_bottom = 14.0
+margin_right = 499.0
+margin_bottom = 38.0
 theme_type_variation = "OnboardingTitle"
-text = "Welcome to Tiny Screen"
+text = "Check for updates"
 align = 1
 
 [node name="Subtitle" type="Label" parent="CenterContainer/VBoxContainer"]
-margin_top = 18.0
-margin_right = 305.0
-margin_bottom = 32.0
+margin_top = 42.0
+margin_right = 499.0
+margin_bottom = 72.0
+rect_min_size = Vector2( 0, 30 )
 theme_type_variation = "OnboardingSubtitle"
-text = "Let's do essentials some essential settings first"
+text = "Check if there is a new version of the application"
 align = 1
 
-[node name="Space" type="Control" parent="CenterContainer/VBoxContainer"]
-margin_top = 36.0
-margin_right = 305.0
-margin_bottom = 76.0
-rect_min_size = Vector2( 0, 40 )
+[node name="Versions" type="HBoxContainer" parent="CenterContainer/VBoxContainer"]
+margin_top = 76.0
+margin_right = 499.0
+margin_bottom = 136.0
+rect_min_size = Vector2( 0, 60 )
+custom_constants/separation = 10
+alignment = 1
 
-[node name="StartButton" type="Button" parent="CenterContainer/VBoxContainer"]
-margin_left = 132.0
-margin_top = 80.0
-margin_right = 173.0
-margin_bottom = 100.0
-size_flags_horizontal = 4
+[node name="Current" type="VBoxContainer" parent="CenterContainer/VBoxContainer/Versions"]
+margin_left = 129.0
+margin_right = 266.0
+margin_bottom = 60.0
+
+[node name="Label" type="Label" parent="CenterContainer/VBoxContainer/Versions/Current"]
+margin_right = 137.0
+margin_bottom = 14.0
+text = "Your current version: "
+
+[node name="Value" type="Label" parent="CenterContainer/VBoxContainer/Versions/Current"]
+margin_top = 18.0
+margin_right = 137.0
+margin_bottom = 32.0
+text = "1.0.0.0"
+
+[node name="Latest" type="VBoxContainer" parent="CenterContainer/VBoxContainer/Versions"]
+margin_left = 276.0
+margin_right = 370.0
+margin_bottom = 60.0
+
+[node name="Label" type="Label" parent="CenterContainer/VBoxContainer/Versions/Latest"]
+margin_right = 94.0
+margin_bottom = 14.0
+text = "Latest version:"
+
+[node name="Value" type="Label" parent="CenterContainer/VBoxContainer/Versions/Latest"]
+margin_top = 18.0
+margin_right = 94.0
+margin_bottom = 32.0
+text = "1.1.0.0"
+
+[node name="Buttons" type="HBoxContainer" parent="CenterContainer/VBoxContainer"]
+margin_top = 140.0
+margin_right = 499.0
+margin_bottom = 173.0
+custom_constants/separation = 15
+
+[node name="SkipButton" type="Button" parent="CenterContainer/VBoxContainer/Buttons"]
+margin_right = 79.0
+margin_bottom = 33.0
+size_flags_horizontal = 3
 theme_type_variation = "OnboardingStartButton"
-text = "Start"
+text = "Skip"
+
+[node name="ChangesButton" type="Button" parent="CenterContainer/VBoxContainer/Buttons"]
+margin_left = 94.0
+margin_right = 238.0
+margin_bottom = 33.0
+size_flags_horizontal = 3
+theme_type_variation = "OnboardingStartButton"
+text = "Change log"
+
+[node name="TryAgainButton" type="Button" parent="CenterContainer/VBoxContainer/Buttons"]
+margin_left = 253.0
+margin_right = 377.0
+margin_bottom = 33.0
+size_flags_horizontal = 3
+theme_type_variation = "OnboardingStartButton"
+text = "Try again"
+
+[node name="UpdateButton" type="Button" parent="CenterContainer/VBoxContainer/Buttons"]
+margin_left = 392.0
+margin_right = 499.0
+margin_bottom = 33.0
+size_flags_horizontal = 3
+theme_type_variation = "OnboardingStartButton"
+text = "Update"
+
+[node name="UpdateSize" type="Label" parent="CenterContainer/VBoxContainer/Buttons/UpdateButton"]
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = 5.0
+margin_bottom = 19.0
+size_flags_horizontal = 3
+text = "16 mb"
+align = 1
+
+[node name="ProgressBar" type="ProgressBar" parent="CenterContainer/VBoxContainer"]
+visible = false
+margin_top = 177.0
+margin_right = 499.0
+margin_bottom = 197.0
+rect_min_size = Vector2( 0, 20 )
+step = 1.0
+rounded = true

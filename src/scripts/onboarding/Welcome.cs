@@ -1,7 +1,7 @@
 ﻿using Godot;
 
-namespace TinyScreen.scripts.onboarding {
-    public class Welcome : Node {
+namespace TinyScreen.Scripts.Onboarding {
+    public class Welcome : Control {
 
         [Export] public NodePath StartButtonPath;
         

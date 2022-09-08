@@ -1,11 +1,11 @@
 ﻿using DatabaseWrapper.Core;
 using ExpressionTree;
 using Godot;
-using TinyScreen.framework.interfaces;
-using TinyScreen.models;
+using TinyScreen.Framework.Interfaces;
+using TinyScreen.Models;
 using Watson.ORM.Sqlite;
 
-namespace TinyScreen.services {
+namespace TinyScreen.Services {
     public class WatsonDatabaseService: IDatabaseService {
 
         private const string DbName = "application.db";

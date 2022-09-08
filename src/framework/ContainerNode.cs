@@ -3,8 +3,8 @@ using System.Linq;
 using System.Reflection;
 using Godot;
 using SimpleInjector;
-using TinyScreen.framework.interfaces;
-using TinyScreen.services;
+using TinyScreen.Framework.Interfaces;
+using TinyScreen.Services;
 using Container = SimpleInjector.Container;
 using HarmonyLib;
 using TinyScreen.Framework.Attributes;
@@ -19,6 +19,8 @@ public class ContainerNode : Node {
         _container = new Container();
         _container.Register<IDatabaseService, WatsonDatabaseService>(Lifestyle.Singleton);
         _container.Register<ISettingsInterface, DatabaseSettingsService>(Lifestyle.Singleton);
+        _container.Register<IUpdateInterface, LocalUpdateService>(Lifestyle.Singleton);
+        _container.Register<IHardwareService>(HardwareFactory.GetHardwareService, Lifestyle.Singleton);
         InjectDI();
 
     }

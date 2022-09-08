@@ -1,6 +1,6 @@
 using Godot;
 
-namespace TinyScreen.scripts.onboarding {
+namespace TinyScreen.Scripts.Onboarding {
     public class Onboarding : Control {
 
         [Export] public PackedScene WelcomeScene;
@@ -15,16 +15,19 @@ namespace TinyScreen.scripts.onboarding {
             Widgets
         }
 
-        private Stage _currentStage;
-        private Node _currentScene;
+        private Stage _currentStage = Stage.Welcome;
+        private Control _currentScene;
+        private Tween _tween;
         
         public override void _Ready() {
-            GD.Print("Onboarding is started!");
-            
+            base._Ready();
+            _tween = new Tween();
+            AddChild(_tween);
             SetStage(_currentStage);
         }
         
         private void SetStage(Stage newStage) {
+            _currentStage = newStage;
             
             switch (newStage) {
                 case Stage.Welcome:
@@ -32,7 +35,11 @@ namespace TinyScreen.scripts.onboarding {
                     break;
                 
                 case Stage.Update:
-                    GD.Print("Update!!!");
+                    TransitionToScene(UpdateScene);
+                    break;
+                
+                default:
+                    GD.Print("This stage isn't implemented yet!");
                     break;
             }
         }
@@ -45,18 +52,41 @@ namespace TinyScreen.scripts.onboarding {
             
             // At this point onboarding is finished
             // Persist settings and games
+            // Open application
         }
 
         private async void TransitionToScene(PackedScene newScene) {
             
             // If there is no scene, just show it (for now)
             if (_currentScene == null) {
-                _currentScene = newScene.Instance();
+                _currentScene = newScene.Instance() as Control;
                 AddChild(_currentScene);
+                return;
             }
             
-            // Otherwise replace it with animation
+            // If we have scene, show transition
+            if (newScene.Instance() is Control newSceneInstance) {
+                
+                // Move new scene slightly to the right and hide
+                newSceneInstance.RectPosition = new Vector2(50, 0);
+                newSceneInstance.Modulate = new Color(1, 1, 1, 0);
+                AddChild(newSceneInstance);
+                
+                // Show new
+                _tween.InterpolateProperty(newSceneInstance, "modulate", new Color(1, 1, 1, 0), new Color(1, 1, 1, 1), 0.3f, Tween.TransitionType.Cubic);
+                _tween.InterpolateProperty(newSceneInstance, "rect_position", newSceneInstance.RectPosition, new Vector2(0, 0), 0.3f, Tween.TransitionType.Cubic);
+                
+                // Hide old
+                _tween.InterpolateProperty(_currentScene, "modulate", new Color(1, 1, 1, 1), new Color(1, 1, 1, 0), 0.3f, Tween.TransitionType.Cubic);
+                _tween.InterpolateProperty(_currentScene, "rect_position", _currentScene.RectPosition, new Vector2(-50, 0), 0.3f, Tween.TransitionType.Cubic);
+
+                _tween.Start();
+                
+                await ToSignal(_tween, "tween_all_completed");
+                
+                RemoveChild(_currentScene);
+                _currentScene = newSceneInstance;
+            }
         }
-        
     }
 }

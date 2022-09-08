@@ -1,6 +1,6 @@
 ﻿using Watson.ORM.Core;
 
-namespace TinyScreen.models {
+namespace TinyScreen.Models {
     
     [Table("settings")]
     public class Settings {

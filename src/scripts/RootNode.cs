@@ -1,6 +1,6 @@
 ﻿using Godot;
 using TinyScreen.Framework.Attributes;
-using TinyScreen.framework.interfaces;
+using TinyScreen.Framework.Interfaces;
 
 namespace TinyScreen.scripts {
     public class RootNode: Control {

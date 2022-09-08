@@ -1,7 +1,7 @@
 ﻿using DatabaseWrapper.Core;
 using ExpressionTree;
 
-namespace TinyScreen.framework.interfaces {
+namespace TinyScreen.Framework.Interfaces {
     public interface IDatabaseService {
         bool IsDatabaseExists();
         void InitDatabase();
