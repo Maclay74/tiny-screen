@@ -116,7 +116,7 @@ namespace TinyScreen.Scripts.Onboarding {
                     _skipButton.Show();
                     _tryAgainButton.Show();
                     break;
-                    
+
             }
             
             _currentState = newState;
@@ -163,7 +163,7 @@ namespace TinyScreen.Scripts.Onboarding {
                     _progressBar.Value = progress;
                 });
                 
-                SetState(State.Install);
+                _updateService.Install();
             }
             catch (Exception _) {
                 SetState(State.Error);

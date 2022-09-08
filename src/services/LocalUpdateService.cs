@@ -48,7 +48,13 @@ namespace TinyScreen.Services {
         }
 
         public void Install() {
-            throw new System.NotImplementedException();
+            
+            // TODO implement
+            // 0. Close currently running application
+            // 1. Check is there is an archive downloaded for update
+            // 2. Unzip it to the application folder
+            // 3. Run application
+            throw new NotImplementedException();
         }
     }
 }
