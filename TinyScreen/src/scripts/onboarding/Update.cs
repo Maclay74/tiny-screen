@@ -146,7 +146,7 @@ namespace TinyScreen.Scripts.Onboarding {
                         SetState(State.Confirmation);
                     }
                 }
-                catch (Exception exception) {
+                catch (Exception) {
                     SetState(State.Error);
                 }
                
@@ -165,7 +165,7 @@ namespace TinyScreen.Scripts.Onboarding {
                 
                 _updateService.Install();
             }
-            catch (Exception _) {
+            catch (Exception) {
                 SetState(State.Error);
             }
         }
