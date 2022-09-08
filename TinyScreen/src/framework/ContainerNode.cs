@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using Godot;
@@ -21,6 +22,7 @@ public class ContainerNode : Node {
         _container.Register<ISettingsInterface, DatabaseSettingsService>(Lifestyle.Singleton);
         _container.Register<IUpdateInterface, LocalUpdateService>(Lifestyle.Singleton);
         _container.Register<IHardwareService>(HardwareFactory.GetHardwareService, Lifestyle.Singleton);
+        LoadPlugins();
         InjectDI();
 
     }
@@ -64,5 +66,15 @@ public class ContainerNode : Node {
             }
         }
         
+    }
+
+    private void LoadPlugins() {
+        List<Assembly> sources = new List<Assembly>();
+        foreach (var dll in System.IO.Directory.GetFiles(ProjectSettings.GlobalizePath("plugins"), "*.dll")) {
+
+            Assembly plugin = Assembly.LoadFrom(dll);
+            sources.Add(plugin);
+        }
+        _container.Collection.Register<ILibrarySource>(sources);
     }
 }
