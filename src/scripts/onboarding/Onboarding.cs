@@ -5,6 +5,7 @@ namespace TinyScreen.Scripts.Onboarding {
 
         [Export] public PackedScene WelcomeScene;
         [Export] public PackedScene UpdateScene;
+        [Export] public PackedScene LibraryScene;
 
         private enum Stage {
             Welcome,
@@ -39,7 +40,7 @@ namespace TinyScreen.Scripts.Onboarding {
                     break;
                 
                 default:
-                    GD.Print("This stage isn't implemented yet!");
+                    TransitionToScene(LibraryScene);
                     break;
             }
         }
@@ -63,6 +64,12 @@ namespace TinyScreen.Scripts.Onboarding {
                 AddChild(_currentScene);
                 return;
             }
+
+            // If previous transition isn't finished yet
+            if (_tween.IsActive()) {
+                await ToSignal(_tween, "tween_all_completed");
+                await ToSignal(GetTree(), "idle_frame");
+            }
             
             // If we have scene, show transition
             if (newScene.Instance() is Control newSceneInstance) {
@@ -70,8 +77,6 @@ namespace TinyScreen.Scripts.Onboarding {
                 // Move new scene slightly to the right and hide
                 newSceneInstance.RectPosition = new Vector2(50, 0);
                 newSceneInstance.Modulate = new Color(1, 1, 1, 0);
-                AddChild(newSceneInstance);
-                
                 // Show new
                 _tween.InterpolateProperty(newSceneInstance, "modulate", new Color(1, 1, 1, 0), new Color(1, 1, 1, 1), 0.3f, Tween.TransitionType.Cubic);
                 _tween.InterpolateProperty(newSceneInstance, "rect_position", newSceneInstance.RectPosition, new Vector2(0, 0), 0.3f, Tween.TransitionType.Cubic);
@@ -79,8 +84,9 @@ namespace TinyScreen.Scripts.Onboarding {
                 // Hide old
                 _tween.InterpolateProperty(_currentScene, "modulate", new Color(1, 1, 1, 1), new Color(1, 1, 1, 0), 0.3f, Tween.TransitionType.Cubic);
                 _tween.InterpolateProperty(_currentScene, "rect_position", _currentScene.RectPosition, new Vector2(-50, 0), 0.3f, Tween.TransitionType.Cubic);
-
+                
                 _tween.Start();
+                AddChild(newSceneInstance);
                 
                 await ToSignal(_tween, "tween_all_completed");
                 
