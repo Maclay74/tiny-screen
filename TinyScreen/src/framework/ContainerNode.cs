@@ -12,7 +12,8 @@ using Container = SimpleInjector.Container;
 
 namespace TinyScreen.Framework {
     public class ContainerNode : Node {
-        public Container _container;
+        
+        private Container _container;
 
         public override void _EnterTree() {
             base._EnterTree();
@@ -27,9 +28,9 @@ namespace TinyScreen.Framework {
         }
 
         /**
-     * This function patches original Node so when user calls _Ready method from the base class
-     * it injects all the dependencies to it
-     */
+         * This function patches original Node so when user calls _Ready method from the base class
+         * it injects all the dependencies to it
+         */
         private void InjectDI() {
             var harmony = new Harmony("com.tinyscreen.di");
 
