@@ -68,4 +68,9 @@ jobs:
           # If "true" Godot will export in debug mode.
           export_debug: true # optional
       
+      # Make it possible to download built
+      - name: artifacts
+        uses: actions/download-artifact@v3
+        with:
+          name: my-artifact
         
