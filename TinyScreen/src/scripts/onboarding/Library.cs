@@ -18,7 +18,7 @@ namespace TinyScreen.Scripts.Onboarding {
             _subtitle = GetNode<Label>(SubTitlePath);
 
             foreach (var library in _librarySources) {
-                GD.Print(library.GetName());
+                _subtitle.Text += library.GetName();
             }
         }
     }
