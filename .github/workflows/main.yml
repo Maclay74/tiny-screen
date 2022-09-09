@@ -16,21 +16,56 @@ on:
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
   # This workflow contains a single job called "build"
-  build:
+  export:
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
+    # Jobs name
+    name: Export Game
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
-      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-      - uses: actions/checkout@v3
-
-      # Runs a single command using the runners shell
-      - name: Run a one-line script
-        run: echo Hello, world!
-
-      # Runs a set of commands using the runners shell
-      - name: Run a multi-line script
+        # Always include the checkout step so that 
+        # your project is available for Godot to export
+      - name: checkout
+        uses: actions/checkout@v3.0.2
+        with:
+          fetch-depth: 0
+          
+        # Automatically stores the tag name for later use  
+      - name: get tag from version
+        id: tag_version
         run: |
-          echo Add other actions to build,
-          echo test, and deploy your project.
+          echo ::set-output name=TAG_VERSION::${GITHUB_REF#refs/tags/v}    
+    
+        # Need wine to update icon  
+      - name: install wine
+        id: wine_install
+        run: |
+          sudo apt install wine64
+          echo ::set-output name=WINE_PATH::$(which wine64)
+    
+      - name: export game
+        # You may pin to the exact commit or the version.
+        # uses: firebelley/godot-export@0cba42bc72c5dcd8378a5e72d7db6a294698a366
+        uses: firebelley/godot-export@v4.1.1
+        with:
+          # The download url of the Linux Headless Godot executable.
+          godot_executable_download_url: https://downloads.tuxfamily.org/godotengine/3.5/mono/Godot_v3.5-stable_mono_linux_headless_64.zip
+          # The url of the export templates corresponding to the Godot executable version.
+          godot_export_templates_download_url: https://downloads.tuxfamily.org/godotengine/3.5/mono/Godot_v3.5-stable_mono_export_templates.tpz
+          # The path relative to the root of the git repository that contains the "project.godot" file.
+          relative_project_path: ./TinyScreen/
+          # If "true", exported files will be archived into a ".zip" file.
+          archive_output: true # optional
+          # If "true", files that are archived will be placed in a root folder within the archive.
+          archive_root_folder: false # optional
+          # If provided, exports will be moved to this directory relative to the root of the Git repository. This setting is overridden by "use_preset_export_path".
+          relative_export_path: '' # optional, default is 
+          # If set to true, exports will be moved to directory defined in "export_presets.cfg" relative to "relative_project_path". Prioritized over "relative_export_path".
+          use_preset_export_path: true # optional
+          # The absolute path to the wine binary. If specified, Godot will use this to run rcedit to update Windows exe icons.
+          wine_path: ${{ steps.wine_install.outputs.WINE_PATH }} # optional, default is 
+          # If "true" Godot will export in debug mode.
+          export_debug: true # optional
+      
+        
