@@ -70,7 +70,8 @@ jobs:
       
       # Make it possible to download built
       - name: artifacts
-        uses: actions/download-artifact@v3
+        uses: actions/upload-artifact@v3
         with:
-          name: my-artifact
+          name: artifact
+          path: ${{ steps.export.outputs.archive_directory }}/*
         
