@@ -17,4 +17,7 @@
       <Private>false</Private>
     </ProjectReference>
   </ItemGroup>
+    <ItemGroup>
+    <Folder Include=".mono" />
+  </ItemGroup>
 </Project>
