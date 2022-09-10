@@ -4,10 +4,6 @@
     <RootNamespace>TinyScreen</RootNamespace>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Remove="SteamLibrarySource\**" />
-    <EmbeddedResource Remove="SteamLibrarySource\**" />
-  </ItemGroup>
-  <ItemGroup>
     <PackageReference Include="ByteSize" Version="2.1.1" />
     <PackageReference Include="Lib.Harmony" Version="2.2.2" />
     <PackageReference Include="SimpleInjector" Version="5.4.0" />
