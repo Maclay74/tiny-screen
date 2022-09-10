@@ -47,7 +47,8 @@ jobs:
       - name: Setup .NET Core SDK
         uses: actions/setup-dotnet@v2.1.0
       
-      - run: dotnet build TinyScreen
+      - name: Build solution
+        run: dotnet build TinyScreen
       
       - name: Build application
         id: build
@@ -75,15 +76,11 @@ jobs:
           export_debug: false # optional
           
       - name: Add plugins to archive
-        run: | 
-          cd /home/runner/work/tiny-screen/tiny-screen/TinyScreen/plugins
-          ls -la
-          /usr/bin/7z u ${{ steps.build.outputs.archive_directory }}/WindowsDesktop.zip /home/runner/work/tiny-screen/tiny-screen/TinyScreen/plugins 
+        run: /usr/bin/7z u ${{ steps.build.outputs.archive_directory }}/WindowsDesktop.zip /home/runner/work/tiny-screen/tiny-screen/TinyScreen/plugins 
           
         # Make it possible to download built
       - name: Create artifacts
         uses: actions/upload-artifact@v3
         with:
           name: artifacts
-          path: |
-            /home/runner/work/tiny-screen/tiny-screen/build/*   
+          path: ${{ steps.build.outputs.archive_directory }}/*   
