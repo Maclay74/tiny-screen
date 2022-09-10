@@ -50,6 +50,7 @@ jobs:
       - run: dotnet build TinyScreen
       
       - name: Build application
+        id: build
         # You may pin to the exact commit or the version.
         # uses: firebelley/godot-export@0cba42bc72c5dcd8378a5e72d7db6a294698a366
         uses: firebelley/godot-export@v4.1.1
@@ -72,6 +73,11 @@ jobs:
           wine_path: ${{ steps.wine_install.outputs.WINE_PATH }} # optional, default is 
           # If "true" Godot will export in debug mode.
           export_debug: false # optional
+          
+      - name: Add plugins to archive
+        run: | 
+          cd {{ steps.build.outputs.build_directory}}
+          ls -la
           
         # Make it possible to download built
       - name: Create artifacts
