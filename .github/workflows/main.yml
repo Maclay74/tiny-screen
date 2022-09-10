@@ -78,7 +78,7 @@ jobs:
         run: | 
           cd /home/runner/work/tiny-screen/tiny-screen/TinyScreen/plugins
           ls -la
-          /usr/bin/7z -ur ${{ steps.build.outputs.archive_directory }}/WindowsDesktop.zip /home/runner/work/tiny-screen/tiny-screen/TinyScreen/plugins 
+          /usr/bin/7z ur ${{ steps.build.outputs.archive_directory }}/WindowsDesktop.zip /home/runner/work/tiny-screen/tiny-screen/TinyScreen/plugins 
           
         # Make it possible to download built
       - name: Create artifacts
