@@ -5,7 +5,7 @@ VisualStudioVersion = 17.3.32825.248
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TinyScreen", "TinyScreen.csproj", "{BEF4EE25-2DF6-43EC-AD0D-80080DE9AAAE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SteamSourceLibrary", "..\plugins\SteamLIbrarySource\SteamSourceLibrary.csproj", "{0743E00E-BB14-4E69-BE76-5823500F2ED8}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SteamLibrarySource", "..\plugins\SteamLibrarySource\SteamLibrarySource.csproj", "{FE3AD83B-7B8C-4A9B-9A28-D6E82EFD94BE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -23,14 +23,14 @@ Global
 		{BEF4EE25-2DF6-43EC-AD0D-80080DE9AAAE}.ExportRelease|Any CPU.Build.0 = ExportRelease|Any CPU
 		{BEF4EE25-2DF6-43EC-AD0D-80080DE9AAAE}.Release|Any CPU.ActiveCfg = ExportRelease|Any CPU
 		{BEF4EE25-2DF6-43EC-AD0D-80080DE9AAAE}.Release|Any CPU.Build.0 = ExportRelease|Any CPU
-		{0743E00E-BB14-4E69-BE76-5823500F2ED8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{0743E00E-BB14-4E69-BE76-5823500F2ED8}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{0743E00E-BB14-4E69-BE76-5823500F2ED8}.ExportDebug|Any CPU.ActiveCfg = Debug|Any CPU
-		{0743E00E-BB14-4E69-BE76-5823500F2ED8}.ExportDebug|Any CPU.Build.0 = Debug|Any CPU
-		{0743E00E-BB14-4E69-BE76-5823500F2ED8}.ExportRelease|Any CPU.ActiveCfg = Release|Any CPU
-		{0743E00E-BB14-4E69-BE76-5823500F2ED8}.ExportRelease|Any CPU.Build.0 = Release|Any CPU
-		{0743E00E-BB14-4E69-BE76-5823500F2ED8}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{0743E00E-BB14-4E69-BE76-5823500F2ED8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FE3AD83B-7B8C-4A9B-9A28-D6E82EFD94BE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FE3AD83B-7B8C-4A9B-9A28-D6E82EFD94BE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FE3AD83B-7B8C-4A9B-9A28-D6E82EFD94BE}.ExportDebug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FE3AD83B-7B8C-4A9B-9A28-D6E82EFD94BE}.ExportDebug|Any CPU.Build.0 = Debug|Any CPU
+		{FE3AD83B-7B8C-4A9B-9A28-D6E82EFD94BE}.ExportRelease|Any CPU.ActiveCfg = Release|Any CPU
+		{FE3AD83B-7B8C-4A9B-9A28-D6E82EFD94BE}.ExportRelease|Any CPU.Build.0 = Release|Any CPU
+		{FE3AD83B-7B8C-4A9B-9A28-D6E82EFD94BE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FE3AD83B-7B8C-4A9B-9A28-D6E82EFD94BE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

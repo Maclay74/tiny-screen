@@ -1,9 +1,9 @@
 ﻿using System;
 using TinyScreen.Framework.Interfaces;
 
-namespace SteamLIbrarySource
+namespace SteamLibrarySource
 {
-    public class SteamSourceLibrary: ILibrarySource
+    public class SteamLibrarySource: ILibrarySource
     {
         public string GetName()
         {
