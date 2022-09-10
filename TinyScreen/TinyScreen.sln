@@ -5,7 +5,7 @@ VisualStudioVersion = 17.3.32825.248
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TinyScreen", "TinyScreen.csproj", "{BEF4EE25-2DF6-43EC-AD0D-80080DE9AAAE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SteamLIbrarySource", "..\plugins\SteamLIbrarySource\SteamLIbrarySource.csproj", "{0743E00E-BB14-4E69-BE76-5823500F2ED8}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SteamSourceLibrary", "..\plugins\SteamLIbrarySource\SteamSourceLibrary.csproj", "{0743E00E-BB14-4E69-BE76-5823500F2ED8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
