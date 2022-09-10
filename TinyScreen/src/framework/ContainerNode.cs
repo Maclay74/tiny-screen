@@ -11,7 +11,7 @@ using TinyScreen.Services;
 using Container = SimpleInjector.Container;
 
 namespace TinyScreen.Framework {
-    public class ContainerNode : Control {
+    public class ContainerNode : Node {
         
         private Container _container;
 
@@ -42,7 +42,7 @@ namespace TinyScreen.Framework {
 
         private static void ResolveDependencies(Node __instance) {
             // Get container for DI
-            var containerNodePath = "/root/ContainerNode";
+            var containerNodePath = "/root/AutoloadScene";
             var containerNode = __instance.GetNode<ContainerNode>(containerNodePath);
 
             // Cache type of attribute

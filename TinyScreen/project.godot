@@ -17,11 +17,16 @@ config/icon="res://icon.png"
 
 [autoload]
 
-ContainerNode="*res://src/framework/ContainerNode.cs"
+AutoloadScene="*res://src/framework/AutoloadScene.tscn"
 
 [gui]
 
 common/drop_mouse_on_gui_input_disabled=true
+
+[mono]
+
+runtime/unhandled_exception_policy=1
+project/assembly_name="Tiny-Screen"
 
 [physics]
 
