@@ -68,10 +68,14 @@ jobs:
           # If "true" Godot will export in debug mode.
           export_debug: true # optional
       
+      - name: Copy out file from volume
+        run: |
+          sudo cp ${{ steps.export.outputs.archive_directory }}/* /home/
+      
       # Make it possible to download built
       - name: artifacts
         uses: actions/upload-artifact@v3
         with:
           name: artifact
-          path: ${{ steps.export.outputs.archive_directory }}/*
+          path: home/*
         
