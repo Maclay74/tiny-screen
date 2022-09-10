@@ -1,14 +1,18 @@
-﻿Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2012
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TinyScreen", "TinyScreen.csproj", "{BEF4EE25-2DF6-43EC-AD0D-80080DE9AAAE}"
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.3.32825.248
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TinyScreen", "TinyScreen.csproj", "{BEF4EE25-2DF6-43EC-AD0D-80080DE9AAAE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SteamLibrarySource", "..\plugins\SteamLibrarySource\SteamLibrarySource.csproj", "{62EFF6C3-EE74-4591-AD72-B7A56FCB0B19}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SteamLIbrarySource", "..\plugins\SteamLIbrarySource\SteamLIbrarySource.csproj", "{0743E00E-BB14-4E69-BE76-5823500F2ED8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
-	Debug|Any CPU = Debug|Any CPU
-	ExportDebug|Any CPU = ExportDebug|Any CPU
-	ExportRelease|Any CPU = ExportRelease|Any CPU
+		Debug|Any CPU = Debug|Any CPU
+		ExportDebug|Any CPU = ExportDebug|Any CPU
+		ExportRelease|Any CPU = ExportRelease|Any CPU
+		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{BEF4EE25-2DF6-43EC-AD0D-80080DE9AAAE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -17,11 +21,21 @@ Global
 		{BEF4EE25-2DF6-43EC-AD0D-80080DE9AAAE}.ExportDebug|Any CPU.Build.0 = ExportDebug|Any CPU
 		{BEF4EE25-2DF6-43EC-AD0D-80080DE9AAAE}.ExportRelease|Any CPU.ActiveCfg = ExportRelease|Any CPU
 		{BEF4EE25-2DF6-43EC-AD0D-80080DE9AAAE}.ExportRelease|Any CPU.Build.0 = ExportRelease|Any CPU
-		{62EFF6C3-EE74-4591-AD72-B7A56FCB0B19}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{62EFF6C3-EE74-4591-AD72-B7A56FCB0B19}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{62EFF6C3-EE74-4591-AD72-B7A56FCB0B19}.ExportDebug|Any CPU.ActiveCfg = Debug|Any CPU
-		{62EFF6C3-EE74-4591-AD72-B7A56FCB0B19}.ExportDebug|Any CPU.Build.0 = Debug|Any CPU
-		{62EFF6C3-EE74-4591-AD72-B7A56FCB0B19}.ExportRelease|Any CPU.ActiveCfg = Debug|Any CPU
-		{62EFF6C3-EE74-4591-AD72-B7A56FCB0B19}.ExportRelease|Any CPU.Build.0 = Debug|Any CPU
+		{BEF4EE25-2DF6-43EC-AD0D-80080DE9AAAE}.Release|Any CPU.ActiveCfg = ExportRelease|Any CPU
+		{BEF4EE25-2DF6-43EC-AD0D-80080DE9AAAE}.Release|Any CPU.Build.0 = ExportRelease|Any CPU
+		{0743E00E-BB14-4E69-BE76-5823500F2ED8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0743E00E-BB14-4E69-BE76-5823500F2ED8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0743E00E-BB14-4E69-BE76-5823500F2ED8}.ExportDebug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0743E00E-BB14-4E69-BE76-5823500F2ED8}.ExportDebug|Any CPU.Build.0 = Debug|Any CPU
+		{0743E00E-BB14-4E69-BE76-5823500F2ED8}.ExportRelease|Any CPU.ActiveCfg = Release|Any CPU
+		{0743E00E-BB14-4E69-BE76-5823500F2ED8}.ExportRelease|Any CPU.Build.0 = Release|Any CPU
+		{0743E00E-BB14-4E69-BE76-5823500F2ED8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0743E00E-BB14-4E69-BE76-5823500F2ED8}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {489C9F49-CD31-4E46-BF81-9FF06BCC9554}
 	EndGlobalSection
 EndGlobal
