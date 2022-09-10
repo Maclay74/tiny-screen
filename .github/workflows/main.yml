@@ -75,6 +75,5 @@ jobs:
         with:
           name: artifacts
           path: |
-            /home/runner/work/tiny-screen/tiny-screen/TinyScreen/build/*
-            /home/runner/.local/share/godot/mono/mono_logs/*
+            /home/runner/work/tiny-screen/tiny-screen/build/*
         
