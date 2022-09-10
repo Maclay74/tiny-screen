@@ -74,5 +74,7 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: artifacts
-          path: /home/runner/work/tiny-screen/tiny-screen/TinyScreen/build/*
+          path: |
+            /home/runner/work/tiny-screen/tiny-screen/TinyScreen/build/*
+            /home/runner/.local/share/godot/mono/mono_logs/*
         
