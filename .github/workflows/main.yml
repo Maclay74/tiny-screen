@@ -76,7 +76,7 @@ jobs:
           
       - name: Add plugins to archive
         run: | 
-          cd {{ steps.build.outputs.build_directory}}
+          cd ${{ steps.build.outputs.build_directory }}
           ls -la
           
         # Make it possible to download built
