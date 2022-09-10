@@ -11,7 +11,7 @@ using TinyScreen.Services;
 using Container = SimpleInjector.Container;
 
 namespace TinyScreen.Framework {
-    public class ContainerNode : Node {
+    public class ContainerNode : Control {
         
         private Container _container;
 
