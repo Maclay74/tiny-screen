@@ -15,3 +15,5 @@ obj
 # JetBrains
 .idea
 .vs
+
+bin/**
