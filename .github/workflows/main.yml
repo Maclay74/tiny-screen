@@ -31,9 +31,56 @@ jobs:
         with:
           fetch-depth: 0
           
+        # Automatically stores the tag name for later use  
+      - name: Get tag from version
+        id: tag_version
+        run: |
+          echo ::set-output name=TAG_VERSION::${GITHUB_REF#refs/tags/v}    
+    
+        # Need wine to update icon  
+      - name: Install Wine
+        id: wine_install
+        run: |
+          sudo apt install wine64
+          echo ::set-output name=WINE_PATH::$(which wine64)    
+          
       - name: Setup .NET Core SDK
         uses: actions/setup-dotnet@v2.1.0
       
-      - run: dotnet build TinyScreen
+      - name: Build solution
+        run: dotnet build TinyScreen
+      
+      - name: Build application
+        id: build
+        # You may pin to the exact commit or the version.
+        # uses: firebelley/godot-export@0cba42bc72c5dcd8378a5e72d7db6a294698a366
+        uses: firebelley/godot-export@v4.1.1
+        with:
+          # The download url of the Linux Headless Godot executable.
+          godot_executable_download_url: https://downloads.tuxfamily.org/godotengine/3.5/mono/Godot_v3.5-stable_mono_linux_headless_64.zip
+          # The url of the export templates corresponding to the Godot executable version.
+          godot_export_templates_download_url: https://downloads.tuxfamily.org/godotengine/3.5/mono/Godot_v3.5-stable_mono_export_templates.tpz
+          # The path relative to the root of the git repository that contains the "project.godot" file.
+          relative_project_path: ./TinyScreen/
+          # If "true", exported files will be archived into a ".zip" file.
+          archive_output: true # optional
+          # If "true", files that are archived will be placed in a root folder within the archive.
+          archive_root_folder: false # optional
+          # If provided, exports will be moved to this directory relative to the root of the Git repository. This setting is overridden by "use_preset_export_path".
+          relative_export_path: '' # optional, default is 
+          # If set to true, exports will be moved to directory defined in "export_presets.cfg" relative to "relative_project_path". Prioritized over "relative_export_path".
+          use_preset_export_path: true # optional
+          # The absolute path to the wine binary. If specified, Godot will use this to run rcedit to update Windows exe icons.
+          wine_path: ${{ steps.wine_install.outputs.WINE_PATH }} # optional, default is 
+          # If "true" Godot will export in debug mode.
+          export_debug: false # optional
           
-        
+      - name: Add plugins to archive
+        run: /usr/bin/7z u ${{ steps.build.outputs.archive_directory }}/WindowsDesktop.zip /home/runner/work/tiny-screen/tiny-screen/TinyScreen/plugins 
+          
+        # Make it possible to download built
+      - name: Create artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: artifacts
+          path: ${{ steps.build.outputs.archive_directory }}/*   
