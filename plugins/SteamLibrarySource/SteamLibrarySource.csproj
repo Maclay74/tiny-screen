@@ -4,16 +4,18 @@
 	<TargetFramework>net472</TargetFramework>
     <BaseOutputPath>bin\</BaseOutputPath>
 	  <RootNamespace>SteamLibrarySource</RootNamespace>
+	  <RunPostBuildEvent>OnBuildSuccess</RunPostBuildEvent>
   </PropertyGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\..\TinyScreen\TinyScreen.csproj">
       <Private>false</Private>
+      <CopyLocalSatelliteAssemblies>false</CopyLocalSatelliteAssemblies>
     </ProjectReference>
   </ItemGroup>
 
   <Target Name="PostBuild" AfterTargets="PostBuildEvent">
-    <Exec Command="copy /Y &quot;$(TargetDir)$(ProjectName).dll&quot; &quot;$(SolutionDir)plugins\$(ProjectName).dll&quot;" />
+    <Exec Command="if $(PlatformName) == Debug (&#xD;&#xA; copy /Y &quot;$(TargetDir)$(ProjectName).dll&quot; &quot;$(SolutionDir)plugins\$(ProjectName).dll&quot;&#xD;&#xA;) ELSE (&#xD;&#xA; cp $(TargetDir)$(ProjectName).dll $(SolutionDir)plugins\$(ProjectName).dll&#xD;&#xA;)&#xD;&#xA;&#xD;&#xA;" />
   </Target>
 
 </Project>
