@@ -2,8 +2,6 @@
 # Visual Studio 2012
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TinyScreen", "TinyScreen.csproj", "{BEF4EE25-2DF6-43EC-AD0D-80080DE9AAAE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EmptyProject1", "EmptyProject1\EmptyProject1.csproj", "{DBC48675-7ADE-4C41-9438-369E791CD8D3}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 	Debug|Any CPU = Debug|Any CPU
@@ -17,11 +15,5 @@ Global
 		{BEF4EE25-2DF6-43EC-AD0D-80080DE9AAAE}.ExportDebug|Any CPU.Build.0 = ExportDebug|Any CPU
 		{BEF4EE25-2DF6-43EC-AD0D-80080DE9AAAE}.ExportRelease|Any CPU.ActiveCfg = ExportRelease|Any CPU
 		{BEF4EE25-2DF6-43EC-AD0D-80080DE9AAAE}.ExportRelease|Any CPU.Build.0 = ExportRelease|Any CPU
-		{DBC48675-7ADE-4C41-9438-369E791CD8D3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{DBC48675-7ADE-4C41-9438-369E791CD8D3}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{DBC48675-7ADE-4C41-9438-369E791CD8D3}.ExportDebug|Any CPU.ActiveCfg = Debug|Any CPU
-		{DBC48675-7ADE-4C41-9438-369E791CD8D3}.ExportDebug|Any CPU.Build.0 = Debug|Any CPU
-		{DBC48675-7ADE-4C41-9438-369E791CD8D3}.ExportRelease|Any CPU.ActiveCfg = Debug|Any CPU
-		{DBC48675-7ADE-4C41-9438-369E791CD8D3}.ExportRelease|Any CPU.Build.0 = Debug|Any CPU
 	EndGlobalSection
 EndGlobal
