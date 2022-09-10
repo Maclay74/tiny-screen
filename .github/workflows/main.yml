@@ -67,15 +67,12 @@ jobs:
           wine_path: ${{ steps.wine_install.outputs.WINE_PATH }} # optional, default is 
           # If "true" Godot will export in debug mode.
           export_debug: true # optional
-      
-      - name: Copy out file from volume
-        run: |
-          sudo ls -la
+    
       
       # Make it possible to download built
       - name: artifacts
         uses: actions/upload-artifact@v3
         with:
           name: artifact
-          path: /home/*
+          path: /home/runner/work/tiny-screen/tiny-screen/TinyScreen/build/*
         
