@@ -76,7 +76,7 @@ jobs:
           
       - name: Add plugins to archive
         run: | 
-          cd ${{ steps.build.outputs.build_directory }}/WindowsDesktop
+          cd /home/runner/work/tiny-screen/tiny-screen/TinyScreen/plugins
           ls -la
           
         # Make it possible to download built
