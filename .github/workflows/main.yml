@@ -50,9 +50,9 @@ jobs:
         uses: firebelley/godot-export@v4.1.1
         with:
           # The download url of the Linux Headless Godot executable.
-          godot_executable_download_url: https://downloads.tuxfamily.org/godotengine/3.5.1/rc1/mono/Godot_v3.5.1-rc1_mono_linux_headless_64.zip
+          godot_executable_download_url: https://downloads.tuxfamily.org/godotengine/3.5/mono/Godot_v3.5-stable_mono_linux_headless_64.zip
           # The url of the export templates corresponding to the Godot executable version.
-          godot_export_templates_download_url: https://downloads.tuxfamily.org/godotengine/3.5.1/rc1/mono/Godot_v3.5.1-rc1_mono_export_templates.tpz
+          godot_export_templates_download_url: https://downloads.tuxfamily.org/godotengine/3.5/mono/Godot_v3.5-stable_mono_export_templates.tpz
           # The path relative to the root of the git repository that contains the "project.godot" file.
           relative_project_path: ./TinyScreen/
           # If "true", exported files will be archived into a ".zip" file.
