@@ -2,8 +2,6 @@
 # Visual Studio 2012
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TinyScreen", "TinyScreen.csproj", "{BEF4EE25-2DF6-43EC-AD0D-80080DE9AAAE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "..\plugins\SteamLibrarySource", "..\plugins\SteamLibrarySource\SteamLibrarySource.csproj", "{234D42A4-9AB0-4201-856B-0C164FAC7890}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 	Debug|Any CPU = Debug|Any CPU
@@ -17,11 +15,5 @@ Global
 		{BEF4EE25-2DF6-43EC-AD0D-80080DE9AAAE}.ExportDebug|Any CPU.Build.0 = ExportDebug|Any CPU
 		{BEF4EE25-2DF6-43EC-AD0D-80080DE9AAAE}.ExportRelease|Any CPU.ActiveCfg = ExportRelease|Any CPU
 		{BEF4EE25-2DF6-43EC-AD0D-80080DE9AAAE}.ExportRelease|Any CPU.Build.0 = ExportRelease|Any CPU
-		{234D42A4-9AB0-4201-856B-0C164FAC7890}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{234D42A4-9AB0-4201-856B-0C164FAC7890}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{234D42A4-9AB0-4201-856B-0C164FAC7890}.ExportDebug|Any CPU.ActiveCfg = Debug|Any CPU
-		{234D42A4-9AB0-4201-856B-0C164FAC7890}.ExportDebug|Any CPU.Build.0 = Debug|Any CPU
-		{234D42A4-9AB0-4201-856B-0C164FAC7890}.ExportRelease|Any CPU.ActiveCfg = Debug|Any CPU
-		{234D42A4-9AB0-4201-856B-0C164FAC7890}.ExportRelease|Any CPU.Build.0 = Debug|Any CPU
 	EndGlobalSection
 EndGlobal
