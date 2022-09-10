@@ -12,3 +12,5 @@ data_*/
 # JetBrains
 .idea
 .vs
+plugins/**
+!plugins/.gitkeep
