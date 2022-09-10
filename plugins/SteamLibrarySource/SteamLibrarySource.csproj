@@ -3,8 +3,8 @@
   <PropertyGroup>
 	<TargetFramework>net472</TargetFramework>
     <BaseOutputPath>bin\</BaseOutputPath>
-	  <RootNamespace>SteamLibrarySource</RootNamespace>
-	  <RunPostBuildEvent>OnBuildSuccess</RunPostBuildEvent>
+    <RootNamespace>SteamLibrarySource</RootNamespace>
+    <RunPostBuildEvent>OnBuildSuccess</RunPostBuildEvent>
   </PropertyGroup>
 
   <ItemGroup>
@@ -14,8 +14,12 @@
     </ProjectReference>
   </ItemGroup>
 
-  <Target Name="PostBuild" AfterTargets="PostBuildEvent">
-    <Exec Command="if $(PlatformName) == Debug (&#xD;&#xA; copy /Y &quot;$(TargetDir)$(ProjectName).dll&quot; &quot;$(SolutionDir)plugins\$(ProjectName).dll&quot;&#xD;&#xA;) ELSE (&#xD;&#xA; cp $(TargetDir)$(ProjectName).dll $(SolutionDir)plugins\$(ProjectName).dll&#xD;&#xA;)&#xD;&#xA;&#xD;&#xA;" />
-  </Target>
+
+	<Target Name="CopyFiles" AfterTargets="AfterBuild">
+	    <Copy
+            SourceFiles="$(TargetDir)$(ProjectName).dll"
+            DestinationFolder="$(SolutionDir)plugins\"
+        />
+	</Target>
 
 </Project>
