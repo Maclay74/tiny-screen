@@ -70,7 +70,6 @@ jobs:
       
       - name: Copy out file from volume
         run: |
-          sudo cd ${{ steps.export.outputs.archive_directory }}
           sudo ls -la
       
       # Make it possible to download built
