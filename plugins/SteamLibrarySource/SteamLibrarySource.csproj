@@ -1,13 +1,15 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netstandard2.1</TargetFramework>
-    <Nullable>enable</Nullable>
+	<TargetFramework>net472</TargetFramework>
     <BaseOutputPath>bin\</BaseOutputPath>
+	  <RootNamespace>SteamLibrarySource</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\TinyScreen\TinyScreen.csproj" />
+    <ProjectReference Include="..\..\TinyScreen\TinyScreen.csproj">
+      <Private>false</Private>
+    </ProjectReference>
   </ItemGroup>
 
   <Target Name="PostBuild" AfterTargets="PostBuildEvent">
