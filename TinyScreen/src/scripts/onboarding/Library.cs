@@ -1,8 +1,8 @@
-﻿using System.Collections.Generic;
-using System.IO;
-using Godot;
+﻿using Godot;
+using System.Collections.Generic;
 using TinyScreen.Framework.Attributes;
 using TinyScreen.Framework.Interfaces;
+using TinyScreen.Services;
 
 namespace TinyScreen.Scripts.Onboarding {
     public class Library : Control {
@@ -17,6 +17,7 @@ namespace TinyScreen.Scripts.Onboarding {
         private Button _import;
 
         [Inject] private IEnumerable<ILibrarySource> _librarySources;
+        [Inject] private LibraryService _libraryService;
 
         private List<ILibrarySource> _included = new List<ILibrarySource>();
 
@@ -28,22 +29,31 @@ namespace TinyScreen.Scripts.Onboarding {
             _sources = GetNode<GridContainer>(SourcesGrid);
             _import = GetNode<Button>(ImportButton);
 
-            foreach (var library in _librarySources) {
+            foreach (var source in _librarySources) {
                 var panel = SourcePanel.Instance<LibrarySource>();
-                panel.source = library;
+                panel.source = source;
                 _sources.AddChild(panel);
 
-                panel.toogle += (source, include) => {
-                    if (include) _included.Add(source);
-                    else _included.Remove(source);
+                panel.toogle += (sourceChanged, include) => {
+                    if (include) _included.Add(sourceChanged);
+                    else _included.Remove(sourceChanged);
                 };
+                _included.Add(source);
             }
             
             _import.Connect("pressed", this, nameof(Import));
         }
 
-        private void Import() {
-            GD.Print(_included.Count);
+        private async void Import() {
+            foreach (var source in _included) {
+                _libraryService.AddSource(source);
+                await _libraryService.UpdateSource(source, (sender, progress) => {
+                    //GD.Print(progress);
+                    // TODO display progress on UI
+                });
+            }
+            
+            GD.Print("Import is done!");
         }
     }
 }

@@ -22,6 +22,8 @@ namespace TinyScreen.Framework {
             _container.Register<IDatabaseService, WatsonDatabaseService>(Lifestyle.Singleton);
             _container.Register<ISettingsInterface, DatabaseSettingsService>(Lifestyle.Singleton);
             _container.Register<IUpdateInterface, LocalUpdateService>(Lifestyle.Singleton);
+            _container.Register<LibraryService>(Lifestyle.Singleton);
+            _container.Register<ImageService>(Lifestyle.Singleton);
             _container.Register<IHardwareService>(HardwareFactory.GetHardwareService, Lifestyle.Singleton);
             LoadPlugins();
             InjectDI();

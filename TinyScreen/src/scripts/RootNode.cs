@@ -24,7 +24,7 @@ namespace TinyScreen.scripts {
                 AddChild(Onboarding.Instance());
             
                 // Install application
-                //_settingsService.InstallApp();
+                _settingsService.InstallApp();
                 
                 // Add some settings during the onboarding, for example
                 //_settingsService.Set(Setting.Author, "Mike!");

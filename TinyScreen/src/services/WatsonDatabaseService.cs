@@ -1,4 +1,8 @@
-﻿using DatabaseWrapper.Core;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Reflection;
+using DatabaseWrapper.Core;
 using ExpressionTree;
 using Godot;
 using TinyScreen.Framework.Interfaces;
@@ -23,7 +27,13 @@ namespace TinyScreen.Services {
             DatabaseSettings settings = new DatabaseSettings(GetDatabasePath());
             _watson = new WatsonORM(settings);
             _watson.InitializeDatabase();
-            _watson.InitializeTable(typeof(Settings));
+            
+            // Find all models and initialize tables for them
+            var models = from t in Assembly.GetExecutingAssembly().GetTypes()
+                where t.IsClass && t.Namespace == Assembly.GetExecutingAssembly().GetName().Name + ".Models"
+                select t;
+            
+            _watson.InitializeTables(models.ToList());
         }
 
         public void Insert<T>(T record) where T : class, new() {

@@ -14,7 +14,8 @@ config/name="TinyScreen"
 run/main_scene="res://assets/scenes/Root.tscn"
 run/low_processor_mode=true
 config/icon="res://icon.png"
-config/windows_native_icon="res://icon.ico"
+config/windows_native_icon="res://Icon.ico"
+config/steamgrid/key="c6c3d47a9c8deeff0f9481aea822bec1"
 
 [autoload]
 

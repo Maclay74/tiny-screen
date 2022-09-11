@@ -30,7 +30,7 @@ namespace TinyScreen.Scripts.Onboarding {
             _name.Text = source.Name();
 
             if (source.IsInstalled()) {
-                _gamesCount.Text = "Games: " + source.GamesCount();
+                _gamesCount.Text = "Games installed: " + source.GamesCount();
                 _include.Connect("pressed", this, nameof(Toggle));
             }
             else {

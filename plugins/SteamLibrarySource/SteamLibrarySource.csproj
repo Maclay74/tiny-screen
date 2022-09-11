@@ -8,6 +8,11 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="assets\Gameloop.Vdf.dll" />
+    <None Remove="assets\Gameloop.Vdf.JsonConverter.dll" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\..\TinyScreen\TinyScreen.csproj">
       <Private>false</Private>
       <CopyLocalSatelliteAssemblies>false</CopyLocalSatelliteAssemblies>
@@ -15,7 +20,13 @@
   </ItemGroup>
 
   <ItemGroup>
+    <EmbeddedResource Include="assets\Gameloop.Vdf.dll" />
+    <EmbeddedResource Include="assets\Gameloop.Vdf.JsonConverter.dll" />
     <EmbeddedResource Include="assets\icon.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Gameloop.Vdf.JsonConverter" Version="0.2.1" />
   </ItemGroup>
 	<Target Name="CopyFiles" AfterTargets="AfterBuild">
 	    <Copy SourceFiles="$(TargetDir)$(ProjectName).dll" DestinationFolder="$(SolutionDir)plugins\" />
