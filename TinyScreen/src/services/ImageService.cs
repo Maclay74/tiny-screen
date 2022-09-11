@@ -20,20 +20,20 @@ namespace TinyScreen.Services {
         }
 
         public async Task<string> Save(string url, ImageType type, string name = "") {
-            var fileName = Guid.NewGuid() + Path.GetExtension(url);
-            var path = Path.Combine(OS.GetUserDataDir(), type.ToString().ToLower(), fileName);
-
+            
             // If image is valid, okay, just download it
             if (!await IsImageValid(url)) {
                 
                 // Fallback to SteamGrid
                 url = await GetImageFromSteamGrid(name, type);
-                
+
                 // Fallback to generate
                 if (url.Length ==  0) {
                     // TODO Fallback to generate image    
                 }
             }
+            var fileName = Guid.NewGuid() + Path.GetExtension(url);
+            var path = Path.Combine(OS.GetUserDataDir(), type.ToString().ToLower(), fileName);
             
             using (WebClient webClient = new WebClient()) {
                 webClient.DownloadFile(url, path) ; 
