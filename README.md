@@ -1,8 +1,6 @@
-<img src="https://user-images.githubusercontent.com/5504685/189494921-cf99e16a-8765-4db1-9b25-c97c42b03466.png#gh-dark-mode-only" alt="Tiny Screen" style="width: 100%;">
+<img src="https://user-images.githubusercontent.com/5504685/189552767-808c7bd2-f906-40a9-8467-f581d7a7e935.png#gh-dark-mode-only" alt="Tiny Screen" style="width: 100%;">
 
 <img src="https://user-images.githubusercontent.com/5504685/189552692-5fc4cd92-4408-4cf9-8864-d895087edd94.png#gh-light-mode-only" alt="Tiny Screen" style="width: 100%;">
-
-
 
 *If you cannot do great things, do small things in a great way* - Napoleon Hill
 
