@@ -41,6 +41,9 @@ namespace SteamLibrarySource {
                 foreach (var param in library.OfType<JObject>()) {
                     foreach (var apps in param.Property("apps")) {
                         foreach (var app in apps.OfType<JProperty>()) {
+                            
+                            // This is SteamWorks or something, totally not a game
+                            if (app.Name == "228980") continue;
                             gamesIds.Add(app.Name);
                         }
                     }

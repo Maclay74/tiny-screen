@@ -22,5 +22,11 @@ namespace TinyScreen.Models {
         [Column("background", false, DataTypes.Nvarchar, 255, false)]
         public string Background { get; set; }
         
+        [Column("source", false, DataTypes.Int, 2, false)]
+        public int Source { get; set; }
+        
+        [Column("lastPlayed", false, DataTypes.DateTime, 2, false)]
+        public string LastPlayed { get; set; }
+        
     }
 }

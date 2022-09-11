@@ -21,8 +21,8 @@ namespace TinyScreen.Services {
         }
         
         public async Task UpdateSource(ILibrarySource source, EventHandler<float> onProgress) {
-            var record = GetSourceRecordByName(source.Name());
-            if (record == null) return;
+            var sourceRecord = GetSourceRecordByName(source.Name());
+            if (sourceRecord == null) return;
 
             var ids = await source.GamesIds();
             var progress = new Progress<float>();
@@ -42,6 +42,7 @@ namespace TinyScreen.Services {
                 // Map gameData to Games model
                 var gameRecord = new Games {
                     SourceId = gameData.SourceId,
+                    Source = sourceRecord.Id,
                     Name = gameData.Name,
                     Description = gameData.Description,
                     Artwork = await _imageService.Save(gameData.ArtworkUrl, ImageService.ImageType.Artwork, gameData.Name),
