@@ -1,0 +1,24 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+	<TargetFramework>net472</TargetFramework>
+    <BaseOutputPath>bin\</BaseOutputPath>
+    <RootNamespace>TemplateLibrarySource</RootNamespace>
+    <RunPostBuildEvent>OnBuildSuccess</RunPostBuildEvent>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\TinyScreen\TinyScreen.csproj">
+      <Private>false</Private>
+      <CopyLocalSatelliteAssemblies>false</CopyLocalSatelliteAssemblies>
+    </ProjectReference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="assets\icon.png" />
+  </ItemGroup>
+
+  <Target Name="CopyFiles" AfterTargets="AfterBuild">
+	  <Copy SourceFiles="$(TargetDir)$(ProjectName).dll" DestinationFolder="$(SolutionDir)plugins\" />
+  </Target>
+</Project>
