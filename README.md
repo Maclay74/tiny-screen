@@ -1,4 +1,6 @@
-<img src="https://user-images.githubusercontent.com/5504685/189494921-cf99e16a-8765-4db1-9b25-c97c42b03466.png" alt="banner" style="width: 100%;">
+<img src="https://user-images.githubusercontent.com/5504685/189552767-808c7bd2-f906-40a9-8467-f581d7a7e935.png#gh-dark-mode-only" alt="Tiny Screen" style="width: 100%;">
+
+<img src="https://user-images.githubusercontent.com/5504685/189552692-5fc4cd92-4408-4cf9-8864-d895087edd94.png#gh-light-mode-only" alt="Tiny Screen" style="width: 100%;">
 
 *If you cannot do great things, do small things in a great way* - Napoleon Hill
 
@@ -19,9 +21,9 @@ Therefore, having support for wide range of handheld devices, open-source codeba
 ![Figma](https://img.shields.io/badge/figma-%23F24E1E.svg?style=for-the-badge&logo=figma&logoColor=white)
 ![Windows](https://img.shields.io/badge/Windows-0078D6?style=for-the-badge&logo=windows&logoColor=white)
 
-Currently the project is in active development phase, but not even close to be working. Feature set is shaped, but the implementation is on very early stage.
+Currently the project is in active development phase, but not even close to be working. Feature set is shaped, but the implementation is on a very early stage.
 
-Solution consists of the main application (TinyScreen) and plugins. Currently only sources of games (such as Steam or EGS) are supported as plugins.
+The solution consists of the main application (TinyScreen) and plugins. Currently only sources of games (such as Steam or EGS) are supported as plugins.
 
 It's on Godot and C#.
 
@@ -64,7 +66,7 @@ This is MVP features set
  - [ ] Overlay
    - [ ] Implementation 
    - [ ] Widgets
-   - [ ] Hardware settings(TDP, brightness, etc)
+   - [ ] Hardware settings (TDP, brightness, etc)
 
 ## Supported hardware
 Currently no hardware support.
