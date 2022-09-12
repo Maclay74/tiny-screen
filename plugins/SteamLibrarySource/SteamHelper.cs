@@ -12,7 +12,7 @@ using Newtonsoft.Json.Linq;
 using TinyScreen.Framework.Interfaces;
 
 namespace SteamLibrarySource {
-    internal class SteamService {
+    internal class SteamHelper {
 
         private RegistryKey _registryKey;
 
@@ -22,7 +22,7 @@ namespace SteamLibrarySource {
             return _registryKey?.GetValue("InstallPath")?.ToString();
         }
 
-        public SteamService(RegistryKey registryKey) {
+        public SteamHelper(RegistryKey registryKey) {
             _registryKey = registryKey;
         }
 
@@ -30,8 +30,11 @@ namespace SteamLibrarySource {
 
         public List<string> GetInstalledGamesIds() {
             var installedPath = GetInstalledDirectory();
+            
+            // In this file we have information about installed games
             var libraryFilePath = Path.Combine(installedPath, "config", "libraryfolders.vdf");
             
+            // Text => Json
             var configContent = File.ReadAllText(libraryFilePath);
             var configRoot = VdfConvert.Deserialize(configContent).Value.ToJson();
             var gamesIds = new List<string>();
