@@ -21,9 +21,9 @@ Therefore, having support for wide range of handheld devices, open-source codeba
 ![Figma](https://img.shields.io/badge/figma-%23F24E1E.svg?style=for-the-badge&logo=figma&logoColor=white)
 ![Windows](https://img.shields.io/badge/Windows-0078D6?style=for-the-badge&logo=windows&logoColor=white)
 
-Currently the project is in active development phase, but not even close to be working. Feature set is shaped, but the implementation is on very early stage.
+Currently the project is in active development phase, but not even close to be working. Feature set is shaped, but the implementation is on a very early stage.
 
-Solution consists of the main application (TinyScreen) and plugins. Currently only sources of games (such as Steam or EGS) are supported as plugins.
+The solution consists of the main application (TinyScreen) and plugins. Currently only sources of games (such as Steam or EGS) are supported as plugins.
 
 It's on Godot and C#.
 
@@ -66,7 +66,7 @@ This is MVP features set
  - [ ] Overlay
    - [ ] Implementation 
    - [ ] Widgets
-   - [ ] Hardware settings(TDP, brightness, etc)
+   - [ ] Hardware settings (TDP, brightness, etc)
 
 ## Supported hardware
 Currently no hardware support.
