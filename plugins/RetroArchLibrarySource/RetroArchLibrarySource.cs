@@ -6,12 +6,11 @@ using TinyScreen.Framework.Interfaces;
 using System.Reflection;
 using System.Threading.Tasks;
 using Microsoft.Win32;
+using TinyScreen.Framework;
 
 namespace RetroArchLibrarySource {
     
-   
-    
-    public class RetroArchLibrarySource : ILibrarySource {
+    public class RetroArchLibrarySource : BaseLibrarySource {
         
         private const string _registryKey = "Software\\Wow6432Node\\Microsoft\\Windows\\CurrentVersion\\Uninstall\\RetroArch";
        
@@ -27,6 +26,9 @@ namespace RetroArchLibrarySource {
 
         public RetroArchLibrarySource() {
             
+            // When library tries to resolve another assembly, we try to do this using embedded resources
+            AppDomain.CurrentDomain.AssemblyResolve += ResolveAssembly;
+            
             foreach (var installation in _installations) {
                 if (installation.Installed()) {
                     _installation = installation;
@@ -35,54 +37,29 @@ namespace RetroArchLibrarySource {
             }
             
             _retroArchHelper = new RetroArchHelper(_installation);
-        
-            // When library tries to resolve another assembly, we try to do this using embedded resources
-            AppDomain.CurrentDomain.AssemblyResolve += ResolveAssembly;
         }
         
-        public string Name() {
+        public override string Name() {
             return "RetroArch";
         }
-
-        public byte[] Icon() {
-            var assembly = Assembly.GetExecutingAssembly();
-            var resourceName = Assembly.GetExecutingAssembly().GetName().Name + ".assets.icon.png";
-
-            using (Stream stream = assembly.GetManifestResourceStream(resourceName))
-            using (var memoryStream = new MemoryStream()) {
-                stream.CopyTo(memoryStream);
-                return memoryStream.ToArray();
-            }
-        }
-
-        public int GamesCount() {
+        
+        public override int GamesCount() {
             if (!IsInstalled()) return 0;
-            return 0;
+            return _retroArchHelper.GamesCount();
         }
 
-        public bool IsInstalled() {
+        public override bool IsInstalled() {
             return _installation != null && _installation.Installed();
         }
 
-        public async Task<int[]> GamesIds() {
-            return new [] {1};
+        public override async Task<string[]> GamesIds() {
+            return new [] {"test"};
         }
 
-        public async Task<LibrarySourceGameData> Game(int sourceId) {
+        public override async Task<LibrarySourceGameData> Game(string sourceId) {
             return new LibrarySourceGameData();
         }
-
-        private Assembly ResolveAssembly(object sender, ResolveEventArgs args) {
-            string keyName = new AssemblyName(args.Name).Name;
-            
-            using (var stream = Assembly.GetExecutingAssembly()
-                .GetManifestResourceStream(Assembly.GetExecutingAssembly().GetName().Name + ".assets." + keyName + ".dll")) {
-                var assemblyData = new Byte[stream.Length];
-                stream.Read(assemblyData, 0, assemblyData.Length);
-                return Assembly.Load(assemblyData);
-            }
-        }
-
+        
         private bool IsInstalledStandalone() {
             RegistryKey steamKey = Registry.LocalMachine.OpenSubKey(_registryKey);
             if (steamKey == null) return false;
@@ -94,7 +71,5 @@ namespace RetroArchLibrarySource {
             // Check if installer exists
             return File.Exists(Path.Combine(installPath));
         }
-
- 
     }
 }

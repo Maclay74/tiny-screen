@@ -13,10 +13,6 @@ namespace TinyScreen.scripts {
 
         public override void _Ready() {
             base._Ready();
-
-            var scriptRes = ResourceLoader.Load<Script>("res://src/framework/ContainerNode.cs");
-            var baseType = scriptRes.GetInstanceBaseType();
-            GD.Print(ClassDB.IsParentClass(baseType, "Node"));
             
             // Application is not installed, we need onboarding!
             if (!_settingsService.IsAppInstalled()) {
