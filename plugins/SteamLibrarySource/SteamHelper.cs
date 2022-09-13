@@ -16,6 +16,11 @@ namespace SteamLibrarySource {
 
         private RegistryKey _registryKey;
 
+        private string[] ignoreIds = {
+            "228980", // Steamworks 
+            "1118310" // RetroArch
+        };
+
         private const string apiBase = "https://store.steampowered.com/api/";
         
         private string GetInstalledDirectory() {
@@ -45,8 +50,9 @@ namespace SteamLibrarySource {
                     foreach (var apps in param.Property("apps")) {
                         foreach (var app in apps.OfType<JProperty>()) {
                             
-                            // This is SteamWorks or something, totally not a game
-                            if (app.Name == "228980") continue;
+                            if (ignoreIds.Contains(app.Name))
+                                continue;
+                            
                             gamesIds.Add(app.Name);
                         }
                     }

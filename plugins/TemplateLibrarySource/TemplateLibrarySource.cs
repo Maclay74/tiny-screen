@@ -9,6 +9,12 @@ using Microsoft.Win32;
 namespace TemplateLibrarySource {
     public class TemplateLibrarySource : ILibrarySource {
         
+        public TemplateLibrarySource() {
+            
+            // When library tries to resolve another assembly, we try to do this using embedded resources
+            AppDomain.CurrentDomain.AssemblyResolve += ResolveAssembly;
+        }
+        
         public string Name() {
             throw new NotImplementedException();
         }

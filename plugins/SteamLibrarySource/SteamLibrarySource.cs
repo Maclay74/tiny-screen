@@ -47,7 +47,14 @@ namespace SteamLibrarySource {
             
             // If key present in the system, application is installed
             RegistryKey steamKey = Registry.LocalMachine.OpenSubKey(_registryKey);
-            return steamKey != null;
+            if (steamKey == null) return false;
+            
+            // If path is not set
+            string installPath = steamKey.GetValue("InstallPath")?.ToString();
+            if (installPath == null) return false;
+
+            // Check if installer exists
+            return File.Exists(Path.Combine(installPath, "steam.exe"));
         }
 
         public async Task<int[]> GamesIds() {
