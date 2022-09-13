@@ -57,13 +57,9 @@ namespace SteamLibrarySource {
             return File.Exists(Path.Combine(installPath, "steam.exe"));
         }
 
-        public async Task<int[]> GamesIds() {
-            return _steamHelper.GetInstalledGamesIds()
-                .Select(Int32.Parse)
-                .ToArray();
-        }
+        public async Task<string[]> GamesIds() => _steamHelper.GetInstalledGamesIds().ToArray();
 
-        public async Task<LibrarySourceGameData> Game(int sourceId) {
+        public async Task<LibrarySourceGameData> Game(string sourceId) {
             return await _steamHelper.GetGameInfo(sourceId);
         }
 

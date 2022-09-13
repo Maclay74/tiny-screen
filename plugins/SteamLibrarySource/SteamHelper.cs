@@ -62,7 +62,7 @@ namespace SteamLibrarySource {
             return gamesIds;
         }
 
-        public async Task<LibrarySourceGameData> GetGameInfo(int id) {
+        public async Task<LibrarySourceGameData> GetGameInfo(string id) {
             
             var client = new HttpClient();
             var apiGameLink = apiBase + "appdetails?appids=" + id;
@@ -74,7 +74,7 @@ namespace SteamLibrarySource {
             if (!response.IsSuccessStatusCode) return null;
             
             var content = response.Content.ReadAsStringAsync().Result;
-            dynamic json = JsonConvert.DeserializeObject<dynamic>(content)[id.ToString()];
+            dynamic json = JsonConvert.DeserializeObject<dynamic>(content)[id];
 
             // Bad game
             if (json.success == false) return null;
@@ -88,7 +88,7 @@ namespace SteamLibrarySource {
             };
         }
 
-        private string GenerateArtworkUrl(int id) {
+        private string GenerateArtworkUrl(string id) {
             return $"https://cdn.akamai.steamstatic.com/steam/apps/{id}/library_600x900_2x.jpg";
         }
 

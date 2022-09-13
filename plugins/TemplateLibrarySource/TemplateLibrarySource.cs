@@ -38,11 +38,11 @@ namespace TemplateLibrarySource {
              throw new NotImplementedException();
         }
 
-        public async Task<int[]> GamesIds() {
+        public async Task<string[]> GamesIds() {
              throw new NotImplementedException();
         }
 
-        public async Task<LibrarySourceGameData> Game(int sourceId) {
+        public async Task<LibrarySourceGameData> Game(string sourceId) {
              throw new NotImplementedException();
         }
 

@@ -78,7 +78,7 @@ namespace TinyScreen.Services {
             return _databaseService.Select<LibrarySources>(new Expr("name", OperatorEnum.Equals, name));
         }
 
-        private Games GetGameBySourceId(int sourceId) {
+        private Games GetGameBySourceId(string sourceId) {
             return _databaseService.Select<Games>(new Expr("sourceId", OperatorEnum.Equals, sourceId));
         }
     }

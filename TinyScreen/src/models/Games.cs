@@ -7,8 +7,8 @@ namespace TinyScreen.Models {
         [Column("id", true, DataTypes.Int, false)]
         public int Id { get; set; }
         
-        [Column("sourceId", false, DataTypes.Int, false)]
-        public int SourceId { get; set; }
+        [Column("sourceId", false, DataTypes.Nvarchar, 255, false)]
+        public string SourceId { get; set; }
         
         [Column("name", false, DataTypes.Nvarchar, 128, false)]
         public string Name { get; set; }
