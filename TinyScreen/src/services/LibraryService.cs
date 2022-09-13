@@ -46,7 +46,8 @@ namespace TinyScreen.Services {
                     Name = gameData.Name,
                     Description = gameData.Description,
                     Artwork = await _imageService.Save(gameData.ArtworkUrl, ImageService.ImageType.Artwork, gameData.Name),
-                    Background = await _imageService.Save(gameData.BackgroundUrl, ImageService.ImageType.Background, gameData.Name)
+                    Background = await _imageService.Save(gameData.BackgroundUrl, ImageService.ImageType.Background, gameData.Name),
+                    LastPlayed = new DateTime()
                 };
                 
                 // Save game to database

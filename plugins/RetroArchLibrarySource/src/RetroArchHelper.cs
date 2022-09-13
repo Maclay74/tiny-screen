@@ -19,7 +19,7 @@ namespace RetroArchLibrarySource {
         
         public int GamesCount() => GetRomsInPlayLists().Count;
 
-        private List<LibrarySourceGameData> GetRomsInPlayLists() {
+        public List<LibrarySourceGameData> GetRomsInPlayLists() {
             var roms = new List<LibrarySourceGameData>();
             
             var playlistsPath = Path.Combine(_installation.InstallPath(), "playlists");

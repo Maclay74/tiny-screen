@@ -81,6 +81,8 @@ namespace TinyScreen.Services {
         }
 
         public async Task<bool> IsImageValid(string url) {
+            if (url == "") return false;
+            
             var client = new HttpClient();
             var response = await client.GetAsync(url, HttpCompletionOption.ResponseHeadersRead);
             return response.IsSuccessStatusCode;

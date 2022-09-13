@@ -1,11 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using TinyScreen.Framework.Interfaces;
-using System.Reflection;
 using System.Threading.Tasks;
-using Microsoft.Win32;
 using TinyScreen.Framework;
 
 namespace RetroArchLibrarySource {
@@ -53,11 +50,14 @@ namespace RetroArchLibrarySource {
         }
 
         public override async Task<string[]> GamesIds() {
-            return new [] {"test"};
+            return _retroArchHelper
+                .GetRomsInPlayLists().Select(game => game.SourceId)
+                .ToArray();
         }
 
         public override async Task<LibrarySourceGameData> Game(string sourceId) {
-            return new LibrarySourceGameData();
+            return _retroArchHelper
+                .GetRomsInPlayLists().Find(game => game.SourceId == sourceId);
         }
     }
 }

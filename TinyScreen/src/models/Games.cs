@@ -1,4 +1,5 @@
-﻿using Watson.ORM.Core;
+﻿using System;
+using Watson.ORM.Core;
 
 namespace TinyScreen.Models {
     [Table("games")]
@@ -26,7 +27,7 @@ namespace TinyScreen.Models {
         public int Source { get; set; }
         
         [Column("lastPlayed", false, DataTypes.DateTime, 2, false)]
-        public string LastPlayed { get; set; }
+        public DateTime LastPlayed { get; set; }
         
     }
 }
