@@ -11,7 +11,7 @@ script = ExtResource( 2 )
 NamePath = NodePath("MarginContainer/HBoxContainer/VBoxContainer/Name")
 GamesCountPath = NodePath("MarginContainer/HBoxContainer/VBoxContainer/Games Count")
 IconPath = NodePath("MarginContainer/HBoxContainer/Icon")
-IncludeCheckbox = NodePath("MarginContainer/HBoxContainer/VBoxContainer/Include")
+IncludePath = NodePath("MarginContainer/HBoxContainer/VBoxContainer/Include")
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 anchor_right = 1.0

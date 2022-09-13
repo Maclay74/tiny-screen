@@ -1,30 +1,21 @@
 using System;
 using Godot;
+using GodotOnReady.Attributes;
 using TinyScreen.Framework.Interfaces;
 
 namespace TinyScreen.Scripts.Onboarding {
-    public class LibrarySource : Panel {
+    public partial class LibrarySource : Panel {
 
         public ILibrarySource source;
         
-        [Export] public NodePath NamePath;
-        [Export] public NodePath GamesCountPath;
-        [Export] public NodePath IconPath;
-        [Export] public NodePath IncludeCheckbox;
-
-        private Label _name;
-        private Label _gamesCount;
-        private TextureRect _icon;
-        private CheckBox _include;
+        [OnReadyGet] private Label _name;
+        [OnReadyGet] private Label _gamesCount;
+        [OnReadyGet] private TextureRect _icon;
+        [OnReadyGet] private CheckBox _include;
 
         public Action<ILibrarySource, bool> toogle;
 
-        public override void _Ready() {
-
-            _name = GetNode<Label>(NamePath);
-            _gamesCount = GetNode<Label>(GamesCountPath);
-            _icon = GetNode<TextureRect>(IconPath);
-            _include = GetNode<CheckBox>(IncludeCheckbox);
+        [OnReady] public void Setup() {
             
             _icon.Texture = PrepareIcon();
             _name.Text = source.Name();

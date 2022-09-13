@@ -1,34 +1,25 @@
 ﻿using Godot;
 using System.Collections.Generic;
+using GodotOnReady.Attributes;
 using TinyScreen.Framework.Attributes;
 using TinyScreen.Framework.Interfaces;
 using TinyScreen.Services;
 
 namespace TinyScreen.Scripts.Onboarding {
-    public class Library : Control {
-
-        [Export] public NodePath SubTitlePath;
-        [Export] public NodePath SourcesGrid;
-        [Export] public NodePath ImportButton;
+    public partial class Library : Control {
+        
         [Export] public PackedScene SourcePanel;
 
-        private Label _subtitle;
-        private GridContainer _sources;
-        private Button _import;
+        [OnReadyGet] private Label _subtitle;
+        [OnReadyGet] private GridContainer _sources;
+        [OnReadyGet] private Button _import;
 
         [Inject] private IEnumerable<ILibrarySource> _librarySources;
         [Inject] private LibraryService _libraryService;
 
         private List<ILibrarySource> _included = new List<ILibrarySource>();
 
-        public override void _Ready() {
-            base._Ready();
-
-            // Bind UI
-            _subtitle = GetNode<Label>(SubTitlePath);
-            _sources = GetNode<GridContainer>(SourcesGrid);
-            _import = GetNode<Button>(ImportButton);
-
+        [OnReady] public void CreateLibrarySources() {
             foreach (var source in _librarySources) {
                 var panel = SourcePanel.Instance<LibrarySource>();
                 panel.source = source;

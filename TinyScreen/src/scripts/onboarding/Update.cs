@@ -2,34 +2,24 @@
 using System.Net.Http;
 using ByteSizeLib;
 using Godot;
+using GodotOnReady.Attributes;
 using TinyScreen.Framework.Attributes;
 using TinyScreen.Framework.Interfaces;
 using TinyScreen.Framework.Extensions;
 
 namespace TinyScreen.Scripts.Onboarding {
-    public class Update : Control {
-
-        [Export] public NodePath SubTitlePath;
-        [Export] public NodePath UpdateSizePath;
-        [Export] public NodePath CurrentVersionPath;
-        [Export] public NodePath LatestVersionPath;
-        [Export] public NodePath VersionsListPath;
-        [Export] public NodePath SkipButtonPath;
-        [Export] public NodePath ChangelogButtonPath;
-        [Export] public NodePath UpdateButtonPath;
-        [Export] public NodePath TryAgainButtonPath;
-        [Export] public NodePath ProgressBarPath;
-
-        private Label _subtitle;
-        private Label _updateSize;
-        private Label _currentVersion;
-        private Label _latestVersion;
-        private Control _versionsList;
-        private Button _skipButton;
-        private Button _changelogButton;
-        private Button _updateButton;
-        private Button _tryAgainButton;
-        private ProgressBar _progressBar;
+    public partial class Update : Control {
+        
+        [OnReadyGet] private Label _subtitle;
+        [OnReadyGet] private Label _updateSize;
+        [OnReadyGet] private Label _currentVersion;
+        [OnReadyGet] private Label _latestVersion;
+        [OnReadyGet] private Control _versionsList;
+        [OnReadyGet] private Button _skipButton;
+        [OnReadyGet] private Button _changelogButton;
+        [OnReadyGet] private Button _updateButton;
+        [OnReadyGet] private Button _tryAgainButton;
+        [OnReadyGet] private ProgressBar _progressBar;
 
         private enum State {
             CheckingLatestVersion,
@@ -45,21 +35,10 @@ namespace TinyScreen.Scripts.Onboarding {
         [Inject] private IUpdateInterface _updateService;
         [Inject] private IHardwareService _hardwareService;
 
-        public override void _Ready() {
+        
+        [OnReady] public void BindEvents() {
             base._Ready();
 
-            // Bind UI
-            _subtitle = GetNode<Label>(SubTitlePath);
-            _updateSize = GetNode<Label>(UpdateSizePath);
-            _currentVersion = GetNode<Label>(CurrentVersionPath);
-            _latestVersion = GetNode<Label>(LatestVersionPath);
-            _versionsList = GetNode<Control>(VersionsListPath);
-            _skipButton = GetNode<Button>(SkipButtonPath);
-            _changelogButton = GetNode<Button>(ChangelogButtonPath);
-            _updateButton = GetNode<Button>(UpdateButtonPath);
-            _tryAgainButton = GetNode<Button>(TryAgainButtonPath);
-            _progressBar = GetNode<ProgressBar>(ProgressBarPath);
-            
             // Bind buttons
             _skipButton.Connect("pressed", this, nameof(OnSkipPress));
             _changelogButton.Connect("pressed", this, nameof(OnChangelogPress));
