@@ -13,9 +13,9 @@ custom_constants/margin_top = 20
 custom_constants/margin_left = 20
 custom_constants/margin_bottom = 20
 script = ExtResource( 1 )
-SubTitlePath = NodePath("CenterContainer/VBoxContainer/Subtitle")
-SourcesGrid = NodePath("CenterContainer/VBoxContainer/GridContainer")
-ImportButton = NodePath("CenterContainer/VBoxContainer/ImportButton")
+SubtitlePath = NodePath("CenterContainer/VBoxContainer/Subtitle")
+SourcesPath = NodePath("CenterContainer/VBoxContainer/GridContainer")
+ImportPath = NodePath("CenterContainer/VBoxContainer/ImportButton")
 SourcePanel = ExtResource( 3 )
 
 [node name="CenterContainer" type="CenterContainer" parent="."]

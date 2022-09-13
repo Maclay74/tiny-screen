@@ -1,15 +1,12 @@
 ﻿using Godot;
+using GodotOnReady.Attributes;
 
 namespace TinyScreen.Scripts.Onboarding {
-    public class Welcome : Control {
+    public partial class Welcome : Control {
 
-        [Export] public NodePath StartButtonPath;
+        [OnReadyGet] private Button _startButton;
         
-        private Button _startButton;
-        
-        public override void _Ready() {
-            base._Ready();
-            _startButton = GetNode<Button>(StartButtonPath);
+        [OnReady] public void BindEvents() {
             _startButton.Connect("pressed", GetParent(), nameof(Onboarding.NextStage));
         }
     }
