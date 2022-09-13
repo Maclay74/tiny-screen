@@ -18,8 +18,8 @@ namespace RetroArchLibrarySource {
         private RetroArchHelper _retroArchHelper;
 
         private List<IRetroArchInstallation> _installations = new List<IRetroArchInstallation> {
-            new SteamInstallation(),
-            new StandaloneInstallation()
+            new StandaloneInstallation(), // Priority is important!
+            new SteamInstallation()
         };
 
         private IRetroArchInstallation _installation;
@@ -58,18 +58,6 @@ namespace RetroArchLibrarySource {
 
         public override async Task<LibrarySourceGameData> Game(string sourceId) {
             return new LibrarySourceGameData();
-        }
-        
-        private bool IsInstalledStandalone() {
-            RegistryKey steamKey = Registry.LocalMachine.OpenSubKey(_registryKey);
-            if (steamKey == null) return false;
-            
-            // If path is not set
-            string installPath = steamKey.GetValue("DisplayIcon")?.ToString();
-            if (installPath == null) return false;
-
-            // Check if installer exists
-            return File.Exists(Path.Combine(installPath));
         }
     }
 }
