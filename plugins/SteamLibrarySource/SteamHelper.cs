@@ -16,6 +16,11 @@ namespace SteamLibrarySource {
 
         private RegistryKey _registryKey;
 
+        private string[] ignoreIds = {
+            "228980", // Steamworks 
+            "1118310" // RetroArch
+        };
+
         private const string apiBase = "https://store.steampowered.com/api/";
         
         private string GetInstalledDirectory() {
@@ -45,8 +50,9 @@ namespace SteamLibrarySource {
                     foreach (var apps in param.Property("apps")) {
                         foreach (var app in apps.OfType<JProperty>()) {
                             
-                            // This is SteamWorks or something, totally not a game
-                            if (app.Name == "228980") continue;
+                            if (ignoreIds.Contains(app.Name))
+                                continue;
+                            
                             gamesIds.Add(app.Name);
                         }
                     }
@@ -56,7 +62,7 @@ namespace SteamLibrarySource {
             return gamesIds;
         }
 
-        public async Task<LibrarySourceGameData> GetGameInfo(int id) {
+        public async Task<LibrarySourceGameData> GetGameInfo(string id) {
             
             var client = new HttpClient();
             var apiGameLink = apiBase + "appdetails?appids=" + id;
@@ -68,7 +74,7 @@ namespace SteamLibrarySource {
             if (!response.IsSuccessStatusCode) return null;
             
             var content = response.Content.ReadAsStringAsync().Result;
-            dynamic json = JsonConvert.DeserializeObject<dynamic>(content)[id.ToString()];
+            dynamic json = JsonConvert.DeserializeObject<dynamic>(content)[id];
 
             // Bad game
             if (json.success == false) return null;
@@ -82,7 +88,7 @@ namespace SteamLibrarySource {
             };
         }
 
-        private string GenerateArtworkUrl(int id) {
+        private string GenerateArtworkUrl(string id) {
             return $"https://cdn.akamai.steamstatic.com/steam/apps/{id}/library_600x900_2x.jpg";
         }
 

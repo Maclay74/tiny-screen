@@ -1,4 +1,5 @@
-﻿using Watson.ORM.Core;
+﻿using System;
+using Watson.ORM.Core;
 
 namespace TinyScreen.Models {
     [Table("games")]
@@ -7,8 +8,8 @@ namespace TinyScreen.Models {
         [Column("id", true, DataTypes.Int, false)]
         public int Id { get; set; }
         
-        [Column("sourceId", false, DataTypes.Int, false)]
-        public int SourceId { get; set; }
+        [Column("sourceId", false, DataTypes.Nvarchar, 255, false)]
+        public string SourceId { get; set; }
         
         [Column("name", false, DataTypes.Nvarchar, 128, false)]
         public string Name { get; set; }
@@ -26,7 +27,7 @@ namespace TinyScreen.Models {
         public int Source { get; set; }
         
         [Column("lastPlayed", false, DataTypes.DateTime, 2, false)]
-        public string LastPlayed { get; set; }
+        public DateTime LastPlayed { get; set; }
         
     }
 }

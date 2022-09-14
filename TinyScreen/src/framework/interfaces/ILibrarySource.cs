@@ -11,13 +11,13 @@ namespace TinyScreen.Framework.Interfaces {
 
         bool IsInstalled();
 
-        Task<int[]> GamesIds();
+        Task<string[]> GamesIds();
 
-        Task<LibrarySourceGameData> Game(int sourceId);
+        Task<LibrarySourceGameData> Game(string sourceId);
     }
     
     public class LibrarySourceGameData {
-        public int SourceId;
+        public string SourceId;
         public string Name;
         public string Description;
         public string ArtworkUrl;
