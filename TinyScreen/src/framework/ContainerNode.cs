@@ -26,6 +26,7 @@ namespace TinyScreen.Framework {
             _container.Register<ImageService>(Lifestyle.Singleton);
             _container.Register<IHardwareService>(HardwareFactory.GetHardwareService, Lifestyle.Singleton);
             LoadPlugins();
+            LoadNodes();
             InjectDI();
         }
 
@@ -78,6 +79,11 @@ namespace TinyScreen.Framework {
                 }
             }
             _container.Collection.Register<ILibrarySource>(sources);
+        }
+
+        private void LoadNodes() {
+            var modalService = GetNode<ModalService>("Modal");
+            _container.RegisterInstance<ModalService>(modalService);
         }
     }
 }
