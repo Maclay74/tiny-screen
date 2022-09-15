@@ -4,6 +4,7 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using craftersmine.SteamGridDBNet;
 using Godot;
+using TinyScreen.Framework.exceptions;
 using Path = System.IO.Path;
 
 namespace TinyScreen.Services {
@@ -23,10 +24,15 @@ namespace TinyScreen.Services {
             
             // If image is valid, okay, just download it
             if (!await IsImageValid(url)) {
-                
-                // Fallback to SteamGrid
-                url = await GetImageFromSteamGrid(name, type);
 
+                try {
+                    // Fallback to SteamGrid
+                    url = await GetImageFromSteamGrid(name, type);
+                }
+                catch (Exception) {
+                    throw new LibraryGraphicsException();
+                }
+                
                 // Fallback to generate
                 if (url.Length ==  0) {
                     // TODO Fallback to generate image    

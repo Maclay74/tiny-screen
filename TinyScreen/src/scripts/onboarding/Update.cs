@@ -6,6 +6,7 @@ using GodotOnReady.Attributes;
 using TinyScreen.Framework.Attributes;
 using TinyScreen.Framework.Interfaces;
 using TinyScreen.Framework.Extensions;
+using TinyScreen.Services;
 
 namespace TinyScreen.Scripts.Onboarding {
     public partial class Update : Control {
@@ -34,6 +35,7 @@ namespace TinyScreen.Scripts.Onboarding {
         
         [Inject] private IUpdateInterface _updateService;
         [Inject] private IHardwareService _hardwareService;
+        [Inject] private ModalService _modalService;
 
         
         [OnReady] public void BindEvents() {
@@ -149,8 +151,11 @@ namespace TinyScreen.Scripts.Onboarding {
             }
         }
 
-        private void OnSkipPress() {
-            GetParent<Onboarding>().NextStage();
+        private async void OnSkipPress() {
+            if (await _modalService.Confirm(
+                "Are you sure you want to skip update?\nOutdated version might not work correctly!",
+                "Skip", "Back"))
+                GetParent<Onboarding>().NextStage();
         }
 
         private void OnUpdatePress() {

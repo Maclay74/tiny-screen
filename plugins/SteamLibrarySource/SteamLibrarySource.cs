@@ -6,6 +6,7 @@ using System.Reflection;
 using System.Threading.Tasks;
 using Microsoft.Win32;
 using TinyScreen.Framework;
+using TinyScreen.Framework.exceptions;
 
 namespace SteamLibrarySource {
     public class SteamLibrarySource : BaseLibrarySource {
@@ -43,10 +44,22 @@ namespace SteamLibrarySource {
             return File.Exists(Path.Combine(installPath, "steam.exe"));
         }
 
-        public override async Task<string[]> GamesIds() => _steamHelper.GetInstalledGamesIds().ToArray();
+        public override async Task<string[]> GamesIds() {
+            try {
+                return _steamHelper.GetInstalledGamesIds().ToArray();
+            }
+            catch (Exception) {
+                throw new LibraryParseException();
+            }
+        }
 
         public override async Task<LibrarySourceGameData> Game(string sourceId) {
-            return await _steamHelper.GetGameInfo(sourceId);
+            try {
+                return await _steamHelper.GetGameInfo(sourceId);
+            }
+            catch (Exception) {
+                throw new LibrarySourceGameDataException();
+            }
         }
     }
 }
