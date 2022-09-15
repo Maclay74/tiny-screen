@@ -17,11 +17,11 @@ namespace TinyScreen.scripts.modals {
 
         public ConfirmModalProperties Properties;
         
-        [OnReady]
+        [OnReady(Order = 0)]
         private void BindEvents() {
             _confirmButton.Connect("pressed", this, nameof(OnConfirm));
             _cancelButton.Connect("pressed", this, nameof(OnCancel));
-
+            
             _title.Text = Properties.Title;
             _confirmButton.Text = Properties.ConfirmButtonText;
             _cancelButton.Text = Properties.CancelButtonText;

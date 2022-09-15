@@ -16,12 +16,19 @@ namespace TinyScreen.scripts.modals {
         [Signal]
         protected delegate void Decision();
         
-        [OnReady]
-        private void FadeIn() {
+        [OnReady(Order = 1)]
+        private async void FadeIn() {
+            _content.Modulate = new Color(1, 1, 1, 0);
+            
+            // Hack so godot could resize content window
+            await ToSignal(GetTree(), "idle_frame");
+            _content.Update();
+            await ToSignal(GetTree(), "idle_frame");
+            
             _content.RectPivotOffset = _content.RectSize / 2;
-            _tween.InterpolateProperty(_content, "modulate", new Color(1, 1, 1, 0), new Color(1, 1, 1, 1), 0.2f, Tween.TransitionType.Cubic);
-            _tween.InterpolateProperty(_content, "rect_scale", new Vector2(0.5f, 0.5f), new Vector2(1, 1), 0.2f, Tween.TransitionType.Back);
-            _tween.InterpolateProperty(_background.Material, "shader_param/lod", 0, 3, 0.15f, Tween.TransitionType.Cubic);
+            _tween.InterpolateProperty(_content, "modulate", new Color(1, 1, 1, 0), new Color(1, 1, 1, 1), .2f, Tween.TransitionType.Cubic);
+            _tween.InterpolateProperty(_content, "rect_scale", new Vector2(0.5f, 0.5f), new Vector2(1, 1), .2f, Tween.TransitionType.Back);
+            _tween.InterpolateProperty(_background.Material, "shader_param/lod", 0, 3, .15f, Tween.TransitionType.Cubic);
             _tween.Start();
         }
 

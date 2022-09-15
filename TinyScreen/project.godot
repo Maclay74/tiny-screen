@@ -19,7 +19,7 @@ config/steamgrid/key="c6c3d47a9c8deeff0f9481aea822bec1"
 
 [autoload]
 
-AutoloadScene="*res://src/framework/AutoloadScene.tscn"
+AutoloadScene="*res://assets/scenes/AutoloadScene.tscn"
 
 [gui]
 

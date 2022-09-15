@@ -13,7 +13,6 @@ using TinyScreen.Framework.Interfaces;
 
 namespace SteamLibrarySource {
     internal class SteamHelper {
-
         private RegistryKey _registryKey;
 
         private string[] ignoreIds = {
@@ -22,7 +21,7 @@ namespace SteamLibrarySource {
         };
 
         private const string apiBase = "https://store.steampowered.com/api/";
-        
+
         private string GetInstalledDirectory() {
             return _registryKey?.GetValue("InstallPath")?.ToString();
         }
@@ -35,24 +34,23 @@ namespace SteamLibrarySource {
 
         public List<string> GetInstalledGamesIds() {
             var installedPath = GetInstalledDirectory();
-            
+
             // In this file we have information about installed games
             var libraryFilePath = Path.Combine(installedPath, "config", "libraryfolders.vdf");
-            
+
             // Text => Json
             var configContent = File.ReadAllText(libraryFilePath);
             var configRoot = VdfConvert.Deserialize(configContent).Value.ToJson();
             var gamesIds = new List<string>();
-            
+
             // The hell of a parse
             foreach (var library in configRoot) {
                 foreach (var param in library.OfType<JObject>()) {
                     foreach (var apps in param.Property("apps")) {
                         foreach (var app in apps.OfType<JProperty>()) {
-                            
                             if (ignoreIds.Contains(app.Name))
                                 continue;
-                            
+
                             gamesIds.Add(app.Name);
                         }
                     }
@@ -63,22 +61,21 @@ namespace SteamLibrarySource {
         }
 
         public async Task<LibrarySourceGameData> GetGameInfo(string id) {
-            
             var client = new HttpClient();
             var apiGameLink = apiBase + "appdetails?appids=" + id;
-            
+
             // Get information about the game
             var response = await client.GetAsync(apiGameLink);
 
             // Bad response
             if (!response.IsSuccessStatusCode) return null;
-            
+
             var content = response.Content.ReadAsStringAsync().Result;
             dynamic json = JsonConvert.DeserializeObject<dynamic>(content)[id];
 
             // Bad game
             if (json.success == false) return null;
-            
+
             return new LibrarySourceGameData {
                 SourceId = id,
                 Name = json.data.name.ToString(),
