@@ -13,6 +13,8 @@ namespace TinyScreen.Framework.Interfaces {
     }
 
     public enum Setting {
-        Author
+        AutoUpdateApplication,
+        AutoUpdateLibrary,
+        StartWithWindows
     }
 }

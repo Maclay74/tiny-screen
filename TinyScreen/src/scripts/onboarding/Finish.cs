@@ -23,6 +23,22 @@ namespace TinyScreen.Scripts.Onboarding {
             
             //TODO bind checkbox to toggle settings via _settingsService
             // _settingsService.Set(Setting.Author, "Mike!");
+
+            _updateCheckbox.Connect("pressed", this, nameof(OnUpdatePress));
+            _libraryCheckbox.Connect("pressed", this, nameof(OnUpdateLibraryPress));
+            _autorunCheckbox.Connect("pressed", this, nameof(OnStartupPress));
+        }
+
+        private void OnUpdatePress() {
+            _settingsService.Set(Setting.AutoUpdateApplication, _updateCheckbox.Pressed.ToString());
+        }
+        
+        private void OnUpdateLibraryPress() {
+            _settingsService.Set(Setting.AutoUpdateLibrary, _libraryCheckbox.Pressed.ToString());
+        }
+        
+        private void OnStartupPress() {
+            _settingsService.Set(Setting.StartWithWindows, _autorunCheckbox.Pressed.ToString());
         }
         
     }
