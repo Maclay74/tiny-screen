@@ -6,7 +6,7 @@ using System.Reflection;
 using System.Threading.Tasks;
 using Microsoft.Win32;
 using TinyScreen.Framework;
-using TinyScreen.Framework.exceptions;
+using TinyScreen.Framework.Exceptions;
 
 namespace SteamLibrarySource {
     public class SteamLibrarySource : BaseLibrarySource {

@@ -6,6 +6,7 @@
   <ItemGroup>
     <PackageReference Include="ByteSize" Version="2.1.1" />
     <PackageReference Include="craftersmine.SteamGridDB.Net" Version="1.1.2" />
+    <PackageReference Include="FlexLayoutSharp" Version="1.0.0" />
     <PackageReference Include="GodotOnReady" Version="1.2.2" />
     <PackageReference Include="Lib.Harmony" Version="2.2.2" />
     <PackageReference Include="SimpleInjector" Version="5.4.0" />

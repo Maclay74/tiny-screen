@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using ExpressionTree;
-using TinyScreen.Framework.exceptions;
+using TinyScreen.Framework.Exceptions;
 using TinyScreen.Framework.Interfaces;
 using TinyScreen.Models;
 
@@ -43,12 +43,10 @@ namespace TinyScreen.Services {
             }
             
             for (int i = 0; i < newGames.Length; i++) {
-                ((IProgress<float>) progress).Report((int)((float)i / newGames.Length * 100));
+                ((IProgress<float>) progress).Report((float)i / newGames.Length);
                 
                 await AddGameToLibrary(source, newGames[i], sourceRecord.Id);
             }
-            
-            ((IProgress<float>) progress).Report(100f);
         }
 
         private async Task AddGameToLibrary(ILibrarySource source, string sourceId, int sourceRecordId) {
