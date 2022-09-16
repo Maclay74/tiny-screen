@@ -9,7 +9,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SteamLibrarySource", "..\pl
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TemplateLibrarySource", "..\plugins\TemplateLibrarySource\TemplateLibrarySource.csproj", "{6B5B2D65-DD2D-4A97-BE32-9A2EDF9C0AAE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RetroArchLibrarySource", "..\plugins\RetroArchLibrarySource\RetroArchLibrarySource.csproj", "{98937A84-9122-4B30-97C2-19F682D5F801}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RetroArchLibrarySource", "..\plugins\RetroArchLibrarySource\RetroArchLibrarySource.csproj", "{98937A84-9122-4B30-97C2-19F682D5F801}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "LibrarySources", "LibrarySources", "{EA567C71-F276-4153-9C10-1BBA605B4D57}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -54,6 +56,11 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{FE3AD83B-7B8C-4A9B-9A28-D6E82EFD94BE} = {EA567C71-F276-4153-9C10-1BBA605B4D57}
+		{6B5B2D65-DD2D-4A97-BE32-9A2EDF9C0AAE} = {EA567C71-F276-4153-9C10-1BBA605B4D57}
+		{98937A84-9122-4B30-97C2-19F682D5F801} = {EA567C71-F276-4153-9C10-1BBA605B4D57}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {489C9F49-CD31-4E46-BF81-9FF06BCC9554}

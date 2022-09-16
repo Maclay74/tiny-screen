@@ -76,8 +76,7 @@ namespace TinyScreen.Scripts.Onboarding {
             }
             
             _progressBar.SetProgress(1);
-            
-            GD.Print("Import is done!");
+            GetParent<Onboarding>().NextStage();
         }
     }
 }
