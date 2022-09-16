@@ -2,6 +2,7 @@
 using TinyScreen.Framework.Attributes;
 using TinyScreen.Framework.Interfaces;
 using TinyScreen.Scripts.Onboarding;
+using static SQLitePCL.Batteries_V2;
 
 namespace TinyScreen.scripts {
     public class RootNode: Control {
