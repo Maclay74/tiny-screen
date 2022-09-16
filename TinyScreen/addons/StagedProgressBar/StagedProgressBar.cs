@@ -73,10 +73,15 @@ namespace TinyScreen.addons.StagedProgressBar {
 
         // Draw rect for background
         private void DrawStages() {
+            if (_stageStyle == null) 
+                return;
             DrawStyleBox(_stageStyle, new Rect2(new Vector2(0, 0), RectSize));
         }
         
         private void DrawProgress() {
+            if (_progressStyle == null) 
+                return;
+            
             var size = RectSize;
             size.x *= Progress;
             DrawStyleBox(_progressStyle, new Rect2(new Vector2(0, 0), size));
@@ -93,6 +98,8 @@ namespace TinyScreen.addons.StagedProgressBar {
         }
 
         private void UpdateLayout() {
+            if (Stages == null)
+                return;
             
             // Size minus gaps
             var workingWidth = RectSize.x - _gap * (Stages.Count - 1);
@@ -159,6 +166,13 @@ namespace TinyScreen.addons.StagedProgressBar {
             DrawStages();
             DrawProgress();
             DrawLabels();
+        }
+
+        public override void _EnterTree() {
+            base._EnterTree();
+            Material = new ShaderMaterial();
+            var shader = ResourceLoader.Load<Shader>("res://addons/StagedProgressBar/mask.gdshader");
+            ((ShaderMaterial) Material).Shader = shader;
         }
 
         public override void _Ready() {

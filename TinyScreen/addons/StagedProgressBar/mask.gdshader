@@ -2,7 +2,7 @@ shader_type canvas_item;
 render_mode blend_disabled, unshaded;
 
 uniform sampler2D mask;
-uniform bool isMasked;
+uniform bool isMasked = true;
 
 uniform vec2 size = vec2(40.0, 40.0);
 
