@@ -9,7 +9,7 @@ using TinyScreen.Framework.Interfaces;
 using Path = System.IO.Path;
 
 namespace TinyScreen.Services {
-    public class LocalUpdateService: IUpdateInterface {
+    public class LocalUpdateService: IUpdateService {
         
         private string archiveUrl = "https://cdn.ayaneo.com/ayaneo/downloads/AYASpaceGlobalSetup1.0.1.144.zip";
         
@@ -25,9 +25,6 @@ namespace TinyScreen.Services {
             
             var client = new HttpClient();
             var head = await client.GetAsync(archiveUrl, HttpCompletionOption.ResponseHeadersRead);
-
-            GD.Print(head.Content.Headers.Contains("Content-Length"));
-
             if (head.Content.Headers.Contains("Content-Length"))
                 return head.Content.Headers.ContentLength;
             

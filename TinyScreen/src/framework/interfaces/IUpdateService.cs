@@ -2,7 +2,7 @@
 using System.Threading.Tasks;
 
 namespace TinyScreen.Framework.Interfaces {
-    public interface IUpdateInterface {
+    public interface IUpdateService {
         
         Version GetCurrentVersion();
 

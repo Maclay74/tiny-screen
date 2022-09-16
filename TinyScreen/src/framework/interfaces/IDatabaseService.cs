@@ -9,6 +9,8 @@ namespace TinyScreen.Framework.Interfaces {
 
         void Insert<T>(T record) where T : class, new();
 
+        T Update<T>(T obj) where T : class, new();
+
         T Select<T>(Expr expr, ResultOrder[] ro = null) where T : class, new();
 
         List<T> SelectAll<T>(Expr expr, ResultOrder[] ro = null) where T : class, new();
