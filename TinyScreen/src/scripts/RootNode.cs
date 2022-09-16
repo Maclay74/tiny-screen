@@ -1,41 +1,33 @@
 ﻿using Godot;
 using TinyScreen.Framework.Attributes;
 using TinyScreen.Framework.Interfaces;
+using TinyScreen.Scripts.Onboarding;
 
 namespace TinyScreen.scripts {
     public class RootNode: Control {
 
-        [Inject] public ISettingsInterface _settingsService;
+        [Inject] public ISettingsService _settingsService;
         [Inject] public IDatabaseService _databaseService;
 
         [Export] private PackedScene Onboarding;
         [Export] private PackedScene Application;
 
-        public override void _Ready() {
+        public override async void _Ready() {
             base._Ready();
             
-            // Application is not installed, we need onboarding!
             if (!_settingsService.IsAppInstalled()) {
+
+                var onboarding = Onboarding.Instance() as Onboarding;
+                AddChild(onboarding);
+
+                var onboardingResult = await ToSignal(onboarding, "Finished");
+                bool showTutorial = (bool)onboardingResult[0];
                 
-                AddChild(Onboarding.Instance());
-            
-                // Install application
-                _settingsService.InstallApp();
-                
-                // Add some settings during the onboarding, for example
-                //_settingsService.Set(Setting.Author, "Mike!");
+                RemoveChild(onboarding);
             }
             
-            // Application is installed, show it
-            else {
-                
-                // Set up database
-                _databaseService.InitDatabase();
-                
-                // When app is running normally, it's possible to retrieve settings
-                var author = _settingsService.Get(Setting.Author);
-                GD.Print(author);
-            }
+            _databaseService.InitDatabase();
+
         }
     }
 }

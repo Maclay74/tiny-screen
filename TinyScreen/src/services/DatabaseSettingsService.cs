@@ -5,7 +5,7 @@ using TinyScreen.Framework.Interfaces;
 using TinyScreen.Models;
 
 namespace TinyScreen.Services {
-    public class DatabaseSettingsService: ISettingsInterface {
+    public class DatabaseSettingsService: ISettingsService {
         
         private IDatabaseService _databaseService;
         

@@ -1,4 +1,6 @@
 using Godot;
+using TinyScreen.Framework.Attributes;
+using TinyScreen.Framework.Interfaces;
 
 namespace TinyScreen.Scripts.Onboarding {
     public class Onboarding : Control {
@@ -6,22 +8,30 @@ namespace TinyScreen.Scripts.Onboarding {
         [Export] public PackedScene WelcomeScene;
         [Export] public PackedScene UpdateScene;
         [Export] public PackedScene LibraryScene;
+        [Export] public PackedScene FinishScene;
+
+        [Inject] private ISettingsService _settingsService;
 
         private enum Stage {
             Welcome,
             Update,
             Library,
-            Emulation,
-            Device,
-            Widgets
+            //Device,
+            Widgets,
+            Finish,
         }
 
         private Stage _currentStage = Stage.Welcome;
         private Control _currentScene;
         private Tween _tween;
         
+        [Signal]
+        protected delegate void Finished(bool showTutorial);
+        
         public override void _Ready() {
             base._Ready();
+            _settingsService.InstallApp();
+            
             _tween = new Tween();
             AddChild(_tween);
             SetStage(_currentStage);
@@ -39,21 +49,32 @@ namespace TinyScreen.Scripts.Onboarding {
                     TransitionToScene(UpdateScene);
                     break;
                 
-                default:
+                case Stage.Library:
                     TransitionToScene(LibraryScene);
+                    break;
+
+                case Stage.Widgets:
+                    NextStage();
+                    break;
+                
+                case Stage.Finish:
+                    TransitionToScene(FinishScene);
                     break;
             }
         }
 
         public void NextStage() {
-            if (_currentStage != Stage.Widgets) {
+            if (_currentStage != Stage.Finish) {
                 SetStage(_currentStage + 1);
                 return;
             }
-            
-            // At this point onboarding is finished
-            // Persist settings and games
-            // Open application
+
+            // No more steps
+            Finish();
+        }
+
+        public void Finish(bool showTutorial = false) {
+            EmitSignal("Finished", showTutorial);
         }
 
         private async void TransitionToScene(PackedScene newScene) {

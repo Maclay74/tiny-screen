@@ -33,7 +33,7 @@ namespace TinyScreen.Scripts.Onboarding {
 
         private State _currentState = State.CheckingLatestVersion;
         
-        [Inject] private IUpdateInterface _updateService;
+        [Inject] private IUpdateService _updateService;
         [Inject] private IHardwareService _hardwareService;
         [Inject] private ModalService _modalService;
 

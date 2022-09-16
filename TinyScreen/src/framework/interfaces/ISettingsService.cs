@@ -2,7 +2,7 @@
 
 namespace TinyScreen.Framework.Interfaces {
     
-    public interface ISettingsInterface {
+    public interface ISettingsService {
         bool IsAppInstalled();
 
         void InstallApp();
