@@ -47,8 +47,6 @@ namespace TinyScreen.Services {
                 
                 await AddGameToLibrary(source, newGames[i], sourceRecord.Id);
             }
-            
-            //((IProgress<float>) progress).Report(1f);
         }
 
         private async Task AddGameToLibrary(ILibrarySource source, string sourceId, int sourceRecordId) {
