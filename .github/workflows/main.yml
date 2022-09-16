@@ -76,7 +76,10 @@ jobs:
           export_debug: false # optional
           
       - name: Add plugins to archive
-        run: /usr/bin/7z u ${{ steps.build.outputs.archive_directory }}/WindowsDesktop.zip /home/runner/work/tiny-screen/tiny-screen/TinyScreen/plugins 
+        run: |
+          /usr/bin/7z u ${{ steps.build.outputs.archive_directory }}/WindowsDesktop.zip /home/runner/work/tiny-screen/tiny-screen/TinyScreen/plugins
+          /usr/bin/7z u ${{ steps.build.outputs.archive_directory }}/WindowsDesktop.zip /home/runner/work/tiny-screen/tiny-screen/TinyScreen/.mono/temp/bin/ExportRelease/SQLitePCLRaw.core.dll
+          /usr/bin/7z u ${{ steps.build.outputs.archive_directory }}/WindowsDesktop.zip /home/runner/work/tiny-screen/tiny-screen/TinyScreen/.mono/temp/bin/ExportRelease/SQLitePCLRaw.provider.winsqlite3.dll
           
         # Make it possible to download built
       - name: Create artifacts
