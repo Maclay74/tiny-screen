@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using ExpressionTree;
+using Godot;
 using TinyScreen.Framework.Exceptions;
 using TinyScreen.Framework.Interfaces;
 using TinyScreen.Models;
@@ -32,9 +33,10 @@ namespace TinyScreen.Services {
             progress.ProgressChanged += onProgress;
 
             var gamesInSource = source.GamesIds().Result.ToList();
-
-            var gamesInLibrary = GetAllGames(source).Select(g => g.SourceId);
+            var gamesInLibrary = GetAllGames(source).Select(g => g.SourceId).ToList();
             
+            GD.Print("lib " + GetAllGames(source).Count);
+
             var newGames = gamesInSource.Where(sourceId => !gamesInLibrary.Contains(sourceId)).ToArray();
             var removedGames = gamesInLibrary.Where(sourceId => !gamesInSource.Contains(sourceId)).ToArray();
 
@@ -120,7 +122,7 @@ namespace TinyScreen.Services {
         
         private List<Games> GetAllGames(ILibrarySource source) {
             var sourceRecord = GetSourceRecord(source);
-            return _databaseService.SelectAll<Games>(new Expr("sourceId", OperatorEnum.Equals, sourceRecord.Id));
+            return _databaseService.SelectAll<Games>(new Expr("source", OperatorEnum.Equals, sourceRecord.Id));
         }
     }
 }
