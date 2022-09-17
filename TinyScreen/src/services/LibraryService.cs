@@ -34,8 +34,6 @@ namespace TinyScreen.Services {
 
             var gamesInSource = source.GamesIds().Result.ToList();
             var gamesInLibrary = GetAllGames(source).Select(g => g.SourceId).ToList();
-            
-            GD.Print("lib " + GetAllGames(source).Count);
 
             var newGames = gamesInSource.Where(sourceId => !gamesInLibrary.Contains(sourceId)).ToArray();
             var removedGames = gamesInLibrary.Where(sourceId => !gamesInSource.Contains(sourceId)).ToArray();

@@ -2,7 +2,7 @@
 using TinyScreen.Framework.Attributes;
 using TinyScreen.Framework.Interfaces;
 using TinyScreen.Scripts.Onboarding;
-using static SQLitePCL.Batteries_V2;
+using static SQLitePCL.Batteries_V2; // Mono won't pack the library without import
 
 namespace TinyScreen.scripts {
     public class RootNode: Control {
@@ -15,6 +15,8 @@ namespace TinyScreen.scripts {
 
         public override async void _Ready() {
             base._Ready();
+
+            bool showTutorial = false;
             
             if (!_settingsService.IsAppInstalled()) {
 
@@ -22,7 +24,7 @@ namespace TinyScreen.scripts {
                 AddChild(onboarding);
 
                 var onboardingResult = await ToSignal(onboarding, "Finished");
-                bool showTutorial = (bool)onboardingResult[0];
+                showTutorial = (bool)onboardingResult[0];
                 
                 RemoveChild(onboarding);
             }

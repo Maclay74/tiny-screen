@@ -59,13 +59,7 @@ namespace TinyScreen.Framework {
             // Recursively inject
             foreach (var field in fields) {
                 var obj = containerNode._container.GetInstance(field.FieldType);
-
-                try {
-                    field.SetValue(__instance, obj);
-                }
-                catch (InvalidCastException) {
-                    GD.PrintErr($"Error converting value {obj} ({obj.GetType()}) to {field.FieldType}");
-                }
+                field.SetValue(__instance, obj);
             }
         }
 
