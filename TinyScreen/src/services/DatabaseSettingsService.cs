@@ -14,8 +14,6 @@ namespace TinyScreen.Services {
         }
 
         public bool IsAppInstalled() {
-            // Since we store settings in database, we need it.
-            return false;
             return _databaseService.IsDatabaseExists();
         }
 

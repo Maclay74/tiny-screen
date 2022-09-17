@@ -1,6 +1,7 @@
 ﻿using Godot;
 using TinyScreen.Framework.Attributes;
 using TinyScreen.Framework.Interfaces;
+using TinyScreen.Scripts.Application;
 using TinyScreen.Scripts.Onboarding;
 using static SQLitePCL.Batteries_V2; // Mono won't pack the library without import
 
@@ -30,6 +31,9 @@ namespace TinyScreen.scripts {
             }
             
             _databaseService.InitDatabase();
+            
+            var application = Application.Instance() as Application;
+            AddChild(application);
 
         }
     }
