@@ -32,6 +32,7 @@ namespace SteamLibrarySource {
 
         public int GamesCount() => GetInstalledGamesIds().Count;
 
+        
         public List<string> GetInstalledGamesIds() {
             var installedPath = GetInstalledDirectory();
 

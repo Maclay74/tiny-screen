@@ -11,6 +11,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TemplateLibrarySource", "..
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RetroArchLibrarySource", "..\plugins\RetroArchLibrarySource\RetroArchLibrarySource.csproj", "{98937A84-9122-4B30-97C2-19F682D5F801}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EGSLibrarySource", "..\plugins\EGSLibrarySource\EGSLibrarySource.csproj", "{D8BEA850-4B69-4AEA-AB92-D036ED4F0A54}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -51,6 +53,14 @@ Global
 		{98937A84-9122-4B30-97C2-19F682D5F801}.ExportRelease|Any CPU.Build.0 = Debug|Any CPU
 		{98937A84-9122-4B30-97C2-19F682D5F801}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{98937A84-9122-4B30-97C2-19F682D5F801}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D8BEA850-4B69-4AEA-AB92-D036ED4F0A54}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D8BEA850-4B69-4AEA-AB92-D036ED4F0A54}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D8BEA850-4B69-4AEA-AB92-D036ED4F0A54}.ExportDebug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D8BEA850-4B69-4AEA-AB92-D036ED4F0A54}.ExportDebug|Any CPU.Build.0 = Debug|Any CPU
+		{D8BEA850-4B69-4AEA-AB92-D036ED4F0A54}.ExportRelease|Any CPU.ActiveCfg = Debug|Any CPU
+		{D8BEA850-4B69-4AEA-AB92-D036ED4F0A54}.ExportRelease|Any CPU.Build.0 = Debug|Any CPU
+		{D8BEA850-4B69-4AEA-AB92-D036ED4F0A54}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D8BEA850-4B69-4AEA-AB92-D036ED4F0A54}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
