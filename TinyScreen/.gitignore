@@ -5,8 +5,7 @@
 *.translation
 
 # Mono-specific ignores
-.mono/
-!.mono/temp/bin/Debug/e_sqlite3.dll
+.mono/**
 data_*/
 
 # JetBrains

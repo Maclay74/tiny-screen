@@ -32,13 +32,17 @@ namespace TinyScreen.Scripts.Onboarding {
                 panel.source = source;
                 _sources.AddChild(panel);
 
+                if (!source.IsInstalled()) 
+                    continue;
+                
                 panel.toogle += (sourceChanged, include) => {
                     if (include) _included.Add(sourceChanged);
                     else _included.Remove(sourceChanged);
                 };
+
                 _included.Add(source);
             }
-            
+
             _import.Connect("pressed", this, nameof(Import));
         }
 
