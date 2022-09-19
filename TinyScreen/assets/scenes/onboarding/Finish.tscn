@@ -1,0 +1,101 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://src/scripts/onboarding/Finish.cs" type="Script" id=1]
+
+[node name="Finish" type="MarginContainer"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_constants/margin_right = 20
+custom_constants/margin_top = 20
+custom_constants/margin_left = 20
+custom_constants/margin_bottom = 20
+script = ExtResource( 1 )
+FinishButtonPath = NodePath("CenterContainer/VBoxContainer/HBoxContainer/FinishButton")
+TourButtonPath = NodePath("CenterContainer/VBoxContainer/HBoxContainer/TourButton")
+UpdateCheckboxPath = NodePath("CenterContainer/VBoxContainer/Updates")
+LibraryCheckboxPath = NodePath("CenterContainer/VBoxContainer/Library")
+AutorunCheckboxPath = NodePath("CenterContainer/VBoxContainer/Autorun")
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+margin_left = 20.0
+margin_top = 20.0
+margin_right = 1004.0
+margin_bottom = 580.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer"]
+margin_left = 292.0
+margin_top = 186.0
+margin_right = 692.0
+margin_bottom = 374.0
+alignment = 1
+
+[node name="Title" type="Label" parent="CenterContainer/VBoxContainer"]
+margin_right = 400.0
+margin_bottom = 14.0
+theme_type_variation = "OnboardingTitle"
+text = "Done!"
+align = 1
+
+[node name="Subtitle" type="Label" parent="CenterContainer/VBoxContainer"]
+margin_top = 18.0
+margin_right = 400.0
+margin_bottom = 32.0
+theme_type_variation = "OnboardingSubtitle"
+text = "Everything is ready, would you like to take a short tour around?"
+align = 1
+
+[node name="Space2" type="Control" parent="CenterContainer/VBoxContainer"]
+margin_top = 36.0
+margin_right = 400.0
+margin_bottom = 46.0
+rect_min_size = Vector2( 0, 10 )
+
+[node name="Updates" type="CheckBox" parent="CenterContainer/VBoxContainer"]
+margin_top = 50.0
+margin_right = 400.0
+margin_bottom = 74.0
+pressed = true
+text = "Check for updates"
+
+[node name="Library" type="CheckBox" parent="CenterContainer/VBoxContainer"]
+margin_top = 78.0
+margin_right = 400.0
+margin_bottom = 102.0
+pressed = true
+text = "Update library"
+
+[node name="Autorun" type="CheckBox" parent="CenterContainer/VBoxContainer"]
+margin_top = 106.0
+margin_right = 400.0
+margin_bottom = 130.0
+pressed = true
+text = "Start with Windows"
+
+[node name="Space" type="Control" parent="CenterContainer/VBoxContainer"]
+margin_top = 134.0
+margin_right = 400.0
+margin_bottom = 164.0
+rect_min_size = Vector2( 0, 30 )
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CenterContainer/VBoxContainer"]
+margin_top = 168.0
+margin_right = 400.0
+margin_bottom = 188.0
+custom_constants/separation = 10
+alignment = 1
+
+[node name="TourButton" type="Button" parent="CenterContainer/VBoxContainer/HBoxContainer"]
+margin_left = 129.0
+margin_right = 211.0
+margin_bottom = 20.0
+size_flags_horizontal = 4
+theme_type_variation = "OnboardingStartButton"
+text = "Take a tour"
+
+[node name="FinishButton" type="Button" parent="CenterContainer/VBoxContainer/HBoxContainer"]
+margin_left = 221.0
+margin_right = 271.0
+margin_bottom = 20.0
+size_flags_horizontal = 4
+theme_type_variation = "OnboardingStartButton"
+text = "Finish"

@@ -4,14 +4,14 @@ using System.Linq;
 using TinyScreen.Framework.Interfaces;
 using System.Threading.Tasks;
 using TinyScreen.Framework;
-using TinyScreen.Framework.exceptions;
+using TinyScreen.Framework.Exceptions;
 
 namespace RetroArchLibrarySource {
     public class RetroArchLibrarySource : BaseLibrarySource {
         private RetroArchHelper _retroArchHelper;
 
         private List<IRetroArchInstallation> _installations = new List<IRetroArchInstallation> {
-            new StandaloneInstallation(), // Priority is important!
+            new StandaloneInstallation(), // Order is important!
             new SteamInstallation()
         };
 

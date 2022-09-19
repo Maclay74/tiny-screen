@@ -21,6 +21,10 @@ config/steamgrid/key="c6c3d47a9c8deeff0f9481aea822bec1"
 
 AutoloadScene="*res://assets/scenes/AutoloadScene.tscn"
 
+[editor_plugins]
+
+enabled=PoolStringArray( "res://addons/StagedProgressBar/plugin.cfg" )
+
 [gui]
 
 common/drop_mouse_on_gui_input_disabled=true
