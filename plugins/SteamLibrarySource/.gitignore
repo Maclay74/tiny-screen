@@ -8,7 +8,6 @@ export_presets.cfg
 
 # Mono-specific ignores
 .mono/
-!.mono/temp/bin/Debug/e_sqlite3.dll
 data_*/
 obj
 
