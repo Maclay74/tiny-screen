@@ -1,18 +1,12 @@
 ﻿using System.Collections.Generic;
 using System;
 using System.IO;
-using System.Linq;
-using System.Net.Http;
-using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 using Microsoft.Win32;
-using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using TinyScreen.Framework.Interfaces;
 
 namespace EGSLibrarySource {
     internal class EGSHelper {
-
         private RegistryKey _registryKey;
 
         private string GetInstalledDirectory() {
@@ -33,36 +27,33 @@ namespace EGSLibrarySource {
 
             var gamesIds = new List<LibrarySourceGameData>();
 
-            if (!Directory.Exists(libraryFilePath))
-            {
+            if (!Directory.Exists(libraryFilePath)) {
                 Console.WriteLine("Error: directory not found");
             }
-            else
-            {
+            else {
                 string[] files = Directory.GetFiles(libraryFilePath, "*.item");
                 
-               // Console.WriteLine("files: " + files);
-
-                foreach (var file in files)
-                {
+                foreach (var file in files) {
                     //TODO: check the game folder is not deleted
-                    
+
                     var fileText = File.ReadAllText(file);
                     JObject fileJson = JObject.Parse(fileText);
                     Console.WriteLine("fileText: " + fileJson);
                     Console.WriteLine("type: " + fileJson.GetType());
                     Console.WriteLine("DisplayName: " + fileJson["DisplayName"]);
 
-                    var libSrc = new LibrarySourceGameData { };
-                    libSrc.Name = fileJson["DisplayName"].ToString();
-                    libSrc.SourceId = fileJson["DisplayName"].ToString();
-                    libSrc.Description = "";
-                    libSrc.ArtworkUrl = "";
-                    libSrc.BackgroundUrl = "";
-
-                        gamesIds.Add(libSrc);
+                    var libSrc = new LibrarySourceGameData {
+                        Name =  fileJson["DisplayName"].ToString(),
+                        SourceId =  fileJson["DisplayName"].ToString(),
+                        Description =  "",
+                        ArtworkUrl =  "",
+                        BackgroundUrl =  "",
+                    };
+                    
+                    gamesIds.Add(libSrc);
                 }
             }
+
             return gamesIds;
         }
     }

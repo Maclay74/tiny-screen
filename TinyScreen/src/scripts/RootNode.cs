@@ -7,7 +7,7 @@ using static SQLitePCL.Batteries_V2;
 namespace TinyScreen.scripts {
 	public class RootNode: Control {
 
-		[Inject] public ISettingsInterface _settingsService;
+		[Inject] public ISettingsService _settingsService;
 		[Inject] public IDatabaseService _databaseService;
 
 		[Export] private PackedScene Onboarding;
