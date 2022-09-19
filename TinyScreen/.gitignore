@@ -5,7 +5,7 @@
 *.translation
 
 # Mono-specific ignores
-.mono/
+.mono/**
 data_*/
 
 # JetBrains
