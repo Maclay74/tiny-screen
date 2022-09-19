@@ -55,7 +55,7 @@ namespace EGSLibrarySource {
 
                     var libSrc = new LibrarySourceGameData { };
                     libSrc.Name = fileJson["DisplayName"].ToString();
-                    libSrc.SourceId = fileJson["CatalogItemId"].ToString();
+                    libSrc.SourceId = fileJson["DisplayName"].ToString();
                     libSrc.Description = "";
                     libSrc.ArtworkUrl = "";
                     libSrc.BackgroundUrl = "";

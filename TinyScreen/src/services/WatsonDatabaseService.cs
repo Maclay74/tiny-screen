@@ -40,6 +40,10 @@ namespace TinyScreen.Services {
             _watson.Insert(record);
         }
 
+        public T Update<T>(T obj) where T : class, new() {
+            return _watson.Update(obj);
+        }
+
         public T Select<T>(Expr expr, ResultOrder[] ro = null) where T : class, new() {
             return _watson.SelectFirst<T>(expr, ro);
         }

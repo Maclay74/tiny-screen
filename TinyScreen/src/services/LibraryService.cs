@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using ExpressionTree;
-using TinyScreen.Framework.exceptions;
+using Godot;
+using TinyScreen.Framework.Exceptions;
 using TinyScreen.Framework.Interfaces;
 using TinyScreen.Models;
 
@@ -32,9 +33,10 @@ namespace TinyScreen.Services {
             progress.ProgressChanged += onProgress;
 
             var gamesInSource = source.GamesIds().Result.ToList();
-
-            var gamesInLibrary = GetAllGames(source).Select(g => g.SourceId);
+            var gamesInLibrary = GetAllGames(source).Select(g => g.SourceId).ToList();
             
+            GD.Print("lib " + GetAllGames(source).Count);
+
             var newGames = gamesInSource.Where(sourceId => !gamesInLibrary.Contains(sourceId)).ToArray();
             var removedGames = gamesInLibrary.Where(sourceId => !gamesInSource.Contains(sourceId)).ToArray();
 
@@ -43,12 +45,10 @@ namespace TinyScreen.Services {
             }
             
             for (int i = 0; i < newGames.Length; i++) {
-                ((IProgress<float>) progress).Report((int)((float)i / newGames.Length * 100));
+                ((IProgress<float>) progress).Report((float)i / newGames.Length);
                 
                 await AddGameToLibrary(source, newGames[i], sourceRecord.Id);
             }
-            
-            ((IProgress<float>) progress).Report(100f);
         }
 
         private async Task AddGameToLibrary(ILibrarySource source, string sourceId, int sourceRecordId) {
@@ -122,7 +122,7 @@ namespace TinyScreen.Services {
         
         private List<Games> GetAllGames(ILibrarySource source) {
             var sourceRecord = GetSourceRecord(source);
-            return _databaseService.SelectAll<Games>(new Expr("sourceId", OperatorEnum.Equals, sourceRecord.Id));
+            return _databaseService.SelectAll<Games>(new Expr("source", OperatorEnum.Equals, sourceRecord.Id));
         }
     }
 }
