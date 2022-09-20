@@ -2,10 +2,9 @@
 using System.IO;
 using System.Reflection;
 using System.Threading.Tasks;
-using Godot;
-using TinyScreen.Framework.Interfaces;
+using Common.Interfaces;
 
-namespace TinyScreen.Framework {
+namespace Common.Framework {
     public abstract class BaseLibrarySource: ILibrarySource {
 
         public BaseLibrarySource() {

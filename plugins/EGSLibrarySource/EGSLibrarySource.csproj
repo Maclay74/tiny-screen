@@ -1,21 +1,23 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-	<TargetFramework>net472</TargetFramework>
+	  <TargetFramework>net472</TargetFramework>
     <BaseOutputPath>bin\</BaseOutputPath>
     <RootNamespace>EGSLibrarySource</RootNamespace>
     <RunPostBuildEvent>OnBuildSuccess</RunPostBuildEvent>
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\TinyScreen\TinyScreen.csproj">
-      <Private>false</Private>
-      <CopyLocalSatelliteAssemblies>false</CopyLocalSatelliteAssemblies>
-    </ProjectReference>
+    <EmbeddedResource Include="assets\icon.png" />
   </ItemGroup>
 
   <ItemGroup>
-    <EmbeddedResource Include="assets\icon.png" />
+    <ProjectReference Include="..\..\common\Common.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.CSharp" Version="4.7.0" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.2-beta2" />
   </ItemGroup>
 
   <Target Name="CopyFiles" AfterTargets="AfterBuild" Condition="'$(ProjectName)' != 'TemplateLibrarySource'">

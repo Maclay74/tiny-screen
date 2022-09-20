@@ -1,11 +1,9 @@
 ﻿using System;
-using System.Net.Http;
 using ByteSizeLib;
 using Godot;
 using GodotOnReady.Attributes;
 using TinyScreen.Framework.Attributes;
 using TinyScreen.Framework.Interfaces;
-using TinyScreen.Framework.Extensions;
 using TinyScreen.Services;
 
 namespace TinyScreen.Scripts.Onboarding {

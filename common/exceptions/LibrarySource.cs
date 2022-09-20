@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace TinyScreen.Framework.Exceptions {
+namespace Common.Exceptions {
     public class LibrarySourceGameDataException : Exception { }
 
     public class LibraryGraphicsException : Exception { }

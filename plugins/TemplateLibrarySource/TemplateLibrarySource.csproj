@@ -8,14 +8,11 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\TinyScreen\TinyScreen.csproj">
-      <Private>false</Private>
-      <CopyLocalSatelliteAssemblies>false</CopyLocalSatelliteAssemblies>
-    </ProjectReference>
+    <EmbeddedResource Include="assets\icon.png" />
   </ItemGroup>
 
   <ItemGroup>
-    <EmbeddedResource Include="assets\icon.png" />
+    <ProjectReference Include="..\..\common\Common.csproj" />
   </ItemGroup>
 
   <Target Name="CopyFiles" AfterTargets="AfterBuild" Condition="'$(ProjectName)' != 'TemplateLibrarySource'">

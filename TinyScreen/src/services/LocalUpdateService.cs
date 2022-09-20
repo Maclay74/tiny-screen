@@ -3,8 +3,7 @@ using System.IO;
 using System.Net.Http;
 using System.Reflection;
 using System.Threading.Tasks;
-using Godot;
-using TinyScreen.Framework.Extensions;
+using Common.Extensions;
 using TinyScreen.Framework.Interfaces;
 using Path = System.IO.Path;
 

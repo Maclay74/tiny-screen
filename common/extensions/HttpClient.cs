@@ -4,7 +4,7 @@ using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace TinyScreen.Framework.Extensions {
+namespace Common.Extensions {
     public static class HttpClientProgressExtensions {
 		public static async Task DownloadDataAsync (this HttpClient client, string requestUrl, Stream destination, IProgress<float> progress = null, CancellationToken cancellationToken = default (CancellationToken))
 		{

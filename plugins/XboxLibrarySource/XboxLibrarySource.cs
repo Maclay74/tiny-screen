@@ -1,9 +1,9 @@
 ﻿using System;
-using TinyScreen.Framework.Interfaces;
 using System.Threading.Tasks;
+using Common.Exceptions;
+using Common.Framework;
+using Common.Interfaces;
 using Microsoft.Win32;
-using TinyScreen.Framework;
-using TinyScreen.Framework.Exceptions;
 
 namespace XboxLibrarySource {
     public class XboxLibrarySource : BaseLibrarySource {

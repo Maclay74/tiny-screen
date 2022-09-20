@@ -3,7 +3,7 @@ using System.Diagnostics;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace TinyScreen.Framework.Extensions {
+namespace Common.Extensions {
     public static class ProcessExtensions {
         public static async Task<int> WaitForExitAsync(this Process process,
             CancellationToken cancellationToken = default) {

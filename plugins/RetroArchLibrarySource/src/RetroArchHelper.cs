@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Security.Cryptography;
-using System.Text;
+using Common.Interfaces;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
-using TinyScreen.Framework.Interfaces;
 
 namespace RetroArchLibrarySource {
     internal class RetroArchHelper {

@@ -27,6 +27,9 @@ namespace TinyScreen.scripts {
             }
 
             _databaseService.InitDatabase();
+
+            var application = Application.Instance();
+            AddChild(application);
         }
     }
 }

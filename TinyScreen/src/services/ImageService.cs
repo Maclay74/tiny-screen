@@ -2,9 +2,9 @@
 using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
+using Common.Exceptions;
 using craftersmine.SteamGridDBNet;
 using Godot;
-using TinyScreen.Framework.Exceptions;
 using Path = System.IO.Path;
 
 namespace TinyScreen.Services {

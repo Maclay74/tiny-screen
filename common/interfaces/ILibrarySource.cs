@@ -1,6 +1,6 @@
 ﻿using System.Threading.Tasks;
 
-namespace TinyScreen.Framework.Interfaces {
+namespace Common.Interfaces {
     public interface ILibrarySource {
         string Name();
 

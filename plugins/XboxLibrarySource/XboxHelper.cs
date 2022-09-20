@@ -1,11 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Diagnostics;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
+using Common.Interfaces;
+using Common.Extensions;
 using Microsoft.Win32;
-using TinyScreen.Framework.Extensions;
-using TinyScreen.Framework.Interfaces;
 
 namespace XboxLibrarySource {
     public class XboxHelper {
