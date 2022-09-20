@@ -1,0 +1,365 @@
+[gd_scene load_steps=3 format=2]
+
+[sub_resource type="StyleBoxFlat" id=2]
+bg_color = Color( 1, 1, 1, 0.172549 )
+
+[sub_resource type="StyleBoxFlat" id=1]
+bg_color = Color( 1, 1, 1, 0.113725 )
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[node name="Home" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_constants/separation = 10
+
+[node name="Panel" type="Panel" parent="HBoxContainer"]
+margin_right = 676.0
+margin_bottom = 600.0
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 2.0
+
+[node name="MarginContainer" type="MarginContainer" parent="HBoxContainer/Panel"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_constants/margin_right = 15
+custom_constants/margin_top = 15
+custom_constants/margin_left = 15
+custom_constants/margin_bottom = 15
+
+[node name="GridContainer" type="GridContainer" parent="HBoxContainer/Panel/MarginContainer"]
+margin_left = 15.0
+margin_top = 15.0
+margin_right = 661.0
+margin_bottom = 585.0
+size_flags_horizontal = 3
+custom_constants/vseparation = 15
+custom_constants/hseparation = 15
+columns = 4
+
+[node name="AspectRatioContainer" type="AspectRatioContainer" parent="HBoxContainer/Panel/MarginContainer/GridContainer"]
+margin_right = 151.0
+margin_bottom = 228.788
+rect_min_size = Vector2( 0, 228.788 )
+size_flags_horizontal = 3
+ratio = 0.66
+stretch_mode = 0
+alignment_vertical = 0
+
+[node name="Panel" type="Panel" parent="HBoxContainer/Panel/MarginContainer/GridContainer/AspectRatioContainer"]
+margin_right = 151.0
+margin_bottom = 228.788
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_styles/panel = SubResource( 2 )
+
+[node name="AspectRatioContainer2" type="AspectRatioContainer" parent="HBoxContainer/Panel/MarginContainer/GridContainer"]
+margin_left = 166.0
+margin_right = 316.0
+margin_bottom = 228.788
+rect_min_size = Vector2( 0, 228.788 )
+size_flags_horizontal = 3
+ratio = 0.66
+stretch_mode = 0
+alignment_vertical = 0
+
+[node name="Panel" type="Panel" parent="HBoxContainer/Panel/MarginContainer/GridContainer/AspectRatioContainer2"]
+margin_right = 150.0
+margin_bottom = 227.273
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_styles/panel = SubResource( 2 )
+
+[node name="AspectRatioContainer3" type="AspectRatioContainer" parent="HBoxContainer/Panel/MarginContainer/GridContainer"]
+margin_left = 331.0
+margin_right = 481.0
+margin_bottom = 228.788
+rect_min_size = Vector2( 0, 228.788 )
+size_flags_horizontal = 3
+ratio = 0.66
+stretch_mode = 0
+alignment_vertical = 0
+
+[node name="Panel" type="Panel" parent="HBoxContainer/Panel/MarginContainer/GridContainer/AspectRatioContainer3"]
+margin_right = 150.0
+margin_bottom = 227.273
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_styles/panel = SubResource( 2 )
+
+[node name="AspectRatioContainer4" type="AspectRatioContainer" parent="HBoxContainer/Panel/MarginContainer/GridContainer"]
+margin_left = 496.0
+margin_right = 646.0
+margin_bottom = 228.788
+rect_min_size = Vector2( 0, 228.788 )
+size_flags_horizontal = 3
+ratio = 0.66
+stretch_mode = 0
+alignment_vertical = 0
+
+[node name="Panel" type="Panel" parent="HBoxContainer/Panel/MarginContainer/GridContainer/AspectRatioContainer4"]
+margin_right = 150.0
+margin_bottom = 227.273
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_styles/panel = SubResource( 2 )
+
+[node name="AspectRatioContainer5" type="AspectRatioContainer" parent="HBoxContainer/Panel/MarginContainer/GridContainer"]
+margin_top = 243.0
+margin_right = 151.0
+margin_bottom = 471.788
+rect_min_size = Vector2( 0, 228.788 )
+size_flags_horizontal = 3
+ratio = 0.66
+stretch_mode = 0
+alignment_vertical = 0
+
+[node name="Panel" type="Panel" parent="HBoxContainer/Panel/MarginContainer/GridContainer/AspectRatioContainer5"]
+margin_right = 151.0
+margin_bottom = 228.788
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_styles/panel = SubResource( 2 )
+
+[node name="AspectRatioContainer6" type="AspectRatioContainer" parent="HBoxContainer/Panel/MarginContainer/GridContainer"]
+margin_left = 166.0
+margin_top = 243.0
+margin_right = 316.0
+margin_bottom = 471.788
+rect_min_size = Vector2( 0, 228.788 )
+size_flags_horizontal = 3
+ratio = 0.66
+stretch_mode = 0
+alignment_vertical = 0
+
+[node name="Panel" type="Panel" parent="HBoxContainer/Panel/MarginContainer/GridContainer/AspectRatioContainer6"]
+margin_right = 150.0
+margin_bottom = 227.273
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_styles/panel = SubResource( 2 )
+
+[node name="AspectRatioContainer7" type="AspectRatioContainer" parent="HBoxContainer/Panel/MarginContainer/GridContainer"]
+margin_left = 331.0
+margin_top = 243.0
+margin_right = 481.0
+margin_bottom = 471.788
+rect_min_size = Vector2( 0, 228.788 )
+size_flags_horizontal = 3
+ratio = 0.66
+stretch_mode = 0
+alignment_vertical = 0
+
+[node name="Panel" type="Panel" parent="HBoxContainer/Panel/MarginContainer/GridContainer/AspectRatioContainer7"]
+margin_right = 150.0
+margin_bottom = 227.273
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_styles/panel = SubResource( 2 )
+
+[node name="AspectRatioContainer8" type="AspectRatioContainer" parent="HBoxContainer/Panel/MarginContainer/GridContainer"]
+margin_left = 496.0
+margin_top = 243.0
+margin_right = 646.0
+margin_bottom = 471.788
+rect_min_size = Vector2( 0, 228.788 )
+size_flags_horizontal = 3
+ratio = 0.66
+stretch_mode = 0
+alignment_vertical = 0
+
+[node name="Panel" type="Panel" parent="HBoxContainer/Panel/MarginContainer/GridContainer/AspectRatioContainer8"]
+margin_right = 150.0
+margin_bottom = 227.273
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_styles/panel = SubResource( 2 )
+
+[node name="Widgets" type="Panel" parent="HBoxContainer"]
+margin_left = 686.0
+margin_right = 1024.0
+margin_bottom = 600.0
+size_flags_horizontal = 3
+
+[node name="MarginContainer" type="MarginContainer" parent="HBoxContainer/Widgets"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_right = 2.0
+size_flags_horizontal = 0
+size_flags_vertical = 0
+custom_constants/margin_right = 15
+custom_constants/margin_top = 15
+custom_constants/margin_left = 15
+custom_constants/margin_bottom = 15
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/Widgets/MarginContainer"]
+margin_left = 15.0
+margin_top = 15.0
+margin_right = 325.0
+margin_bottom = 585.0
+custom_constants/separation = 15
+
+[node name="GridContainer5" type="GridContainer" parent="HBoxContainer/Widgets/MarginContainer/VBoxContainer"]
+margin_right = 310.0
+margin_bottom = 80.0
+size_flags_horizontal = 3
+custom_constants/vseparation = 15
+custom_constants/hseparation = 15
+
+[node name="Panel10" type="Panel" parent="HBoxContainer/Widgets/MarginContainer/VBoxContainer/GridContainer5"]
+margin_right = 310.0
+margin_bottom = 80.0
+rect_min_size = Vector2( 147, 80 )
+size_flags_horizontal = 3
+custom_styles/panel = SubResource( 1 )
+
+[node name="GridContainer2" type="GridContainer" parent="HBoxContainer/Widgets/MarginContainer/VBoxContainer"]
+margin_top = 95.0
+margin_right = 310.0
+margin_bottom = 175.0
+size_flags_horizontal = 3
+custom_constants/vseparation = 15
+custom_constants/hseparation = 15
+columns = 2
+
+[node name="Panel10" type="Panel" parent="HBoxContainer/Widgets/MarginContainer/VBoxContainer/GridContainer2"]
+margin_right = 148.0
+margin_bottom = 80.0
+rect_min_size = Vector2( 0, 80 )
+size_flags_horizontal = 3
+custom_styles/panel = SubResource( 1 )
+
+[node name="Panel11" type="Panel" parent="HBoxContainer/Widgets/MarginContainer/VBoxContainer/GridContainer2"]
+margin_left = 163.0
+margin_right = 310.0
+margin_bottom = 80.0
+rect_min_size = Vector2( 0, 80 )
+size_flags_horizontal = 3
+custom_styles/panel = SubResource( 1 )
+
+[node name="GridContainer" type="GridContainer" parent="HBoxContainer/Widgets/MarginContainer/VBoxContainer"]
+margin_top = 190.0
+margin_right = 310.0
+margin_bottom = 339.0
+custom_constants/vseparation = 15
+custom_constants/hseparation = 15
+columns = 4
+
+[node name="Panel" type="Panel" parent="HBoxContainer/Widgets/MarginContainer/VBoxContainer/GridContainer"]
+margin_right = 67.0
+margin_bottom = 67.0
+rect_min_size = Vector2( 50, 67 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_styles/panel = SubResource( 1 )
+
+[node name="Panel2" type="Panel" parent="HBoxContainer/Widgets/MarginContainer/VBoxContainer/GridContainer"]
+margin_left = 82.0
+margin_right = 148.0
+margin_bottom = 67.0
+rect_min_size = Vector2( 50, 67 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_styles/panel = SubResource( 1 )
+
+[node name="Panel3" type="Panel" parent="HBoxContainer/Widgets/MarginContainer/VBoxContainer/GridContainer"]
+margin_left = 163.0
+margin_right = 229.0
+margin_bottom = 67.0
+rect_min_size = Vector2( 50, 67 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_styles/panel = SubResource( 1 )
+
+[node name="Panel4" type="Panel" parent="HBoxContainer/Widgets/MarginContainer/VBoxContainer/GridContainer"]
+margin_left = 244.0
+margin_right = 310.0
+margin_bottom = 67.0
+rect_min_size = Vector2( 50, 67 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_styles/panel = SubResource( 1 )
+
+[node name="Panel5" type="Panel" parent="HBoxContainer/Widgets/MarginContainer/VBoxContainer/GridContainer"]
+margin_top = 82.0
+margin_right = 67.0
+margin_bottom = 149.0
+rect_min_size = Vector2( 50, 67 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_styles/panel = SubResource( 1 )
+
+[node name="Panel6" type="Panel" parent="HBoxContainer/Widgets/MarginContainer/VBoxContainer/GridContainer"]
+margin_left = 82.0
+margin_top = 82.0
+margin_right = 148.0
+margin_bottom = 149.0
+rect_min_size = Vector2( 50, 67 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_styles/panel = SubResource( 1 )
+
+[node name="Panel7" type="Panel" parent="HBoxContainer/Widgets/MarginContainer/VBoxContainer/GridContainer"]
+margin_left = 163.0
+margin_top = 82.0
+margin_right = 229.0
+margin_bottom = 149.0
+rect_min_size = Vector2( 50, 67 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_styles/panel = SubResource( 1 )
+
+[node name="Panel8" type="Panel" parent="HBoxContainer/Widgets/MarginContainer/VBoxContainer/GridContainer"]
+margin_left = 244.0
+margin_top = 82.0
+margin_right = 310.0
+margin_bottom = 149.0
+rect_min_size = Vector2( 50, 67 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_styles/panel = SubResource( 1 )
+
+[node name="GridContainer3" type="GridContainer" parent="HBoxContainer/Widgets/MarginContainer/VBoxContainer"]
+margin_top = 354.0
+margin_right = 310.0
+margin_bottom = 404.0
+custom_constants/vseparation = 15
+custom_constants/hseparation = 15
+columns = 2
+
+[node name="Panel" type="Panel" parent="HBoxContainer/Widgets/MarginContainer/VBoxContainer/GridContainer3"]
+margin_right = 148.0
+margin_bottom = 50.0
+rect_min_size = Vector2( 50, 50 )
+size_flags_horizontal = 3
+custom_styles/panel = SubResource( 1 )
+
+[node name="Panel2" type="Panel" parent="HBoxContainer/Widgets/MarginContainer/VBoxContainer/GridContainer3"]
+margin_left = 163.0
+margin_right = 310.0
+margin_bottom = 50.0
+rect_min_size = Vector2( 50, 50 )
+size_flags_horizontal = 3
+custom_styles/panel = SubResource( 1 )
+
+[node name="GridContainer4" type="GridContainer" parent="HBoxContainer/Widgets/MarginContainer/VBoxContainer"]
+margin_top = 419.0
+margin_right = 310.0
+margin_bottom = 469.0
+custom_constants/vseparation = 15
+custom_constants/hseparation = 15
+
+[node name="Panel" type="Panel" parent="HBoxContainer/Widgets/MarginContainer/VBoxContainer/GridContainer4"]
+margin_right = 310.0
+margin_bottom = 50.0
+rect_min_size = Vector2( 50, 50 )
+size_flags_horizontal = 3
+custom_styles/panel = SubResource( 1 )

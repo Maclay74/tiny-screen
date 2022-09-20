@@ -1,0 +1,73 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://src/scripts/application/Application.cs" type="Script" id=1]
+[ext_resource path="res://assets/scenes/application/home/Home.tscn" type="PackedScene" id=2]
+[ext_resource path="res://assets/scenes/application/games/Games.tscn" type="PackedScene" id=3]
+[ext_resource path="res://assets/scenes/application/settings/Settings.tscn" type="PackedScene" id=4]
+
+[node name="Application" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 1 )
+ContentPath = NodePath("MarginContainer/Wrapper/Content")
+HomeButtonPath = NodePath("MarginContainer/Wrapper/TopMenu/HomeButton")
+GamesButtonPath = NodePath("MarginContainer/Wrapper/TopMenu/GamesButton")
+SettingsButtonPath = NodePath("MarginContainer/Wrapper/TopMenu/SettingsButton")
+_home = ExtResource( 2 )
+_games = ExtResource( 3 )
+_settings = ExtResource( 4 )
+
+[node name="Background" type="ColorRect" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0.0980392, 0.101961, 0.129412, 1 )
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_constants/margin_right = 15
+custom_constants/margin_top = 15
+custom_constants/margin_left = 15
+custom_constants/margin_bottom = 15
+
+[node name="Wrapper" type="VBoxContainer" parent="MarginContainer"]
+margin_left = 15.0
+margin_top = 15.0
+margin_right = 1009.0
+margin_bottom = 585.0
+
+[node name="TopMenu" type="HBoxContainer" parent="MarginContainer/Wrapper"]
+margin_right = 994.0
+margin_bottom = 20.0
+custom_constants/separation = 15
+
+[node name="HomeButton" type="Button" parent="MarginContainer/Wrapper/TopMenu"]
+margin_right = 51.0
+margin_bottom = 20.0
+text = "Home"
+
+[node name="GamesButton" type="Button" parent="MarginContainer/Wrapper/TopMenu"]
+margin_left = 66.0
+margin_right = 123.0
+margin_bottom = 20.0
+text = "Games"
+
+[node name="SettingsButton" type="Button" parent="MarginContainer/Wrapper/TopMenu"]
+margin_left = 138.0
+margin_right = 201.0
+margin_bottom = 20.0
+text = "Settings"
+
+[node name="HSeparator" type="HSeparator" parent="MarginContainer/Wrapper"]
+margin_top = 24.0
+margin_right = 994.0
+margin_bottom = 64.0
+rect_min_size = Vector2( 0, 40 )
+
+[node name="Content" type="Control" parent="MarginContainer/Wrapper"]
+margin_top = 68.0
+margin_right = 994.0
+margin_bottom = 570.0
+size_flags_vertical = 3
