@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
 using System;
 using System.IO;
+using Common.Interfaces;
 using Microsoft.Win32;
 using Newtonsoft.Json.Linq;
-using TinyScreen.Framework.Interfaces;
 
 namespace EGSLibrarySource {
     internal class EGSHelper {

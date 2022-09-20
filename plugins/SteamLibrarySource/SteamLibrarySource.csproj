@@ -13,13 +13,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\TinyScreen\TinyScreen.csproj">
-      <Private>false</Private>
-      <CopyLocalSatelliteAssemblies>false</CopyLocalSatelliteAssemblies>
-    </ProjectReference>
-  </ItemGroup>
-
-  <ItemGroup>
     <EmbeddedResource Include="assets\Gameloop.Vdf.dll" />
     <EmbeddedResource Include="assets\Gameloop.Vdf.JsonConverter.dll" />
     <EmbeddedResource Include="assets\icon.png" />
@@ -27,6 +20,13 @@
 
   <ItemGroup>
     <PackageReference Include="Gameloop.Vdf.JsonConverter" Version="0.2.1" />
+    <PackageReference Include="Microsoft.CSharp" Version="4.7.0" />
+    <PackageReference Include="System.Net.Http" Version="4.3.4" />
+    <PackageReference Include="System.Net.Http.Json" Version="7.0.0-rc.1.22426.10" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\common\Common.csproj" />
   </ItemGroup>
 	<Target Name="CopyFiles" AfterTargets="AfterBuild">
 	    <Copy SourceFiles="$(TargetDir)$(ProjectName).dll" DestinationFolder="$(SolutionDir)plugins\" />

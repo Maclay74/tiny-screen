@@ -1,12 +1,10 @@
 ﻿using System;
 using System.IO;
-using System.Linq;
-using TinyScreen.Framework.Interfaces;
-using System.Reflection;
 using System.Threading.Tasks;
 using Microsoft.Win32;
-using TinyScreen.Framework;
-using TinyScreen.Framework.Exceptions;
+using Common.Framework;
+using Common.Exceptions;
+using Common.Interfaces;
 
 namespace SteamLibrarySource {
     public class SteamLibrarySource : BaseLibrarySource {

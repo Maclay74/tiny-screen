@@ -1,7 +1,7 @@
 ﻿using System;
-using TinyScreen.Framework.Interfaces;
 using System.Threading.Tasks;
-using TinyScreen.Framework;
+using Common.Framework;
+using Common.Interfaces;
 
 namespace TemplateLibrarySource {
     public class TemplateLibrarySource : BaseLibrarySource {

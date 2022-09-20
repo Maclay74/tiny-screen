@@ -5,7 +5,6 @@ using System.Linq;
 using GodotOnReady.Attributes;
 using TinyScreen.addons.StagedProgressBar;
 using TinyScreen.Framework.Attributes;
-using TinyScreen.Framework.Exceptions;
 using TinyScreen.Framework.Interfaces;
 using TinyScreen.Services;
 

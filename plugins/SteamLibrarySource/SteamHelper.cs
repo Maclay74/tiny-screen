@@ -4,12 +4,12 @@ using System.Linq;
 using System.Net.Http;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
+using Common.Interfaces;
 using Gameloop.Vdf;
 using Gameloop.Vdf.JsonConverter;
 using Microsoft.Win32;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
-using TinyScreen.Framework.Interfaces;
 
 namespace SteamLibrarySource {
     internal class SteamHelper {

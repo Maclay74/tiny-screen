@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using TinyScreen.Framework.Interfaces;
 using System.Threading.Tasks;
-using TinyScreen.Framework;
-using TinyScreen.Framework.Exceptions;
+using Common.Exceptions;
+using Common.Framework;
+using Common.Interfaces;
 
 namespace RetroArchLibrarySource {
     public class RetroArchLibrarySource : BaseLibrarySource {
