@@ -91,12 +91,12 @@ namespace TinyScreen.Scripts.Application {
                 newSceneInstance.RectPosition = new Vector2(50, 0);
                 newSceneInstance.Modulate = new Color(1, 1, 1, 0);
                 // Show new
-                _tween.InterpolateProperty(newSceneInstance, "modulate", new Color(1, 1, 1, 0), new Color(1, 1, 1, 1), 0.3f, Tween.TransitionType.Expo);
-                _tween.InterpolateProperty(newSceneInstance, "rect_position", newSceneInstance.RectPosition, new Vector2(0, 0), 0.3f, Tween.TransitionType.Expo);
+                _tween.InterpolateProperty(newSceneInstance, "modulate", new Color(1, 1, 1, 0), new Color(1, 1, 1, 1), 0.3f, Tween.TransitionType.Cubic);
+                _tween.InterpolateProperty(newSceneInstance, "rect_position", newSceneInstance.RectPosition, new Vector2(0, 0), 0.3f, Tween.TransitionType.Cubic);
                 
                 // Hide old
-                _tween.InterpolateProperty(_currentScene, "modulate", new Color(1, 1, 1, 1), new Color(1, 1, 1, 0), 0.3f, Tween.TransitionType.Expo);
-                _tween.InterpolateProperty(_currentScene, "rect_position", _currentScene.RectPosition, new Vector2(-50, 0), 0.3f, Tween.TransitionType.Expo);
+                _tween.InterpolateProperty(_currentScene, "modulate", new Color(1, 1, 1, 1), new Color(1, 1, 1, 0), 0.3f, Tween.TransitionType.Cubic);
+                _tween.InterpolateProperty(_currentScene, "rect_position", _currentScene.RectPosition, new Vector2(-50, 0), 0.3f, Tween.TransitionType.Cubic);
                 
                 _tween.Start();
                 _content.AddChild(newSceneInstance);
