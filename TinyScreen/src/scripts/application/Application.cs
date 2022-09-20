@@ -1,8 +1,5 @@
-using System.Collections.Generic;
-using Common.Interfaces;
 using Godot;
 using GodotOnReady.Attributes;
-using TinyScreen.Framework.Attributes;
 
 namespace TinyScreen.Scripts.Application {
     public partial class Application : Control {
@@ -26,8 +23,6 @@ namespace TinyScreen.Scripts.Application {
         private State _currentState = State.Home;
         private Control _currentScene;
         private Tween _tween;
-        
-        [Inject] private IEnumerable<IGameDataProvider> _gameDataProviders;
 
         [OnReady]
         private void BindEvents() {

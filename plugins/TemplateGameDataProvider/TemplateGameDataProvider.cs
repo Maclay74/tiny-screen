@@ -1,7 +1,9 @@
-﻿using Common.Framework;
+﻿using System;
+using System.Threading.Tasks;
+using Common.Framework;
 using Common.Interfaces;
 
-namespace TestGameDataProvider {
+namespace TemplateGameDataProvider {
     
     /**
      * Extend this class by implementing IGameDataProvider<GameDataType> interface.
@@ -12,7 +14,7 @@ namespace TestGameDataProvider {
         public int Priority() => 1;
 
         /*
-        public string GetData(ArtworkGameDataType dataType, string gameName) {
+        public Task<string> GetData(ArtworkGameDataType dataType, string gameName) {
             throw new NotImplementedException();
         }
         */

@@ -6,8 +6,8 @@ namespace Common.Interfaces {
         int Priority();
     }
 
-    public interface IGameDataProvider<in TGameDataType> {
-        Task<string> GetData(TGameDataType dataType, string gameName);
+    public interface IGameDataProvider<T> {
+        Task<string> GetData(T dataType, string gameName);
     }
     
 }
