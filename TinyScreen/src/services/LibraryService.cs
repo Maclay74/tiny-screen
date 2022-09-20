@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Common.Exceptions;
+using Common.Framework;
+using Common.Interfaces;
 using ExpressionTree;
-using Godot;
 using TinyScreen.Framework.Interfaces;
 using TinyScreen.Models;
 
@@ -14,11 +15,13 @@ namespace TinyScreen.Services {
         private IDatabaseService _databaseService;
         private ImageService _imageService;
         private ModalService _modalService;
+        private IEnumerable<IGameDataProvider> _gameDataProviders;
 
-        public LibraryService(IDatabaseService databaseService, ImageService imageService, ModalService modalService) {
+        public LibraryService(IDatabaseService databaseService, ImageService imageService, ModalService modalService, IEnumerable<IGameDataProvider> gameDataProviders) {
             _databaseService = databaseService;
             _imageService = imageService;
             _modalService = modalService;
+            _gameDataProviders = gameDataProviders;
         }
 
         public void RunGame(int id) {
@@ -121,6 +124,26 @@ namespace TinyScreen.Services {
         private List<Games> GetAllGames(ILibrarySource source) {
             var sourceRecord = GetSourceRecord(source);
             return _databaseService.SelectAll<Games>(new Expr("source", OperatorEnum.Equals, sourceRecord.Id));
+        }
+
+        private IEnumerable<IGameDataProvider> GetProviders<T>() {
+
+            return _gameDataProviders
+                .Where(provider => provider is IGameDataProvider<T>)
+                .OrderBy(provider => provider.Priority());
+        }
+        
+        public async Task<string> GetData<T>(string gameName) where T: GameDataType, new() {
+            var dataType = new T();
+            
+            // Iterate over providers, try to get data for the game
+            foreach (var provider in  GetProviders<T>()) {
+                var data = await dataType.Accept(provider, gameName);
+                if (data.Length > 0)
+                    return data;
+            }
+
+            return "";
         }
     }
 }
