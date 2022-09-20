@@ -2,10 +2,10 @@
 using Godot;
 using System.Collections.Generic;
 using System.Linq;
+using Common.Interfaces;
 using GodotOnReady.Attributes;
 using TinyScreen.addons.StagedProgressBar;
 using TinyScreen.Framework.Attributes;
-using TinyScreen.Framework.Interfaces;
 using TinyScreen.Services;
 
 namespace TinyScreen.Scripts.Onboarding {

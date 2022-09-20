@@ -1,7 +1,7 @@
 using System;
+using Common.Interfaces;
 using Godot;
 using GodotOnReady.Attributes;
-using TinyScreen.Framework.Interfaces;
 
 namespace TinyScreen.Scripts.Onboarding {
     public partial class LibrarySource : Panel {

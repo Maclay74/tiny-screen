@@ -1,7 +1,7 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using Common.Interfaces;
 using Godot;
 using HarmonyLib;
 using SimpleInjector;
@@ -73,6 +73,7 @@ namespace TinyScreen.Framework {
                 }
             }
             _container.Collection.Register<ILibrarySource>(sources);
+            _container.Collection.Register<IGameDataProvider>(sources);
         }
 
         private void LoadNodes() {
