@@ -1,14 +1,6 @@
-using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Text;
+
 using Godot;
-using Godot.Collections;
 using GodotOnReady.Attributes;
-using HarmonyLib;
-using Microsoft.Win32;
-using TinyScreen.Framework.Extensions;
 
 namespace TinyScreen.Scripts.Application {
     public partial class Application : Control {
