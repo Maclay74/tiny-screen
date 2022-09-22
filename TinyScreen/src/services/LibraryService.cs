@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Common.Exceptions;
 using Common.Framework;
 using Common.Interfaces;
+using DatabaseWrapper.Core;
 using ExpressionTree;
 using TinyScreen.Framework.Interfaces;
 using TinyScreen.Models;
@@ -121,29 +122,37 @@ namespace TinyScreen.Services {
             return _databaseService.Select<LibrarySources>(new Expr("name", OperatorEnum.Equals, source.Name()));
         }
         
-        private List<Games> GetAllGames(ILibrarySource source) {
+        public List<Games> GetAllGames(ILibrarySource source) {
             var sourceRecord = GetSourceRecord(source);
-            return _databaseService.SelectAll<Games>(new Expr("source", OperatorEnum.Equals, sourceRecord.Id));
+            var where = new Expr("source", OperatorEnum.Equals, sourceRecord.Id);
+            return _databaseService.SelectAll<Games>(where);
+        }
+        
+        public List<Games> GetAllGames( int offset, int count, Expr expr = null, ResultOrder[] ro = null) {
+            return _databaseService.SelectAll<Games>(offset, count, expr, ro);
+        }
+        
+        public List<Games> GetAllGames( ) {
+            return _databaseService.SelectAll<Games>(null);
         }
 
-        private IEnumerable<IGameDataProvider> GetProviders<T>() {
+        private IEnumerable<IGameDataProvider> GetProviders<T, T1>() {
 
             return _gameDataProviders
-                .Where(provider => provider is IGameDataProvider<T>)
+                .Where(provider => provider is IGameDataProvider<T, T1>)
                 .OrderBy(provider => provider.Priority());
         }
         
-        public async Task<string> GetData<T>(string gameName) where T: GameDataType, new() {
+        public async Task<T1> GetData<T, T1>(string gameName) where T: GameDataType, new() {
             var dataType = new T();
-            
+
             // Iterate over providers, try to get data for the game
-            foreach (var provider in  GetProviders<T>()) {
-                var data = await dataType.Accept(provider, gameName);
-                if (data.Length > 0)
+            foreach (var provider in  GetProviders<T, T1>()) {
+                if (await dataType.Accept<T1>(provider, gameName, out var data))
                     return data;
             }
 
-            return "";
+            return default;
         }
     }
 }

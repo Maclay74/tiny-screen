@@ -15,6 +15,8 @@ namespace TinyScreen.Framework.Interfaces {
 
         List<T> SelectAll<T>(Expr expr, ResultOrder[] ro = null) where T : class, new();
 
+        List<T> SelectAll<T>(int? offset, int? count, Expr expr, ResultOrder[] ro = null) where T : class, new();
+
         void Delete<T>(T obj) where T : class, new();
 
         void DeleteAll<T>(Expr expr) where T : class, new();

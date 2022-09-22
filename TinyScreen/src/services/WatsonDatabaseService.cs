@@ -52,6 +52,10 @@ namespace TinyScreen.Services {
             return _watson.SelectMany<T>(expr, ro);
         }
 
+        public List<T> SelectAll<T>(int? indexStart, int? maxResults, Expr expr, ResultOrder[] ro = null) where T : class, new() {
+            return _watson.SelectMany<T>(indexStart, maxResults, expr, ro);
+        }
+
         public void Delete<T>(T obj) where T : class, new() {
             _watson.Delete(obj);
         }
