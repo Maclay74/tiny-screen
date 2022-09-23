@@ -77,6 +77,8 @@ namespace TinyScreen.Framework {
         }
 
         private void LoadNodes() {
+            
+            // Modal
             var modalService = GetNode<ModalService>("Modal");
             _container.RegisterInstance<ModalService>(modalService);
         }

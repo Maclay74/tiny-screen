@@ -29,6 +29,11 @@ enabled=PoolStringArray( "res://addons/StagedProgressBar/plugin.cfg" )
 
 common/drop_mouse_on_gui_input_disabled=true
 
+[input_devices]
+
+pointing/emulate_touch_from_mouse=true
+pointing/emulate_mouse_from_touch=false
+
 [mono]
 
 runtime/unhandled_exception_policy=1
