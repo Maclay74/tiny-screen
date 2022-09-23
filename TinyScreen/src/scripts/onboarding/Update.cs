@@ -1,7 +1,6 @@
 ﻿using System;
 using ByteSizeLib;
 using Godot;
-using Godot.Collections;
 using GodotOnReady.Attributes;
 using TinyScreen.Framework;
 using TinyScreen.Framework.Attributes;
@@ -10,7 +9,6 @@ using TinyScreen.Services;
 
 namespace TinyScreen.Scripts.Onboarding {
     public partial class Update : BaseRouter {
-        
         [OnReadyGet] private Label _subtitle;
         [OnReadyGet] private Label _updateSize;
         [OnReadyGet] private Label _currentVersion;
@@ -26,7 +24,8 @@ namespace TinyScreen.Scripts.Onboarding {
         [Inject] private IHardwareService _hardwareService;
         [Inject] private ModalService _modalService;
 
-        [OnReady] public void BindEvents() {
+        [OnReady]
+        public void BindEvents() {
             base._Ready();
 
             // Bind buttons
@@ -35,10 +34,9 @@ namespace TinyScreen.Scripts.Onboarding {
             _updateButton.Connect("pressed", this, nameof(OnUpdatePress));
             _tryAgainButton.Connect("pressed", this, nameof(OnTryAgainPress));
         }
-        
+
         [Route("check", true)]
-        private async void CheckLatestVersion(string path) {
-            
+        private async void Check(string path) {
             // Update UI
             _subtitle.Text = "Checking is there is a new version of the application";
             _skipButton.Hide();
@@ -47,7 +45,7 @@ namespace TinyScreen.Scripts.Onboarding {
             _versionsList.Hide();
             _tryAgainButton.Hide();
             _progressBar.Hide();
-            
+
             if (!_hardwareService.IsOnline()) {
                 Navigate("error", "Seems like you are not connected to internet");
                 return;
@@ -73,10 +71,10 @@ namespace TinyScreen.Scripts.Onboarding {
                 catch (Exception) {
                     Navigate("error", "Something went wrong");
                 }
-               
+
                 return;
             }
-            
+
             // Latest version, nothing to do
             OnSkipPress();
         }
@@ -99,10 +97,9 @@ namespace TinyScreen.Scripts.Onboarding {
             _skipButton.Show();
             _tryAgainButton.Show();
         }
-        
+
         [Route("download")]
         private async void DownloadUpdate(string path) {
-            
             // UI
             _subtitle.Text = "Downloading the latest version";
             _skipButton.Hide();
@@ -111,7 +108,7 @@ namespace TinyScreen.Scripts.Onboarding {
             _versionsList.Hide();
             _tryAgainButton.Hide();
             _progressBar.Show();
-            
+
             try {
                 await _updateService.DownloadLatestUpdate((sender, progress) => _progressBar.Value = progress);
                 _updateService.Install();
@@ -128,18 +125,11 @@ namespace TinyScreen.Scripts.Onboarding {
                 GetParent<BaseRouter>().Navigate("library");
         }
 
-        private void OnUpdatePress() {
-            Navigate("download");
-        }
+        private void OnUpdatePress() => Navigate("download");
 
-        private void OnTryAgainPress() {
-            Navigate("check");
-        }
 
-        private void OnChangelogPress() {
-            // TODO implement some kind of UI for that
-            Navigate("changelog");
-        }
-        
+        private void OnTryAgainPress() => Navigate("check");
+
+        private void OnChangelogPress() => Navigate("changelog");
     }
 }

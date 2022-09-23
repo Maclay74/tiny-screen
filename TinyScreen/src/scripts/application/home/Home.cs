@@ -2,12 +2,12 @@ using DatabaseWrapper.Core;
 using ExpressionTree;
 using Godot;
 using GodotOnReady.Attributes;
+using TinyScreen.Framework;
 using TinyScreen.Framework.Attributes;
 using TinyScreen.Scripts.Components.Library;
 using TinyScreen.Services;
 
-
-public partial class Home : Control {
+public partial class Home : BaseRouter {
     [Inject] private LibraryService _libraryService;
 
     [OnReadyGet] private GridContainer _gamesContainer;

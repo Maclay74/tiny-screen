@@ -27,9 +27,10 @@ namespace TinyScreen.Scripts.Onboarding {
             // If there is no scene, just show it (for now)
             if (_currentScene == null) {
                 _currentScene = newScene.Instance() as Control;
-                await ToSignal(GetTree(), "idle_frame");
-                ((BaseRouter) _currentScene).Navigate(path);
                 AddChild(_currentScene);
+                await ToSignal(GetTree(), "idle_frame");
+                if (_currentScene is BaseRouter router)
+                    router.Navigate(path);
                 return;
             }
 
@@ -59,7 +60,8 @@ namespace TinyScreen.Scripts.Onboarding {
                 _tween.Start();
                 AddChild(newSceneInstance);
                 await ToSignal(GetTree(), "idle_frame");
-                ((BaseRouter) newSceneInstance).Navigate(path);
+                if (_currentScene is BaseRouter router)
+                    router.Navigate(path);
 
                 await ToSignal(_tween, "tween_all_completed");
 

@@ -29,9 +29,7 @@ namespace TinyScreen.Scripts.Onboarding {
             _import.Connect("pressed", this, nameof(OnImportPress));
         }
 
-        private void OnImportPress() {
-            Navigate("import");
-        }
+        private void OnImportPress() => Navigate("import");
 
         [Route("default", true)]
         private void DefaultRoute(string path) {
@@ -52,6 +50,7 @@ namespace TinyScreen.Scripts.Onboarding {
                 _included.Add(source);
             }
         }
+
         [Route("import")]
         private async void Import(string path) {
             var stages = new Dictionary<string, int>();
@@ -87,7 +86,6 @@ namespace TinyScreen.Scripts.Onboarding {
 
             _progressBar.SetProgress(1);
             Navigate("/onboarding/finished");
-            //GetParent<Onboarding>().NextStage();
         }
     }
 }

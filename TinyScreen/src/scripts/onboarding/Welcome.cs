@@ -16,7 +16,7 @@ namespace TinyScreen.Scripts.Onboarding {
         }
 
         private void OnUpdatePress() {
-            GetParent<BaseRouter>().Navigate("update");
+            Navigate("/onboarding/update");
         }
     }
 }
