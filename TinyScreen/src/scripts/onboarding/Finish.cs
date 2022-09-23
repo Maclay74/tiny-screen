@@ -24,13 +24,9 @@ namespace TinyScreen.Scripts.Onboarding {
             _autorunCheckbox.Connect("pressed", this, nameof(OnStartupPress));
         }
 
-        private void OnFinishPress() {
-            Navigate("/application", false);
-        }
+        private void OnFinishPress() => Navigate("/application", false);
 
-        private void OnTourPress() {
-            Navigate("/application", true);
-        }
+        private void OnTourPress() => Navigate("/application", true);
 
         private void OnUpdatePress() {
             _settingsService.Set(Setting.AutoUpdateApplication, _updateCheckbox.Pressed.ToString());
