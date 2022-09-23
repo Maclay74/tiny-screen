@@ -1,7 +1,7 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=4 format=2]
 
-[sub_resource type="StyleBoxFlat" id=2]
-bg_color = Color( 1, 1, 1, 0.172549 )
+[ext_resource path="res://assets/components/library/GameCard.tscn" type="PackedScene" id=1]
+[ext_resource path="res://src/scripts/application/home/Home.cs" type="Script" id=2]
 
 [sub_resource type="StyleBoxFlat" id=1]
 bg_color = Color( 1, 1, 1, 0.113725 )
@@ -13,8 +13,13 @@ corner_radius_bottom_left = 5
 [node name="Home" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
+script = ExtResource( 2 )
+GamesContainerPath = NodePath("HBoxContainer/Panel/MarginContainer/ScrollContainer/GridContainer")
+_gameCard = ExtResource( 1 )
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
 anchor_right = 1.0
@@ -35,153 +40,19 @@ custom_constants/margin_top = 15
 custom_constants/margin_left = 15
 custom_constants/margin_bottom = 15
 
-[node name="GridContainer" type="GridContainer" parent="HBoxContainer/Panel/MarginContainer"]
+[node name="ScrollContainer" type="ScrollContainer" parent="HBoxContainer/Panel/MarginContainer"]
 margin_left = 15.0
 margin_top = 15.0
 margin_right = 661.0
 margin_bottom = 585.0
+scroll_horizontal_enabled = false
+
+[node name="GridContainer" type="GridContainer" parent="HBoxContainer/Panel/MarginContainer/ScrollContainer"]
+margin_right = 634.0
 size_flags_horizontal = 3
 custom_constants/vseparation = 15
 custom_constants/hseparation = 15
 columns = 4
-
-[node name="AspectRatioContainer" type="AspectRatioContainer" parent="HBoxContainer/Panel/MarginContainer/GridContainer"]
-margin_right = 151.0
-margin_bottom = 228.788
-rect_min_size = Vector2( 0, 228.788 )
-size_flags_horizontal = 3
-ratio = 0.66
-stretch_mode = 0
-alignment_vertical = 0
-
-[node name="Panel" type="Panel" parent="HBoxContainer/Panel/MarginContainer/GridContainer/AspectRatioContainer"]
-margin_right = 151.0
-margin_bottom = 228.788
-size_flags_horizontal = 3
-size_flags_vertical = 3
-custom_styles/panel = SubResource( 2 )
-
-[node name="AspectRatioContainer2" type="AspectRatioContainer" parent="HBoxContainer/Panel/MarginContainer/GridContainer"]
-margin_left = 166.0
-margin_right = 316.0
-margin_bottom = 228.788
-rect_min_size = Vector2( 0, 228.788 )
-size_flags_horizontal = 3
-ratio = 0.66
-stretch_mode = 0
-alignment_vertical = 0
-
-[node name="Panel" type="Panel" parent="HBoxContainer/Panel/MarginContainer/GridContainer/AspectRatioContainer2"]
-margin_right = 150.0
-margin_bottom = 227.273
-size_flags_horizontal = 3
-size_flags_vertical = 3
-custom_styles/panel = SubResource( 2 )
-
-[node name="AspectRatioContainer3" type="AspectRatioContainer" parent="HBoxContainer/Panel/MarginContainer/GridContainer"]
-margin_left = 331.0
-margin_right = 481.0
-margin_bottom = 228.788
-rect_min_size = Vector2( 0, 228.788 )
-size_flags_horizontal = 3
-ratio = 0.66
-stretch_mode = 0
-alignment_vertical = 0
-
-[node name="Panel" type="Panel" parent="HBoxContainer/Panel/MarginContainer/GridContainer/AspectRatioContainer3"]
-margin_right = 150.0
-margin_bottom = 227.273
-size_flags_horizontal = 3
-size_flags_vertical = 3
-custom_styles/panel = SubResource( 2 )
-
-[node name="AspectRatioContainer4" type="AspectRatioContainer" parent="HBoxContainer/Panel/MarginContainer/GridContainer"]
-margin_left = 496.0
-margin_right = 646.0
-margin_bottom = 228.788
-rect_min_size = Vector2( 0, 228.788 )
-size_flags_horizontal = 3
-ratio = 0.66
-stretch_mode = 0
-alignment_vertical = 0
-
-[node name="Panel" type="Panel" parent="HBoxContainer/Panel/MarginContainer/GridContainer/AspectRatioContainer4"]
-margin_right = 150.0
-margin_bottom = 227.273
-size_flags_horizontal = 3
-size_flags_vertical = 3
-custom_styles/panel = SubResource( 2 )
-
-[node name="AspectRatioContainer5" type="AspectRatioContainer" parent="HBoxContainer/Panel/MarginContainer/GridContainer"]
-margin_top = 243.0
-margin_right = 151.0
-margin_bottom = 471.788
-rect_min_size = Vector2( 0, 228.788 )
-size_flags_horizontal = 3
-ratio = 0.66
-stretch_mode = 0
-alignment_vertical = 0
-
-[node name="Panel" type="Panel" parent="HBoxContainer/Panel/MarginContainer/GridContainer/AspectRatioContainer5"]
-margin_right = 151.0
-margin_bottom = 228.788
-size_flags_horizontal = 3
-size_flags_vertical = 3
-custom_styles/panel = SubResource( 2 )
-
-[node name="AspectRatioContainer6" type="AspectRatioContainer" parent="HBoxContainer/Panel/MarginContainer/GridContainer"]
-margin_left = 166.0
-margin_top = 243.0
-margin_right = 316.0
-margin_bottom = 471.788
-rect_min_size = Vector2( 0, 228.788 )
-size_flags_horizontal = 3
-ratio = 0.66
-stretch_mode = 0
-alignment_vertical = 0
-
-[node name="Panel" type="Panel" parent="HBoxContainer/Panel/MarginContainer/GridContainer/AspectRatioContainer6"]
-margin_right = 150.0
-margin_bottom = 227.273
-size_flags_horizontal = 3
-size_flags_vertical = 3
-custom_styles/panel = SubResource( 2 )
-
-[node name="AspectRatioContainer7" type="AspectRatioContainer" parent="HBoxContainer/Panel/MarginContainer/GridContainer"]
-margin_left = 331.0
-margin_top = 243.0
-margin_right = 481.0
-margin_bottom = 471.788
-rect_min_size = Vector2( 0, 228.788 )
-size_flags_horizontal = 3
-ratio = 0.66
-stretch_mode = 0
-alignment_vertical = 0
-
-[node name="Panel" type="Panel" parent="HBoxContainer/Panel/MarginContainer/GridContainer/AspectRatioContainer7"]
-margin_right = 150.0
-margin_bottom = 227.273
-size_flags_horizontal = 3
-size_flags_vertical = 3
-custom_styles/panel = SubResource( 2 )
-
-[node name="AspectRatioContainer8" type="AspectRatioContainer" parent="HBoxContainer/Panel/MarginContainer/GridContainer"]
-margin_left = 496.0
-margin_top = 243.0
-margin_right = 646.0
-margin_bottom = 471.788
-rect_min_size = Vector2( 0, 228.788 )
-size_flags_horizontal = 3
-ratio = 0.66
-stretch_mode = 0
-alignment_vertical = 0
-
-[node name="Panel" type="Panel" parent="HBoxContainer/Panel/MarginContainer/GridContainer/AspectRatioContainer8"]
-margin_right = 150.0
-margin_bottom = 227.273
-size_flags_horizontal = 3
-size_flags_vertical = 3
-custom_styles/panel = SubResource( 2 )
 
 [node name="Widgets" type="Panel" parent="HBoxContainer"]
 margin_left = 686.0

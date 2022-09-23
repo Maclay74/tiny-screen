@@ -12,7 +12,6 @@ using Container = SimpleInjector.Container;
 
 namespace TinyScreen.Framework {
     public class ContainerNode : Node {
-        
         private Container _container;
 
         public override void _EnterTree() {
@@ -65,18 +64,20 @@ namespace TinyScreen.Framework {
 
         private void LoadPlugins() {
             List<Assembly> sources = new List<Assembly>();
-        
+
             if (System.IO.Directory.Exists(ProjectSettings.GlobalizePath("plugins"))) {
                 foreach (var dll in System.IO.Directory.GetFiles(ProjectSettings.GlobalizePath("plugins"), "*.dll")) {
                     Assembly plugin = Assembly.LoadFrom(dll);
                     sources.Add(plugin);
                 }
             }
+
             _container.Collection.Register<ILibrarySource>(sources);
             _container.Collection.Register<IGameDataProvider>(sources);
         }
 
         private void LoadNodes() {
+            // Modal
             var modalService = GetNode<ModalService>("Modal");
             _container.RegisterInstance<ModalService>(modalService);
         }

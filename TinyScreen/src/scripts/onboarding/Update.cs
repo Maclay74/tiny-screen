@@ -2,13 +2,13 @@
 using ByteSizeLib;
 using Godot;
 using GodotOnReady.Attributes;
+using TinyScreen.Framework;
 using TinyScreen.Framework.Attributes;
 using TinyScreen.Framework.Interfaces;
 using TinyScreen.Services;
 
 namespace TinyScreen.Scripts.Onboarding {
-    public partial class Update : Control {
-        
+    public partial class Update : BaseRouter {
         [OnReadyGet] private Label _subtitle;
         [OnReadyGet] private Label _updateSize;
         [OnReadyGet] private Label _currentVersion;
@@ -20,23 +20,12 @@ namespace TinyScreen.Scripts.Onboarding {
         [OnReadyGet] private Button _tryAgainButton;
         [OnReadyGet] private ProgressBar _progressBar;
 
-        private enum State {
-            CheckingLatestVersion,
-            NoInternet,
-            Confirmation,
-            Updating,
-            Error,
-            Install
-        }
-
-        private State _currentState = State.CheckingLatestVersion;
-        
         [Inject] private IUpdateService _updateService;
         [Inject] private IHardwareService _hardwareService;
         [Inject] private ModalService _modalService;
 
-        
-        [OnReady] public void BindEvents() {
+        [OnReady]
+        public void BindEvents() {
             base._Ready();
 
             // Bind buttons
@@ -44,67 +33,21 @@ namespace TinyScreen.Scripts.Onboarding {
             _changelogButton.Connect("pressed", this, nameof(OnChangelogPress));
             _updateButton.Connect("pressed", this, nameof(OnUpdatePress));
             _tryAgainButton.Connect("pressed", this, nameof(OnTryAgainPress));
-            
-            SetState(_currentState);
         }
 
-        private void SetState(State newState) {
+        [Route("check", true)]
+        private async void Check(string path) {
+            // Update UI
+            _subtitle.Text = "Checking is there is a new version of the application";
+            _skipButton.Hide();
+            _changelogButton.Hide();
+            _updateButton.Hide();
+            _versionsList.Hide();
+            _tryAgainButton.Hide();
+            _progressBar.Hide();
 
-            switch (newState) {
-                case State.CheckingLatestVersion:
-                    _subtitle.Text = "Checking is there is a new version of the application";
-                    _skipButton.Hide();
-                    _changelogButton.Hide();
-                    _updateButton.Hide();
-                    _versionsList.Hide();
-                    _tryAgainButton.Hide();
-                    _progressBar.Hide();
-                    CheckLatestVersion();
-                    break;
-                
-                case State.NoInternet:
-                    _subtitle.Text = "Seems like you are not connected to internet";
-                    _skipButton.Show();
-                    _tryAgainButton.Show();
-                    break;
-                
-                case State.Confirmation:
-                    _subtitle.Text = "New version available, we strongly recommend to update";
-                    _skipButton.Show();
-                    _changelogButton.Show();
-                    _updateButton.Show();
-                    _versionsList.Show();
-                    _tryAgainButton.Hide();
-                    break;
-                
-                case State.Updating:
-                    _subtitle.Text = "Downloading the latest version";
-                    _skipButton.Hide();
-                    _changelogButton.Hide();
-                    _updateButton.Hide();
-                    _versionsList.Hide();
-                    _tryAgainButton.Hide();
-                    _progressBar.Show();
-                    DownloadUpdate();
-                    break;
-                
-                case State.Error:
-                    _subtitle.Text = "Something went wrong";
-                    _progressBar.Hide();
-                    _versionsList.Hide();
-                    _skipButton.Show();
-                    _tryAgainButton.Show();
-                    break;
-
-            }
-            
-            _currentState = newState;
-        }
-
-        private async void CheckLatestVersion() {
-            
             if (!_hardwareService.IsOnline()) {
-                SetState(State.NoInternet);
+                Navigate("error", "Seems like you are not connected to internet");
                 return;
             }
 
@@ -122,30 +65,56 @@ namespace TinyScreen.Scripts.Onboarding {
 
                     if (updateSize != null) {
                         _updateSize.Text = ByteSize.FromBytes(updateSize.Value).ToString();
-                        SetState(State.Confirmation);
+                        Navigate("confirm");
                     }
                 }
                 catch (Exception) {
-                    SetState(State.Error);
+                    Navigate("error", "Something went wrong");
                 }
-               
+
                 return;
             }
-            
+
             // Latest version, nothing to do
             OnSkipPress();
         }
 
-        private async void DownloadUpdate() {
+        [Route("confirm")]
+        private void Confirm(string path) {
+            _subtitle.Text = "New version available, we strongly recommend to update";
+            _skipButton.Show();
+            _changelogButton.Show();
+            _updateButton.Show();
+            _versionsList.Show();
+            _tryAgainButton.Hide();
+        }
+
+        [Route("error")]
+        private async void Error(string path, string message = "Something went wrong") {
+            _subtitle.Text = message;
+            _progressBar.Hide();
+            _versionsList.Hide();
+            _skipButton.Show();
+            _tryAgainButton.Show();
+        }
+
+        [Route("download")]
+        private async void DownloadUpdate(string path) {
+            // UI
+            _subtitle.Text = "Downloading the latest version";
+            _skipButton.Hide();
+            _changelogButton.Hide();
+            _updateButton.Hide();
+            _versionsList.Hide();
+            _tryAgainButton.Hide();
+            _progressBar.Show();
+
             try {
-                await _updateService.DownloadLatestUpdate((object sender, float progress) => {
-                    _progressBar.Value = progress;
-                });
-                
+                await _updateService.DownloadLatestUpdate((sender, progress) => _progressBar.Value = progress);
                 _updateService.Install();
             }
             catch (Exception) {
-                SetState(State.Error);
+                Navigate("error", "Error during downloading");
             }
         }
 
@@ -153,20 +122,14 @@ namespace TinyScreen.Scripts.Onboarding {
             if (await _modalService.Confirm(
                 "Are you sure you want to skip update?\nOutdated version might not work correctly!",
                 "Skip", "Back"))
-                GetParent<Onboarding>().NextStage();
+                GetParent<BaseRouter>().Navigate("library");
         }
 
-        private void OnUpdatePress() {
-            SetState(State.Updating);
-        }
+        private void OnUpdatePress() => Navigate("download");
 
-        private void OnTryAgainPress() {
-            SetState(State.CheckingLatestVersion);
-        }
 
-        private void OnChangelogPress() {
-            // TODO implement some kind of UI for that
-        }
-        
+        private void OnTryAgainPress() => Navigate("check");
+
+        private void OnChangelogPress() => Navigate("changelog");
     }
 }
