@@ -38,10 +38,10 @@ This is MVP features set
     - [ ] Install and restart
   - [ ] Library
     - [x] Import games from Steam
-    - [ ] Import games from EGS
+    - [x] Import games from EGS
     - [ ] Import games from GOG
   - [ ] Emulation
-    - [ ] Import roms from RetroArch
+    - [x] Import roms from RetroArch
     - [ ] Import games from other emulators?
   - [ ] Device
     - [ ] Check is additional hardware settings available
