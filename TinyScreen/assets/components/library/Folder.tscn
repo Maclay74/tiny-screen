@@ -1,23 +1,33 @@
-[gd_scene format=2]
+[gd_scene load_steps=2 format=2]
 
-[node name="AspectRatioContainer2" type="AspectRatioContainer"]
+[ext_resource path="res://src/scripts/components/library/FolderCard.cs" type="Script" id=1]
+
+[node name="Folder" type="AspectRatioContainer"]
 margin_left = 182.0
 margin_right = 349.0
 margin_bottom = 167.0
 rect_min_size = Vector2( 167, 167 )
+mouse_filter = 2
+input_pass_on_modal_close_click = false
 size_flags_horizontal = 3
+script = ExtResource( 1 )
+LabelPath = NodePath("Button/CenterContainer/Label")
+ButtonPath = NodePath("Button")
 
 [node name="Button" type="Button" parent="."]
 margin_right = 167.0
 margin_bottom = 167.0
+mouse_filter = 1
 
 [node name="CenterContainer" type="CenterContainer" parent="Button"]
 anchor_right = 1.0
 anchor_bottom = 1.0
+mouse_filter = 1
+input_pass_on_modal_close_click = false
 
 [node name="Label" type="Label" parent="Button/CenterContainer"]
-margin_left = 61.0
-margin_top = 76.0
-margin_right = 105.0
-margin_bottom = 90.0
+margin_left = 45.0
+margin_top = 71.0
+margin_right = 121.0
+margin_bottom = 96.0
 text = "Arcade"

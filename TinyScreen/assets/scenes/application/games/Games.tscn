@@ -1,104 +1,38 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://assets/components/library/GameCard.tscn" type="PackedScene" id=1]
 [ext_resource path="res://assets/components/library/Folder.tscn" type="PackedScene" id=2]
+[ext_resource path="res://src/scripts/application/games/Games.cs" type="Script" id=3]
 
 [node name="Games" type="VBoxContainer"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
+script = ExtResource( 3 )
+GamesContainerPath = NodePath("Games/MarginContainer/ScrollContainer/HBoxContainer")
+FoldersContainerPath = NodePath("Folders/MarginContainer/GridContainer")
+_gameCard = ExtResource( 1 )
+_folder = ExtResource( 2 )
 
 [node name="Folders" type="ScrollContainer" parent="."]
 margin_right = 1024.0
-margin_bottom = 177.0
+margin_bottom = 10.0
+mouse_filter = 1
 size_flags_horizontal = 3
 scroll_vertical_enabled = false
 
 [node name="MarginContainer" type="MarginContainer" parent="Folders"]
-margin_right = 713.0
-margin_bottom = 177.0
-mouse_filter = 2
+margin_bottom = 10.0
+mouse_filter = 1
 custom_constants/margin_bottom = 10
 
 [node name="GridContainer" type="HBoxContainer" parent="Folders/MarginContainer"]
-margin_right = 713.0
-margin_bottom = 167.0
 size_flags_horizontal = 3
 custom_constants/separation = 15
 
-[node name="Folder" parent="Folders/MarginContainer/GridContainer" instance=ExtResource( 2 )]
-margin_left = 0.0
-margin_right = 167.0
-
-[node name="AspectRatioContainer3" type="AspectRatioContainer" parent="Folders/MarginContainer/GridContainer"]
-margin_left = 182.0
-margin_right = 349.0
-margin_bottom = 167.0
-rect_min_size = Vector2( 167, 167 )
-size_flags_horizontal = 3
-
-[node name="Button" type="Button" parent="Folders/MarginContainer/GridContainer/AspectRatioContainer3"]
-margin_right = 167.0
-margin_bottom = 167.0
-
-[node name="CenterContainer" type="CenterContainer" parent="Folders/MarginContainer/GridContainer/AspectRatioContainer3/Button"]
-anchor_right = 1.0
-anchor_bottom = 1.0
-
-[node name="Label" type="Label" parent="Folders/MarginContainer/GridContainer/AspectRatioContainer3/Button/CenterContainer"]
-margin_left = 61.0
-margin_top = 76.0
-margin_right = 105.0
-margin_bottom = 90.0
-text = "Arcade"
-
-[node name="AspectRatioContainer4" type="AspectRatioContainer" parent="Folders/MarginContainer/GridContainer"]
-margin_left = 364.0
-margin_right = 531.0
-margin_bottom = 167.0
-rect_min_size = Vector2( 167, 167 )
-size_flags_horizontal = 3
-
-[node name="Button" type="Button" parent="Folders/MarginContainer/GridContainer/AspectRatioContainer4"]
-margin_right = 167.0
-margin_bottom = 167.0
-
-[node name="CenterContainer" type="CenterContainer" parent="Folders/MarginContainer/GridContainer/AspectRatioContainer4/Button"]
-anchor_right = 1.0
-anchor_bottom = 1.0
-
-[node name="Label" type="Label" parent="Folders/MarginContainer/GridContainer/AspectRatioContainer4/Button/CenterContainer"]
-margin_left = 61.0
-margin_top = 76.0
-margin_right = 105.0
-margin_bottom = 90.0
-text = "Arcade"
-
-[node name="AspectRatioContainer5" type="AspectRatioContainer" parent="Folders/MarginContainer/GridContainer"]
-margin_left = 546.0
-margin_right = 713.0
-margin_bottom = 167.0
-rect_min_size = Vector2( 167, 167 )
-size_flags_horizontal = 3
-
-[node name="Button" type="Button" parent="Folders/MarginContainer/GridContainer/AspectRatioContainer5"]
-margin_right = 167.0
-margin_bottom = 167.0
-
-[node name="CenterContainer" type="CenterContainer" parent="Folders/MarginContainer/GridContainer/AspectRatioContainer5/Button"]
-anchor_right = 1.0
-anchor_bottom = 1.0
-
-[node name="Label" type="Label" parent="Folders/MarginContainer/GridContainer/AspectRatioContainer5/Button/CenterContainer"]
-margin_left = 61.0
-margin_top = 76.0
-margin_right = 105.0
-margin_bottom = 90.0
-text = "Arcade"
-
 [node name="Games" type="ScrollContainer" parent="."]
-margin_top = 181.0
+margin_top = 18.0
 margin_right = 1024.0
 margin_bottom = 600.0
 size_flags_horizontal = 3
@@ -107,7 +41,7 @@ scroll_vertical_enabled = false
 
 [node name="MarginContainer" type="MarginContainer" parent="Games"]
 margin_right = 1024.0
-margin_bottom = 419.0
+margin_bottom = 582.0
 mouse_filter = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -115,7 +49,7 @@ custom_constants/margin_bottom = 10
 
 [node name="ScrollContainer" type="ScrollContainer" parent="Games/MarginContainer"]
 margin_right = 1024.0
-margin_bottom = 409.0
+margin_bottom = 572.0
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Games/MarginContainer/ScrollContainer"]
 margin_right = 1800.0

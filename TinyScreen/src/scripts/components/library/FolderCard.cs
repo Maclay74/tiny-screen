@@ -1,29 +1,28 @@
+using System;
 using Godot;
 using GodotOnReady.Attributes;
 using TinyScreen.Models;
 
 namespace TinyScreen.Scripts.Components.Library {
-    public partial class GameCard : AspectRatioContainer {
-        [OnReadyGet] private TextureRect _cover;
+    public partial class FolderCard : AspectRatioContainer {
         
-        public Games Game;
-        private ImageTexture _texture;
-        private Image _image;
+        [OnReadyGet] private Label _label;
+        [OnReadyGet] private Button _button;
+        
         private System.Timers.Timer _updateTimer;
         private const float UpdateEventDelay = 0.1f;
 
+        public string FolderName;
+        public Action<string> OnPress;
+
         [OnReady]
         private void Setup() {
-            _texture = new ImageTexture();
-            _image = new Image();
-            //_image.Load(System.IO.Path.Combine(OS.GetUserDataDir(), Game.Artwork));
-            // TODO replace with relative paths
+            _label.Text = FolderName;
+            _button.Connect("pressed", this, nameof(OnButtonPress));
+        }
 
-            if (Game != null) {
-                _image.Load(Game.Artwork);
-                _texture.CreateFromImage(_image);
-                _cover.Texture = _texture;
-            }
+        private void OnButtonPress() {
+            OnPress.Invoke(FolderName);
         }
 
         private void UpdateLayout() {
@@ -47,7 +46,6 @@ namespace TinyScreen.Scripts.Components.Library {
                     Update();
                 }
                 
-                //_updateTimer = null;
             };
 
             _updateTimer?.Start();
