@@ -1,9 +1,9 @@
 [gd_scene load_steps=5 format=2]
 
-[ext_resource path="res://src/framework/ContainerNode.cs" type="Script" id=1]
-[ext_resource path="res://src/services/ModalService.cs" type="Script" id=2]
-[ext_resource path="res://assets/scenes/modals/Confirm.tscn" type="PackedScene" id=3]
-[ext_resource path="res://assets/scenes/modals/Alert.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Src/Framework/ContainerNode.cs" type="Script" id=1]
+[ext_resource path="res://Src/Services/ModalService.cs" type="Script" id=2]
+[ext_resource path="res://Assets/Scenes/Modals/Confirm.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Assets/Scenes/Modals/Alert.tscn" type="PackedScene" id=4]
 
 [node name="ContainerNode" type="Node"]
 script = ExtResource( 1 )

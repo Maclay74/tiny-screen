@@ -11,7 +11,7 @@ config_version=4
 [application]
 
 config/name="TinyScreen"
-run/main_scene="res://assets/scenes/Root.tscn"
+run/main_scene="res://Assets/Scenes/Root.tscn"
 run/low_processor_mode=true
 config/icon="res://icon.png"
 config/windows_native_icon="res://Icon.ico"
@@ -19,11 +19,11 @@ config/steamgrid/key="c6c3d47a9c8deeff0f9481aea822bec1"
 
 [autoload]
 
-AutoloadScene="*res://assets/scenes/AutoloadScene.tscn"
+AutoloadScene="*res://Assets/Scenes/AutoloadScene.tscn"
 
 [editor_plugins]
 
-enabled=PoolStringArray( "res://addons/StagedProgressBar/plugin.cfg" )
+enabled=PoolStringArray( "res://Addons/StagedProgressBar/plugin.cfg" )
 
 [gui]
 

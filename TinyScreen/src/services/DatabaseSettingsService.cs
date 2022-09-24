@@ -13,6 +13,7 @@ namespace TinyScreen.Services {
         }
 
         public bool IsAppInstalled() {
+            return false;
             return _databaseService.IsDatabaseExists();
         }
 

@@ -2,20 +2,15 @@
 
   <PropertyGroup>
 	<TargetFramework>net472</TargetFramework>
-    <BaseOutputPath>bin\</BaseOutputPath>
+    <BaseOutputPath>Bin\</BaseOutputPath>
     <RootNamespace>SteamLibrarySource</RootNamespace>
     <RunPostBuildEvent>OnBuildSuccess</RunPostBuildEvent>
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="assets\Gameloop.Vdf.dll" />
-    <None Remove="assets\Gameloop.Vdf.JsonConverter.dll" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <EmbeddedResource Include="assets\Gameloop.Vdf.dll" />
-    <EmbeddedResource Include="assets\Gameloop.Vdf.JsonConverter.dll" />
-    <EmbeddedResource Include="assets\icon.png" />
+    <EmbeddedResource Include="Assets\Gameloop.Vdf.dll" />
+    <EmbeddedResource Include="Assets\Gameloop.Vdf.JsonConverter.dll" />
+    <EmbeddedResource Include="Assets\icon.png" />
   </ItemGroup>
 
   <ItemGroup>
@@ -26,9 +21,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\common\Common.csproj" />
+    <ProjectReference Include="..\..\Common\Common.csproj" />
   </ItemGroup>
 	<Target Name="CopyFiles" AfterTargets="AfterBuild">
-	    <Copy SourceFiles="$(TargetDir)$(ProjectName).dll" DestinationFolder="$(SolutionDir)plugins\" />
+	    <Copy SourceFiles="$(TargetDir)$(ProjectName).dll" DestinationFolder="$(SolutionDir)Plugins\" />
 	</Target>
 </Project>

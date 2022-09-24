@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/class-icon.svg-4bf04c682a86d81dc97113d8605a12ef.stex"
+path="res://.import/class-icon.svg-c21c8fedd41883572f03a57d88583244.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://addons/StagedProgressBar/class-icon.svg"
-dest_files=[ "res://.import/class-icon.svg-4bf04c682a86d81dc97113d8605a12ef.stex" ]
+source_file="res://Addons/StagedProgressBar/class-icon.svg"
+dest_files=[ "res://.import/class-icon.svg-c21c8fedd41883572f03a57d88583244.stex" ]
 
 [params]
 

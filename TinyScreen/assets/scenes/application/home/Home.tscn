@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=2]
 
-[ext_resource path="res://assets/components/library/GameCard.tscn" type="PackedScene" id=1]
-[ext_resource path="res://src/scripts/application/home/Home.cs" type="Script" id=2]
+[ext_resource path="res://Assets/Components/Library/GameCard.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Src/Scripts/Application/Home/Home.cs" type="Script" id=2]
 
 [sub_resource type="StyleBoxFlat" id=1]
 bg_color = Color( 1, 1, 1, 0.113725 )

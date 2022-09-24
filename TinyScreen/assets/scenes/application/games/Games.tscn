@@ -1,8 +1,8 @@
 [gd_scene load_steps=4 format=2]
 
-[ext_resource path="res://assets/components/library/GameCard.tscn" type="PackedScene" id=1]
-[ext_resource path="res://assets/components/library/Folder.tscn" type="PackedScene" id=2]
-[ext_resource path="res://src/scripts/application/games/Games.cs" type="Script" id=3]
+[ext_resource path="res://Assets/Components/Library/GameCard.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Assets/Components/Library/Folder.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Src/Scripts/Application/Games/Games.cs" type="Script" id=3]
 
 [node name="Games" type="VBoxContainer"]
 anchor_right = 1.0
