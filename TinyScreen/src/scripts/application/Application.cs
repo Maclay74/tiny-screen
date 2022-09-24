@@ -35,12 +35,12 @@ namespace TinyScreen.Scripts.Application {
             AddChild(_tween);
         }
 
-        [Route("home", true)]
+        [Route("home")]
         private void Home(string path) {
             TransitionToScene(_home, path);
         }
 
-        [Route("games")]
+        [Route("games", true)]
         private void Games(string path) {
             TransitionToScene(_games, path);
         }
