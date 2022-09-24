@@ -48,7 +48,7 @@ margin_bottom = 585.0
 scroll_horizontal_enabled = false
 
 [node name="GridContainer" type="GridContainer" parent="HBoxContainer/Panel/MarginContainer/ScrollContainer"]
-margin_right = 634.0
+margin_right = 646.0
 size_flags_horizontal = 3
 custom_constants/vseparation = 15
 custom_constants/hseparation = 15

@@ -71,3 +71,6 @@ margin_top = 68.0
 margin_right = 994.0
 margin_bottom = 570.0
 size_flags_vertical = 3
+
+[node name="Games" parent="MarginContainer/Wrapper/Content" instance=ExtResource( 3 )]
+visible = false

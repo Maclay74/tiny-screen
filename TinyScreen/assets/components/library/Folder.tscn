@@ -1,0 +1,23 @@
+[gd_scene format=2]
+
+[node name="AspectRatioContainer2" type="AspectRatioContainer"]
+margin_left = 182.0
+margin_right = 349.0
+margin_bottom = 167.0
+rect_min_size = Vector2( 167, 167 )
+size_flags_horizontal = 3
+
+[node name="Button" type="Button" parent="."]
+margin_right = 167.0
+margin_bottom = 167.0
+
+[node name="CenterContainer" type="CenterContainer" parent="Button"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="Label" type="Label" parent="Button/CenterContainer"]
+margin_left = 61.0
+margin_top = 76.0
+margin_right = 105.0
+margin_bottom = 90.0
+text = "Arcade"
