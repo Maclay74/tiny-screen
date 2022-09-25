@@ -122,7 +122,7 @@ namespace TinyScreen.Scripts.Onboarding {
             if (await _modalService.Confirm(
                 "Are you sure you want to skip update?\nOutdated version might not work correctly!",
                 "Skip", "Back"))
-                GetParent<BaseRouter>().Navigate("library");
+                Navigate("/onboarding/library");
         }
 
         private void OnUpdatePress() => Navigate("download");

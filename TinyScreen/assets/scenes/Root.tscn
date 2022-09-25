@@ -1,9 +1,9 @@
 [gd_scene load_steps=5 format=2]
 
-[ext_resource path="res://src/scripts/RootNode.cs" type="Script" id=1]
-[ext_resource path="res://assets/themes/default.tres" type="Theme" id=2]
-[ext_resource path="res://assets/scenes/onboarding/Onboarding.tscn" type="PackedScene" id=3]
-[ext_resource path="res://assets/scenes/application/Application.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Src/Scripts/RootNode.cs" type="Script" id=1]
+[ext_resource path="res://Assets/Themes/default.tres" type="Theme" id=2]
+[ext_resource path="res://Assets/Scenes/Onboarding/Onboarding.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Assets/Scenes/Application/Application.tscn" type="PackedScene" id=4]
 
 [node name="Root" type="Control"]
 anchor_right = 1.0

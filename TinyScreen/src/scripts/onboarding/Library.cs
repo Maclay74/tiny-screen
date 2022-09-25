@@ -27,13 +27,13 @@ namespace TinyScreen.Scripts.Onboarding {
         [OnReady]
         public void BindEvents() {
             _import.Connect("pressed", this, nameof(OnImportPress));
+            GD.Print("here");
         }
 
         private void OnImportPress() => Navigate("import");
 
         [Route("default", true)]
         private void DefaultRoute(string path) {
-            Console.WriteLine("DEFAULT");
             foreach (var source in _librarySources) {
                 var panel = SourcePanel.Instance<LibrarySource>();
                 panel.source = source;

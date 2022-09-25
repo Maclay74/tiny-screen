@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
@@ -65,8 +66,8 @@ namespace TinyScreen.Framework {
         private void LoadPlugins() {
             List<Assembly> sources = new List<Assembly>();
 
-            if (System.IO.Directory.Exists(ProjectSettings.GlobalizePath("plugins"))) {
-                foreach (var dll in System.IO.Directory.GetFiles(ProjectSettings.GlobalizePath("plugins"), "*.dll")) {
+            if (System.IO.Directory.Exists(ProjectSettings.GlobalizePath("Plugins"))) {
+                foreach (var dll in System.IO.Directory.GetFiles(ProjectSettings.GlobalizePath("Plugins"), "*.dll")) {
                     Assembly plugin = Assembly.LoadFrom(dll);
                     sources.Add(plugin);
                 }

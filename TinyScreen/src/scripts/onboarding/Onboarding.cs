@@ -56,13 +56,14 @@ namespace TinyScreen.Scripts.Onboarding {
                     0.3f, Tween.TransitionType.Cubic);
                 _tween.InterpolateProperty(_currentScene, "rect_position", _currentScene.RectPosition,
                     new Vector2(-50, 0), 0.3f, Tween.TransitionType.Cubic);
-
-                _tween.Start();
+                
                 AddChild(newSceneInstance);
-                await ToSignal(GetTree(), "idle_frame");
-                if (_currentScene is BaseRouter router)
+                if (newSceneInstance is BaseRouter router)
                     router.Navigate(path);
-
+                
+                await ToSignal(GetTree(), "idle_frame");
+                _tween.Start();
+                
                 await ToSignal(_tween, "tween_all_completed");
 
                 RemoveChild(_currentScene);

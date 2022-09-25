@@ -43,6 +43,8 @@ namespace TinyScreen.Framework {
 
         public void Navigate(string path, params object[] args) {
             
+            Console.WriteLine($"[{this.Name}] Path: " + (path.Length > 0 ? path : "Default"));
+            
             BaseRouter root = path.ElementAtOrDefault(0) == '/' ? GetRoot() : this;
             var rootType = root.GetType();
             path = Regex.Replace(path, "^/", ""); // Remove slash from the beginning
@@ -58,11 +60,12 @@ namespace TinyScreen.Framework {
                     var state = new RouteState(pathLeft, newArgs);
                     var isDefault = pathLeft.Length == 0 && attribute.IsDefault;
                     var match = Regex.Match(path, "^" + attribute?.Path);
-
+                    
                     //Console.WriteLine($"[{Name}]: {path} / {attribute?.Path} {match.Success}");
                     
                     if (match.Success || isDefault) {
-                        Console.WriteLine($"[{Name}]: Calling method {route.Name}");
+                      
+                        //Console.WriteLine($"[{Name}]: {route.Name}");
                         if (_currentState == null || !_currentState.Equals(state)) {
                             _currentState = state;
                             route.Invoke(root, newArgs);

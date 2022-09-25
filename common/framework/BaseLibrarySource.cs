@@ -23,7 +23,7 @@ namespace Common.Framework {
         
         public byte[] Icon() {
             var assembly = GetType().Assembly;
-            var resourceName = assembly.GetName().Name + ".assets.icon.png";
+            var resourceName = assembly.GetName().Name + ".Assets.icon.png";
 
             using (Stream stream = assembly.GetManifestResourceStream(resourceName))
             using (var memoryStream = new MemoryStream()) {
@@ -39,7 +39,7 @@ namespace Common.Framework {
             if (args.RequestingAssembly != assembly)
                 return null;
             
-            using (var stream = assembly.GetManifestResourceStream(assembly.GetName().Name + ".assets." + keyName + ".dll")) {
+            using (var stream = assembly.GetManifestResourceStream(assembly.GetName().Name + ".Assets." + keyName + ".dll")) {
                 var assemblyData = new Byte[stream.Length];
                 stream.Read(assemblyData, 0, assemblyData.Length);
                 return Assembly.Load(assemblyData);

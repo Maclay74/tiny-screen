@@ -2,20 +2,20 @@
 
   <PropertyGroup>
 	<TargetFramework>net472</TargetFramework>
-    <BaseOutputPath>bin\</BaseOutputPath>
+    <BaseOutputPath>Bin\</BaseOutputPath>
     <RootNamespace>XboxLibrarySource</RootNamespace>
     <RunPostBuildEvent>OnBuildSuccess</RunPostBuildEvent>
   </PropertyGroup>
 
   <ItemGroup>
-    <EmbeddedResource Include="assets\icon.png" />
+    <EmbeddedResource Include="Assets\icon.png" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\common\Common.csproj" />
+    <ProjectReference Include="..\..\Common\Common.csproj" />
   </ItemGroup>
   
   <Target Name="CopyFiles" AfterTargets="AfterBuild" Condition="'$(ProjectName)' != 'TemplateLibrarySource'">
-	  <Copy SourceFiles="$(TargetDir)$(ProjectName).dll" DestinationFolder="$(SolutionDir)plugins\" />
+	  <Copy SourceFiles="$(TargetDir)$(ProjectName).dll" DestinationFolder="$(SolutionDir)Plugins\" />
   </Target>
 </Project>

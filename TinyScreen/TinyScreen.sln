@@ -5,23 +5,23 @@ VisualStudioVersion = 17.3.32825.248
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TinyScreen", "TinyScreen.csproj", "{BEF4EE25-2DF6-43EC-AD0D-80080DE9AAAE}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SteamLibrarySource", "..\plugins\SteamLibrarySource\SteamLibrarySource.csproj", "{FE3AD83B-7B8C-4A9B-9A28-D6E82EFD94BE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SteamLibrarySource", "..\Plugins\SteamLibrarySource\SteamLibrarySource.csproj", "{FE3AD83B-7B8C-4A9B-9A28-D6E82EFD94BE}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TemplateLibrarySource", "..\plugins\TemplateLibrarySource\TemplateLibrarySource.csproj", "{6B5B2D65-DD2D-4A97-BE32-9A2EDF9C0AAE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TemplateLibrarySource", "..\Plugins\TemplateLibrarySource\TemplateLibrarySource.csproj", "{6B5B2D65-DD2D-4A97-BE32-9A2EDF9C0AAE}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RetroArchLibrarySource", "..\plugins\RetroArchLibrarySource\RetroArchLibrarySource.csproj", "{98937A84-9122-4B30-97C2-19F682D5F801}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RetroArchLibrarySource", "..\Plugins\RetroArchLibrarySource\RetroArchLibrarySource.csproj", "{98937A84-9122-4B30-97C2-19F682D5F801}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "LibrarySources", "LibrarySources", "{EA567C71-F276-4153-9C10-1BBA605B4D57}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "XboxLibrarySource", "..\plugins\XboxLibrarySource\XboxLibrarySource.csproj", "{C5AB6FFC-7C64-4AB0-83B6-29BC546964B5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "XboxLibrarySource", "..\Plugins\XboxLibrarySource\XboxLibrarySource.csproj", "{C5AB6FFC-7C64-4AB0-83B6-29BC546964B5}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EGSLibrarySource", "..\plugins\EGSLibrarySource\EGSLibrarySource.csproj", "{D8BEA850-4B69-4AEA-AB92-D036ED4F0A54}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EGSLibrarySource", "..\Plugins\EGSLibrarySource\EGSLibrarySource.csproj", "{D8BEA850-4B69-4AEA-AB92-D036ED4F0A54}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Common", "..\common\Common.csproj", "{881DE072-4480-418B-B441-A0937CC10369}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Common", "..\Common\Common.csproj", "{881DE072-4480-418B-B441-A0937CC10369}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "GameDataProviders", "GameDataProviders", "{BEC4A8BC-C5BB-49F3-BB01-A39A72F6F967}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TemplateGameDataProvider", "..\plugins\TemplateGameDataProvider\TemplateGameDataProvider.csproj", "{5C5D04DA-F657-481A-B216-9982BACB8C7D}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TemplateGameDataProvider", "..\Plugins\TemplateGameDataProvider\TemplateGameDataProvider.csproj", "{5C5D04DA-F657-481A-B216-9982BACB8C7D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
