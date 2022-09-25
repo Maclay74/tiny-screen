@@ -1,0 +1,21 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+	<TargetFramework>net472</TargetFramework>
+    <BaseOutputPath>Bin\</BaseOutputPath>
+    <RootNamespace>TemplateLibrarySource</RootNamespace>
+    <RunPostBuildEvent>OnBuildSuccess</RunPostBuildEvent>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Assets\icon.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Common\Common.csproj" />
+  </ItemGroup>
+
+  <Target Name="CopyFiles" AfterTargets="AfterBuild" Condition="'$(ProjectName)' != 'TemplateLibrarySource'">
+	  <Copy SourceFiles="$(TargetDir)$(ProjectName).dll" DestinationFolder="$(SolutionDir)Plugins\" />
+  </Target>
+</Project>
