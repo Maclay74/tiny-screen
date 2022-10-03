@@ -10,9 +10,11 @@ export_presets.cfg
 .mono/
 data_*/
 obj
+Obj
 
 # JetBrains
 .idea
 .vs
 
 Bin/**
+bin/**
