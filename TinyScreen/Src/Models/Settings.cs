@@ -1,9 +1,9 @@
-﻿using Watson.ORM.Core;
+using Watson.ORM.Core;
 
 namespace TinyScreen.Models {
     
     [Table("settings")]
-    public class Settings {
+    public partial class Settings {
         
         [Column("id", true, DataTypes.Int, false)]
         public int Id { get; set; }

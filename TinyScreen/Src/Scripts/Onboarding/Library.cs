@@ -1,10 +1,8 @@
-﻿using System;
+using System;
 using Godot;
 using System.Collections.Generic;
 using System.Linq;
 using Common.Interfaces;
-using GodotOnReady.Attributes;
-using TinyScreen.addons.StagedProgressBar;
 using TinyScreen.Framework;
 using TinyScreen.Framework.Attributes;
 using TinyScreen.Services;
@@ -13,36 +11,35 @@ namespace TinyScreen.Scripts.Onboarding {
     public partial class Library : BaseRouter {
         [Export] public PackedScene SourcePanel;
 
-        [OnReadyGet] private Label _subtitle;
-        [OnReadyGet] private GridContainer _sources;
-        [OnReadyGet] private Button _import;
-        [OnReadyGet] private StagedProgressBar _progressBar;
+        [Export] private Label _subtitle;
+        [Export] private GridContainer _sources;
+        [Export] private Button _import;
+        //[Export] private Addons.StagedProgressBar.StagedProgressBar _progressBar;
 
         [Inject] private IEnumerable<ILibrarySource> _librarySources;
         [Inject] private LibraryService _libraryService;
         [Inject] private ModalService _modalService;
 
-        private List<ILibrarySource> _included = new List<ILibrarySource>();
+        private List<ILibrarySource> _included = new ();
+        
+        public override partial void _Ready();
 
-        [OnReady]
-        public void BindEvents() {
-            _import.Connect("pressed", this, nameof(OnImportPress));
-            GD.Print("here");
+        [Ready]
+        private void Start() {
+            _import.Pressed += () => Navigate("import");
         }
-
-        private void OnImportPress() => Navigate("import");
 
         [Route("default", true)]
         private void DefaultRoute(string path) {
             foreach (var source in _librarySources) {
-                var panel = SourcePanel.Instance<LibrarySource>();
+                var panel = SourcePanel.Instantiate<Components.Library.LibrarySource>();
                 panel.source = source;
                 _sources.AddChild(panel);
 
                 if (!source.IsInstalled())
                     continue;
 
-                panel.toogle += (sourceChanged, include) => {
+                panel.Toogle += (sourceChanged, include) => {
                     if (include) _included.Add(sourceChanged);
                     else _included.Remove(sourceChanged);
                 };
@@ -61,11 +58,11 @@ namespace TinyScreen.Scripts.Onboarding {
 
             var overall = stages.Aggregate(0, (acc, pair) => acc + pair.Value);
 
-            _progressBar.Stages = stages;
+            /*_progressBar.Stages = stages;
             _progressBar.Progress = 0;
 
             _progressBar.Show();
-            _progressBar.Update();
+            _progressBar.QueueRedraw();*/
             _import.Hide();
 
             for (int i = 0; i < _included.Count; i++) {
@@ -76,7 +73,8 @@ namespace TinyScreen.Scripts.Onboarding {
                     await _libraryService.UpdateSource(source, (sender, progress) => {
                         var gamesDoneForSource = progress * stages.ElementAt(i).Value;
                         var gamesDone = stages.Take(i).Aggregate(gamesDoneForSource, (acc, pair) => acc + pair.Value);
-                        _progressBar.SetProgress(gamesDone / overall);
+                        //_progressBar.SetProgress(gamesDone / overall);
+                        GD.Print(gamesDone / overall);
                     });
                 }
                 catch (Exception exception) {
@@ -84,7 +82,7 @@ namespace TinyScreen.Scripts.Onboarding {
                 }
             }
 
-            _progressBar.SetProgress(1);
+            //_progressBar.SetProgress(1);
             Navigate("/onboarding/finished");
         }
     }

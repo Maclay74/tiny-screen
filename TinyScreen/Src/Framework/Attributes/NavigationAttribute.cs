@@ -1,10 +1,10 @@
-﻿using System;
+using System;
 
 namespace TinyScreen.Framework.Attributes {
     
     [Serializable]
     [AttributeUsage(AttributeTargets.Method)]
-    public class RouteAttribute : Attribute {
+    public partial class RouteAttribute : Attribute {
 
         public string Path { get; }
         
@@ -18,6 +18,6 @@ namespace TinyScreen.Framework.Attributes {
     
     [Serializable]
     [AttributeUsage(AttributeTargets.Class)]
-    public class RouterAttribute : Attribute {
+    public partial class RouterAttribute : Attribute {
     }
 }

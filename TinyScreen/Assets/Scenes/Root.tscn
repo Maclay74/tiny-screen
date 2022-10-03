@@ -1,14 +1,18 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=5 format=3 uid="uid://cofd5ucw6185y"]
 
-[ext_resource path="res://Src/Scripts/RootNode.cs" type="Script" id=1]
-[ext_resource path="res://Assets/Themes/default.tres" type="Theme" id=2]
-[ext_resource path="res://Assets/Scenes/Onboarding/Onboarding.tscn" type="PackedScene" id=3]
-[ext_resource path="res://Assets/Scenes/Application/Application.tscn" type="PackedScene" id=4]
+[ext_resource type="Script" path="res://Src/Scripts/RootNode.cs" id="1"]
+[ext_resource type="Theme" uid="uid://s68nh7fxuqqs" path="res://Assets/Themes/default.tres" id="2"]
+[ext_resource type="PackedScene" uid="uid://6gw6am6m0pfl" path="res://Assets/Scenes/Onboarding/Onboarding.tscn" id="3"]
+[ext_resource type="PackedScene" path="res://Assets/Scenes/Application/Application.tscn" id="4"]
 
 [node name="Root" type="Control"]
+layout_mode = 3
+anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-theme = ExtResource( 2 )
-script = ExtResource( 1 )
-Onboarding = ExtResource( 3 )
-Application = ExtResource( 4 )
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("2")
+script = ExtResource("1")
+Onboarding = ExtResource("3")
+Application = ExtResource("4")

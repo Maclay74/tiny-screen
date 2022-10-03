@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://8u7vcvg5iq62"
-path="res://.godot/imported/class-icon.svg-ccc85426d0c7d7b39299f7981f0660fd.ctex"
+path="res://.godot/imported/class-icon.svg-c21c8fedd41883572f03a57d88583244.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Addons/_StagedProgressBar/class-icon.svg"
-dest_files=["res://.godot/imported/class-icon.svg-ccc85426d0c7d7b39299f7981f0660fd.ctex"]
+source_file="res://Addons/StagedProgressBar/class-icon.svg"
+dest_files=["res://.godot/imported/class-icon.svg-c21c8fedd41883572f03a57d88583244.ctex"]
 
 [params]
 

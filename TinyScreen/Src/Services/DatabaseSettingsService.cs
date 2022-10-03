@@ -1,11 +1,11 @@
-﻿using System;
+using System;
 using ExpressionTree;
 using Godot;
 using TinyScreen.Framework.Interfaces;
 using TinyScreen.Models;
 
 namespace TinyScreen.Services {
-    public class DatabaseSettingsService : ISettingsService {
+    public partial class DatabaseSettingsService : ISettingsService {
         private IDatabaseService _databaseService;
 
         public DatabaseSettingsService(IDatabaseService databaseService) {
