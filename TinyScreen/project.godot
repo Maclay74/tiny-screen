@@ -6,12 +6,13 @@
 ;   [section] ; section goes between []
 ;   param=value ; assign values to parameters
 
-config_version=4
+config_version=5
 
 [application]
 
 config/name="TinyScreen"
 run/main_scene="res://Assets/Scenes/Root.tscn"
+config/features=PackedStringArray("4.0", "C#")
 run/low_processor_mode=true
 config/icon="res://icon.png"
 config/windows_native_icon="res://Icon.ico"
@@ -21,12 +22,18 @@ config/steamgrid/key="c6c3d47a9c8deeff0f9481aea822bec1"
 
 AutoloadScene="*res://Assets/Scenes/AutoloadScene.tscn"
 
-[editor_plugins]
+[dotnet]
 
-enabled=PoolStringArray( "res://Addons/StagedProgressBar/plugin.cfg" )
+project/assembly_name="TinyScreen"
+
+[filesystem]
+
+import/blender/enabled=false
+import/fbx/enabled=false
 
 [gui]
 
+theme/custom="res://Assets/Themes/default.tres"
 common/drop_mouse_on_gui_input_disabled=true
 
 [input_devices]
@@ -36,9 +43,9 @@ pointing/emulate_mouse_from_touch=false
 
 [mono]
 
+export/aot/use_interpreter=false
 runtime/unhandled_exception_policy=1
 project/assembly_name="TinyScreen"
-export/aot/use_interpreter=false
 
 [physics]
 
@@ -46,6 +53,7 @@ common/enable_pause_aware_picking=true
 
 [rendering]
 
+driver/threads/thread_model=2
 2d/options/use_nvidia_rect_flicker_workaround=true
 quality/intended_usage/framebuffer_allocation=0
 quality/intended_usage/framebuffer_allocation.mobile=0

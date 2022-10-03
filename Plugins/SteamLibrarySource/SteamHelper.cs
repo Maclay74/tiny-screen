@@ -2,6 +2,7 @@
 using System.IO;
 using System.Linq;
 using System.Net.Http;
+using System.Runtime.Versioning;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using Common.Interfaces;
@@ -11,87 +12,88 @@ using Microsoft.Win32;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
-namespace SteamLibrarySource {
-    internal class SteamHelper {
-        private RegistryKey _registryKey;
+namespace SteamLibrarySource;
 
-        private string[] ignoreIds = {
-            "228980", // Steamworks 
-            "1118310" // RetroArch
-        };
+[SupportedOSPlatform("windows")]
+internal class SteamHelper {
+    private RegistryKey _registryKey;
 
-        private const string apiBase = "https://store.steampowered.com/api/";
+    private string[] ignoreIds = {
+        "228980", // Steamworks 
+        "1118310" // RetroArch
+    };
 
-        private string GetInstalledDirectory() {
-            return _registryKey?.GetValue("InstallPath")?.ToString();
-        }
+    private const string apiBase = "https://store.steampowered.com/api/";
 
-        public SteamHelper(RegistryKey registryKey) {
-            _registryKey = registryKey;
-        }
+    private string GetInstalledDirectory() {
+        return _registryKey?.GetValue("InstallPath")?.ToString();
+    }
 
-        public int GamesCount() => GetInstalledGamesIds().Count;
+    public SteamHelper(RegistryKey registryKey) {
+        _registryKey = registryKey;
+    }
 
-        public List<string> GetInstalledGamesIds() {
-            var installedPath = GetInstalledDirectory();
+    public int GamesCount() => GetInstalledGamesIds().Count;
 
-            // In this file we have information about installed games
-            var libraryFilePath = Path.Combine(installedPath, "config", "libraryfolders.vdf");
+    public List<string> GetInstalledGamesIds() {
+        var installedPath = GetInstalledDirectory();
 
-            // Text => Json
-            var configContent = File.ReadAllText(libraryFilePath);
-            var configRoot = VdfConvert.Deserialize(configContent).Value.ToJson();
-            var gamesIds = new List<string>();
+        // In this file we have information about installed games
+        var libraryFilePath = Path.Combine(installedPath, "config", "libraryfolders.vdf");
 
-            // The hell of a parse
-            foreach (var library in configRoot) {
-                foreach (var param in library.OfType<JObject>()) {
-                    foreach (var apps in param.Property("apps")) {
-                        foreach (var app in apps.OfType<JProperty>()) {
-                            if (ignoreIds.Contains(app.Name))
-                                continue;
+        // Text => Json
+        var configContent = File.ReadAllText(libraryFilePath);
+        var configRoot = VdfConvert.Deserialize(configContent).Value.ToJson();
+        var gamesIds = new List<string>();
 
-                            gamesIds.Add(app.Name);
-                        }
+        // The hell of a parse
+        foreach (var library in configRoot) {
+            foreach (var param in library.OfType<JObject>()) {
+                foreach (var apps in param.Property("apps")) {
+                    foreach (var app in apps.OfType<JProperty>()) {
+                        if (ignoreIds.Contains(app.Name))
+                            continue;
+
+                        gamesIds.Add(app.Name);
                     }
                 }
             }
-
-            return gamesIds;
         }
 
-        public async Task<LibrarySourceGameData> GetGameInfo(string id) {
-            var client = new HttpClient();
-            var apiGameLink = apiBase + "appdetails?appids=" + id;
+        return gamesIds;
+    }
 
-            // Get information about the game
-            var response = await client.GetAsync(apiGameLink);
+    public async Task<LibrarySourceGameData> GetGameInfo(string id) {
+        var client = new HttpClient();
+        var apiGameLink = apiBase + "appdetails?appids=" + id;
 
-            // Bad response
-            if (!response.IsSuccessStatusCode) return null;
+        // Get information about the game
+        var response = await client.GetAsync(apiGameLink);
 
-            var content = response.Content.ReadAsStringAsync().Result;
-            dynamic json = JsonConvert.DeserializeObject<dynamic>(content)[id];
+        // Bad response
+        if (!response.IsSuccessStatusCode) return null;
 
-            // Bad game
-            if (json.success == false) return null;
+        var content = response.Content.ReadAsStringAsync().Result;
+        dynamic json = JsonConvert.DeserializeObject<dynamic>(content)?[id];
 
-            return new LibrarySourceGameData {
-                SourceId = id,
-                Name = json.data.name.ToString(),
-                Description = json.data.short_description.ToString(),
-                ArtworkUrl = GenerateArtworkUrl(id),
-                BackgroundUrl = GenerateBackgroundUrl(json.data.background_raw.ToString()),
-            };
-        }
+        // Bad game
+        if (json != null && json.success == false) return null;
 
-        private string GenerateArtworkUrl(string id) {
-            return $"https://cdn.akamai.steamstatic.com/steam/apps/{id}/library_600x900_2x.jpg";
-        }
+        return new LibrarySourceGameData {
+            SourceId = id,
+            Name = json.data.name.ToString(),
+            Description = json.data.short_description.ToString(),
+            ArtworkUrl = GenerateArtworkUrl(id),
+            BackgroundUrl = GenerateBackgroundUrl(json.data.background_raw.ToString()),
+        };
+    }
 
-        private string GenerateBackgroundUrl(string backgroundUrl) {
-            var pattern = @"^([^?]+)";
-            return Regex.Match(backgroundUrl, pattern).ToString();
-        }
+    private string GenerateArtworkUrl(string id) {
+        return $"https://cdn.akamai.steamstatic.com/steam/apps/{id}/library_600x900_2x.jpg";
+    }
+
+    private string GenerateBackgroundUrl(string backgroundUrl) {
+        var pattern = @"^([^?]+)";
+        return Regex.Match(backgroundUrl, pattern).ToString();
     }
 }

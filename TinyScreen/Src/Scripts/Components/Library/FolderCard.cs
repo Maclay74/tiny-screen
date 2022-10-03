@@ -1,13 +1,11 @@
 using System;
 using Godot;
-using GodotOnReady.Attributes;
-using TinyScreen.Models;
 
 namespace TinyScreen.Scripts.Components.Library {
     public partial class FolderCard : AspectRatioContainer {
         
-        [OnReadyGet] private Label _label;
-        [OnReadyGet] private Button _button;
+        [Export] private Label _label;
+        [Export] private Button _button;
         
         private System.Timers.Timer _updateTimer;
         private const float UpdateEventDelay = 0.1f;
@@ -15,16 +13,14 @@ namespace TinyScreen.Scripts.Components.Library {
         public string FolderName;
         public Action<string> OnPress;
 
-        [OnReady]
-        private void Setup() {
+        public override void _Ready() {
+            base._Ready();
             _label.Text = FolderName;
-            _button.Connect("pressed", this, nameof(OnButtonPress));
-        }
 
-        private void OnButtonPress() {
-            OnPress.Invoke(FolderName);
-        }
+            _button.Pressed += () => OnPress(FolderName);
 
+        }
+        
         private void UpdateLayout() {
 
             if (_updateTimer != null) {
@@ -38,12 +34,12 @@ namespace TinyScreen.Scripts.Components.Library {
             };
 
             _updateTimer.Elapsed += (sender, args) => {
-                var newSize = new Vector2(RectSize.x, RectSize.x / Ratio);
+                var newSize = new Vector2(Size.x, Size.x / Ratio);
 
-                if (RectSize != newSize) {
-                    RectSize = new Vector2(RectSize.x, RectSize.x / Ratio);
-                    RectMinSize = new Vector2(0, RectSize.x / Ratio);
-                    Update();
+                if (Size != newSize) {
+                    Size = new Vector2(Size.x, Size.x / Ratio);
+                    CustomMinimumSize = new Vector2i(0, (int)(Size.x / Ratio));
+                    QueueRedraw();
                 }
                 
             };
@@ -51,7 +47,7 @@ namespace TinyScreen.Scripts.Components.Library {
             _updateTimer?.Start();
         }
 
-        public override void _Notification(int what) {
+        public override void _Notification(long what) {
             base._Notification(what);
 
             switch (what) {

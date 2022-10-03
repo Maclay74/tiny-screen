@@ -7,9 +7,10 @@
 # Mono-specific ignores
 .mono/**
 data_*/
+.godot/**
 
 # JetBrains
 .idea
 .vs
-plugins/**
-!plugins/.gitkeep
+Plugins/**
+!Plugins/.gitkeep

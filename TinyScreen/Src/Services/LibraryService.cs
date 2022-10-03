@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -11,7 +11,7 @@ using TinyScreen.Framework.Interfaces;
 using TinyScreen.Models;
 
 namespace TinyScreen.Services {
-    public class LibraryService {
+    public partial class LibraryService {
 
         private IDatabaseService _databaseService;
         private ImageService _imageService;
@@ -82,17 +82,17 @@ namespace TinyScreen.Services {
                     await AddGameToLibrary(source, sourceId, sourceRecordId);
                 }
             }
-            catch (LibraryGraphicsException) {
+            catch (LibraryGraphicsException e) {
                 if (await _modalService.Confirm(
-                    "Error downloading artwork or background for #" + sourceId, "Try again",
-                    "Skip the game")) {
+                        $"Error downloading artwork or background for #{sourceId}:\n{e.Message}" , "Try again",
+                        "Skip the game")) {
                     await AddGameToLibrary(source, sourceId, sourceRecordId);
                 }
             }
-            catch (Exception) {
+            catch (Exception e) {
                 if (await _modalService.Confirm(
-                    "Something went wrong with #" + sourceId, "Try again",
-                    "Skip the game")) {
+                        "Something went wrong with #" + sourceId, "Try again",
+                        "Skip the game")) {
                     await AddGameToLibrary(source, sourceId, sourceRecordId);
                 }
             }
@@ -112,10 +112,10 @@ namespace TinyScreen.Services {
             _databaseService.Insert(record);
         }
 
-        // Remove source from the table, removes all games too 
+        // RemoveAt source from the table, removes all games too 
         public void RemoveSource(ILibrarySource source) {
             // TODO Implement
-            // Remove all games too
+            // RemoveAt all games too
         }
 
         private LibrarySources GetSourceRecord(ILibrarySource source) {

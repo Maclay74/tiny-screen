@@ -1,9 +1,9 @@
-﻿using Watson.ORM.Core;
+using Watson.ORM.Core;
 
 namespace TinyScreen.Models {
     
     [Table("library-sources")]
-    public class LibrarySources {
+    public partial class LibrarySources {
         
         [Column("id", true, DataTypes.Int, false)]
         public int Id { get; set; }

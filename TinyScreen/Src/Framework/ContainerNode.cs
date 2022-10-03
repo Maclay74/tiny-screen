@@ -1,86 +1,68 @@
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Reflection;
+using System.Runtime.Loader;
+using Common.Framework;
 using Common.Interfaces;
 using Godot;
-using HarmonyLib;
 using SimpleInjector;
 using TinyScreen.Framework.Attributes;
 using TinyScreen.Framework.Interfaces;
 using TinyScreen.Services;
-using Container = SimpleInjector.Container;
+using DI = SimpleInjector.Container;
 
-namespace TinyScreen.Framework {
-    public class ContainerNode : Node {
-        private Container _container;
+namespace TinyScreen.Framework;
 
-        public override void _EnterTree() {
-            base._EnterTree();
+public partial class ContainerNode : Node {
+    public SimpleInjector.Container _container;
 
-            _container = new Container();
-            _container.Register<IDatabaseService, WatsonDatabaseService>(Lifestyle.Singleton);
-            _container.Register<ISettingsService, DatabaseSettingsService>(Lifestyle.Singleton);
-            _container.Register<IUpdateService, LocalUpdateService>(Lifestyle.Singleton);
-            _container.Register<LibraryService>(Lifestyle.Singleton);
-            _container.Register<ImageService>(Lifestyle.Singleton);
-            _container.Register<IHardwareService>(HardwareFactory.GetHardwareService, Lifestyle.Singleton);
-            LoadPlugins();
-            LoadNodes();
-            InjectDI();
-        }
+    public override void _EnterTree() {
+        base._EnterTree();
+        _container = new SimpleInjector.Container();
 
-        /**
-         * This function patches original Node so when user calls _Ready method from the base class
-         * it injects all the dependencies to it
-         */
-        private void InjectDI() {
-            var harmony = new Harmony("com.tinyscreen.di");
+        _container.Register<IDatabaseService, WatsonDatabaseService>(Lifestyle.Singleton);
+        _container.Register<ISettingsService, DatabaseSettingsService>(Lifestyle.Singleton);
+        _container.Register<IUpdateService, LocalUpdateService>(Lifestyle.Singleton);
+        _container.Register<LibraryService>(Lifestyle.Singleton);
+        _container.Register<ImageService>(Lifestyle.Singleton);
+        _container.Register<IHardwareService>(HardwareFactory.GetHardwareService, Lifestyle.Singleton);
+        LoadPlugins();
+        LoadNodes();
+        
+        // throws an error here
+        var a = _container.GetAllInstances<ILibrarySource>();
+        Console.WriteLine("Libs: " + a.Count());
+    }
+    
+    [Injector]
+    private DI ResolveDependencies() {
+        // Get container for DI
+        var containerNodePath = "/root/AutoloadScene";
+        return GetNode<ContainerNode>(containerNodePath)._container;
+    }
 
-            var mOriginal = AccessTools.Method(typeof(Node), nameof(_Ready)); // if possible use nameof() here
-            var mPostfix = SymbolExtensions.GetMethodInfo(() => ResolveDependencies(this));
+    private void LoadPlugins() {
+        List<Assembly> sources = new List<Assembly>();
+        
+        var currentContext = AssemblyLoadContext.GetLoadContext(Assembly.GetExecutingAssembly());
+        if (currentContext == null) return;
 
-            harmony.Patch(mOriginal, postfix: new HarmonyMethod(mPostfix));
-        }
-
-        private static void ResolveDependencies(Node __instance) {
-            // Get container for DI
-            var containerNodePath = "/root/AutoloadScene";
-            var containerNode = __instance.GetNode<ContainerNode>(containerNodePath);
-
-            // Cache type of attribute
-            var at = typeof(InjectAttribute);
-
-            // Find injectable fields
-            var fields = __instance.GetType()
-                .GetRuntimeFields()
-                .Where(f => f.GetCustomAttributes(at, true).Any());
-
-            // Recursively inject
-            foreach (var field in fields) {
-                var obj = containerNode._container.GetInstance(field.FieldType);
-                field.SetValue(__instance, obj);
+        if (Directory.Exists(ProjectSettings.GlobalizePath("Plugins"))) {
+            foreach (var dll in Directory.GetFiles(ProjectSettings.GlobalizePath("Plugins"), "*.dll")) {
+                Assembly plugin = currentContext.LoadFromAssemblyPath(Path.GetFullPath(dll));
+                sources.Add(plugin);
             }
         }
 
-        private void LoadPlugins() {
-            List<Assembly> sources = new List<Assembly>();
+        _container.Collection.Register<ILibrarySource>(sources);
+        _container.Collection.Register<IGameDataProvider>(sources);
+    }
 
-            if (System.IO.Directory.Exists(ProjectSettings.GlobalizePath("Plugins"))) {
-                foreach (var dll in System.IO.Directory.GetFiles(ProjectSettings.GlobalizePath("Plugins"), "*.dll")) {
-                    Assembly plugin = Assembly.LoadFrom(dll);
-                    sources.Add(plugin);
-                }
-            }
-
-            _container.Collection.Register<ILibrarySource>(sources);
-            _container.Collection.Register<IGameDataProvider>(sources);
-        }
-
-        private void LoadNodes() {
-            // Modal
-            var modalService = GetNode<ModalService>("Modal");
-            _container.RegisterInstance<ModalService>(modalService);
-        }
+    private void LoadNodes() {
+        // Modal
+        var modalService = GetNode<ModalService>("Modal");
+        _container.RegisterInstance<ModalService>(modalService);
     }
 }

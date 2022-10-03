@@ -1,10 +1,9 @@
 using Godot;
-using GodotOnReady.Attributes;
 using TinyScreen.Models;
 
 namespace TinyScreen.Scripts.Components.Library {
     public partial class GameCard : AspectRatioContainer {
-        [OnReadyGet] private TextureRect _cover;
+        [Export] private TextureRect _cover;
         
         public Games Game;
         private ImageTexture _texture;
@@ -12,20 +11,18 @@ namespace TinyScreen.Scripts.Components.Library {
         private System.Timers.Timer _updateTimer;
         private const float UpdateEventDelay = 0.1f;
 
-        [OnReady]
-        private void Setup() {
-            _texture = new ImageTexture();
-            _image = new Image();
+        public override void _Ready() {
+            base._Ready();
             //_image.Load(System.IO.Path.Combine(OS.GetUserDataDir(), Game.Artwork));
             // TODO replace with relative paths
-
+            
             if (Game != null) {
-                _image.Load(Game.Artwork);
-                _texture.CreateFromImage(_image);
+                _image = Image.LoadFromFile(Game.Artwork);
+                _texture = ImageTexture.CreateFromImage(_image);
                 _cover.Texture = _texture;
             }
         }
-
+        
         private void UpdateLayout() {
 
             if (_updateTimer != null) {
@@ -39,12 +36,12 @@ namespace TinyScreen.Scripts.Components.Library {
             };
 
             _updateTimer.Elapsed += (sender, args) => {
-                var newSize = new Vector2(RectSize.x, RectSize.x / Ratio);
+                var newSize = new Vector2(Size.x, Size.x / Ratio);
 
-                if (RectSize != newSize) {
-                    RectSize = new Vector2(RectSize.x, RectSize.x / Ratio);
-                    RectMinSize = new Vector2(0, RectSize.x / Ratio);
-                    Update();
+                if (Size != newSize) {
+                    Size = new Vector2(Size.x, Size.x / Ratio);
+                    CustomMinimumSize = new Vector2i(0, (int)(Size.x / Ratio));
+                    QueueRedraw();
                 }
                 
                 //_updateTimer = null;
@@ -53,7 +50,7 @@ namespace TinyScreen.Scripts.Components.Library {
             _updateTimer?.Start();
         }
 
-        public override void _Notification(int what) {
+        public override void _Notification(long what) {
             base._Notification(what);
 
             switch (what) {

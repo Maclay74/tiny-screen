@@ -4,56 +4,62 @@ using TinyScreen.Framework.Attributes;
 using TinyScreen.Framework.Interfaces;
 using static SQLitePCL.Batteries_V2; // Mono won't pack the library without import
 
-namespace TinyScreen.scripts {
-    [Router]
-    public class RootNode : BaseRouter {
-        [Inject] private ISettingsService _settingsService;
-        [Inject] private IDatabaseService _databaseService;
+namespace TinyScreen.scripts;
 
-        [Export] private PackedScene Onboarding;
-        [Export] private PackedScene Application;
 
-        private BaseRouter _currentScene;
+public partial class RootNode : BaseRouter {
+    
+    [Inject] 
+    private ISettingsService _settingsService;
 
-        public override async void _Ready() {
-            base._Ready();
+    [Inject] 
+    private IDatabaseService _databaseService;
 
-            if (!_settingsService.IsAppInstalled()) {
-                Navigate("/onboarding");
-            }
-            else {
-                Navigate("/application", false);
-            }
+    [Export] private PackedScene Onboarding;
+    [Export] private PackedScene Application;
+
+    private BaseRouter _currentScene;
+
+    public override partial void _Ready();
+
+    [Ready]
+    public void Start() {
+        
+        if (!_settingsService.IsAppInstalled()) {
+            Navigate("/onboarding");
         }
-
-        private void CheckScene() {
-            if (_currentScene == null) {
-                _currentScene = Onboarding.Instance() as BaseRouter;
-                AddChild(_currentScene);
-            }
-            else if (_currentScene.Filename != Onboarding.ResourcePath) {
-                RemoveChild(_currentScene);
-                _currentScene = Onboarding.Instance() as BaseRouter;
-                AddChild(_currentScene);
-            }
+        else {
+            Navigate("/application", false);
         }
-
-        [Route("onboarding")]
-        private async void OnboardingRoute(string path) {
-            CheckScene();
-            await ToSignal(GetTree(), "idle_frame");
-            _currentScene.Navigate(path);
-        }
-
-        [Route("application")]
-        private async void ApplicationRoute(string path, bool showTutorial = false) {
-            CheckScene();
-            _databaseService.InitDatabase();
-
-            _currentScene = Application.Instance() as BaseRouter;
+    }
+    
+    private void CheckScene() {
+        if (_currentScene == null) {
+            _currentScene = Onboarding.Instantiate() as BaseRouter;
             AddChild(_currentScene);
-            await ToSignal(GetTree(), "idle_frame");
-            _currentScene.Navigate(path);
         }
+        else if (_currentScene.SceneFilePath != Onboarding.ResourcePath) {
+            RemoveChild(_currentScene);
+            _currentScene = Onboarding.Instantiate() as BaseRouter;
+            AddChild(_currentScene);
+        }
+    }
+
+    [Route("onboarding")]
+    private async void OnboardingRoute(string path) {
+        CheckScene();
+        await ToSignal(GetTree(), "process_frame");
+        _currentScene.Navigate(path);
+    }
+
+    [Route("application")]
+    private async void ApplicationRoute(string path, bool showTutorial = false) {
+        CheckScene();
+        _databaseService.InitDatabase();
+
+        _currentScene = Application.Instantiate() as BaseRouter;
+        AddChild(_currentScene);
+        await ToSignal(GetTree(), "process_frame");
+        _currentScene.Navigate(path);
     }
 }

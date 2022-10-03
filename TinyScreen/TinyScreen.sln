@@ -23,6 +23,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "GameDataProviders", "GameDa
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TemplateGameDataProvider", "..\Plugins\TemplateGameDataProvider\TemplateGameDataProvider.csproj", "{5C5D04DA-F657-481A-B216-9982BACB8C7D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Generators", "..\Generators\Generators.csproj", "{5FCF9147-F9FB-46AA-97BA-66EC5A81B915}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -95,6 +97,14 @@ Global
 		{5C5D04DA-F657-481A-B216-9982BACB8C7D}.ExportRelease|Any CPU.Build.0 = Debug|Any CPU
 		{5C5D04DA-F657-481A-B216-9982BACB8C7D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5C5D04DA-F657-481A-B216-9982BACB8C7D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5FCF9147-F9FB-46AA-97BA-66EC5A81B915}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5FCF9147-F9FB-46AA-97BA-66EC5A81B915}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5FCF9147-F9FB-46AA-97BA-66EC5A81B915}.ExportDebug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5FCF9147-F9FB-46AA-97BA-66EC5A81B915}.ExportDebug|Any CPU.Build.0 = Debug|Any CPU
+		{5FCF9147-F9FB-46AA-97BA-66EC5A81B915}.ExportRelease|Any CPU.ActiveCfg = Debug|Any CPU
+		{5FCF9147-F9FB-46AA-97BA-66EC5A81B915}.ExportRelease|Any CPU.Build.0 = Debug|Any CPU
+		{5FCF9147-F9FB-46AA-97BA-66EC5A81B915}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5FCF9147-F9FB-46AA-97BA-66EC5A81B915}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
