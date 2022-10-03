@@ -1,34 +1,34 @@
-﻿using System.Threading.Tasks;
+using System;
+using System.Threading.Tasks;
 using Godot;
 
 using TinyScreen.scripts.modals;
 
 namespace TinyScreen.Services {
-    public class ModalService: Node {
+    public partial class ModalService: Node {
 
         [Export] private PackedScene _confirmScene;
         [Export] private PackedScene _alertScene;
         
         public async Task<bool> Confirm(string title, string confirmText = "Confirm", string cancelText = "Cancel") {
             
-            if (!(_confirmScene.Instance() is ConfirmModal modal)) return false;
+            if (_confirmScene.Instantiate() is not ConfirmModal modal) return false;
             
             modal.Properties = new ConfirmModalProperties {
                 Title = title,
                 CancelButtonText = cancelText,
-                ConfirmButtonText = confirmText
+                ConfirmButtonText = confirmText,
             };
             AddChild(modal);
-            
-            var response = await ToSignal(modal, "Decision");
+
+            var response = await ToSignal(modal, nameof(modal.Decision));
             RemoveChild(modal);
-            
-            return ((ConfirmModal.Response)response[0]).Result;
+            return (bool)response[0];
         }
 
         public async Task Alert(string title, string okText = "OK") {
             
-            if (!(_alertScene.Instance() is AlertModal modal)) return;
+            if (_alertScene.Instantiate() is not AlertModal modal) return;
 
             modal.Properties = new AlertModalProperties {
                 Title = title,
@@ -36,7 +36,7 @@ namespace TinyScreen.Services {
             };
             
             AddChild(modal);
-            var response = await ToSignal(modal, "Decision");
+            await ToSignal(modal, nameof(modal.Decision));
             RemoveChild(modal);
         }
     }

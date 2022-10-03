@@ -1,9 +1,9 @@
-﻿using System;
+using System;
 using Watson.ORM.Core;
 
 namespace TinyScreen.Models {
     [Table("games")]
-    public class Games {
+    public partial class Games {
         
         [Column("id", true, DataTypes.Int, false)]
         public int Id { get; set; }

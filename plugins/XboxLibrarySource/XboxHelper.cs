@@ -7,7 +7,7 @@ using Common.Extensions;
 using Microsoft.Win32;
 
 namespace XboxLibrarySource {
-    public class XboxHelper {
+    internal class XboxHelper {
         private RegistryKey _registryKey;
 
         public XboxHelper(RegistryKey registryKey) {

@@ -1,8 +1,8 @@
-﻿using TinyScreen.Framework.Interfaces;
+using TinyScreen.Framework.Interfaces;
 using TinyScreen.Services;
 
 namespace TinyScreen.Services {
-    public class HardwareFactory {
+    public partial class HardwareFactory {
         
         public static IHardwareService GetHardwareService() {
         

@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Linq;
 using System.Reflection;
 using System.Text.RegularExpressions;
@@ -8,7 +8,7 @@ using TinyScreen.scripts;
 
 namespace TinyScreen.Framework {
     
-    public class RouteState: IEquatable<RouteState> {
+    public partial class RouteState: IEquatable<RouteState> {
         public string Path;
         public object[] Args;
 
@@ -37,7 +37,7 @@ namespace TinyScreen.Framework {
         }
     }
     
-    public abstract class BaseRouter : Control {
+    public abstract partial class BaseRouter : Control {
 
         protected RouteState _currentState;
 
@@ -47,7 +47,7 @@ namespace TinyScreen.Framework {
             
             BaseRouter root = path.ElementAtOrDefault(0) == '/' ? GetRoot() : this;
             var rootType = root.GetType();
-            path = Regex.Replace(path, "^/", ""); // Remove slash from the beginning
+            path = Regex.Replace(path, "^/", ""); // RemoveAt slash from the beginning
 
             if (rootType.IsSubclassOf(typeof(BaseRouter))) {
                 var routes = rootType.GetMethods(BindingFlags.NonPublic | BindingFlags.Instance)

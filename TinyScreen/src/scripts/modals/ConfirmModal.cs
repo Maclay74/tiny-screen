@@ -1,38 +1,38 @@
-﻿using Godot;
-using GodotOnReady.Attributes;
+﻿using System;
+using Godot;
 
-namespace TinyScreen.scripts.modals {
+namespace TinyScreen.scripts.modals; 
 
-    public struct ConfirmModalProperties {
-        public string Title;
-        public string ConfirmButtonText;
-        public string CancelButtonText;
-    }
-    
-    public partial class ConfirmModal: BaseModal<bool> {
+public struct ConfirmModalProperties {
+    public string Title;
+    public string ConfirmButtonText;
+    public string CancelButtonText;
+}
+
+public partial class ConfirmModal : BaseModal {
+    [Export] private Button _confirmButton;
+    [Export] private Button _cancelButton;
+    [Export] private Label _title;
+
+    public ConfirmModalProperties Properties;
+
+    public override void _Ready() {
+        base._Ready();
+       
+
+        _confirmButton.Pressed += async () => {
+            await FadeOut();
+            EmitSignal("Decision", true);
+        };
+        _cancelButton.Pressed += async () => {
+            await FadeOut();
+            EmitSignal("Decision", false);
+        };
+
+        _title.Text = Properties.Title;
+        _confirmButton.Text = Properties.ConfirmButtonText;
+        _cancelButton.Text = Properties.CancelButtonText;
         
-        [OnReadyGet] private Button _confirmButton;
-        [OnReadyGet] private Button _cancelButton;
-        [OnReadyGet] private Label _title;
-
-        public ConfirmModalProperties Properties;
-        
-        [OnReady(Order = 0)]
-        private void BindEvents() {
-            _confirmButton.Connect("pressed", this, nameof(OnConfirm));
-            _cancelButton.Connect("pressed", this, nameof(OnCancel));
-            
-            _title.Text = Properties.Title;
-            _confirmButton.Text = Properties.ConfirmButtonText;
-            _cancelButton.Text = Properties.CancelButtonText;
-        }
-
-        private void OnConfirm() {
-            Close(true);
-        }
-
-        private void OnCancel() {
-            Close(false);
-        }
+        FadeIn();
     }
 }

@@ -5,16 +5,15 @@ using Godot.Collections;
 
 namespace TinyScreen.addons.StagedProgressBar {
     [Tool]
-    public class StagedProgressBar : Control {
+    public partial class _StagedProgressBar : Control {
         private System.Collections.Generic.Dictionary<string, int> _stages;
-
-        [Export]
+        
         public System.Collections.Generic.Dictionary<string, int> Stages {
             get => _stages;
             set {
                 _stages = value;
                 UpdateLayout();
-                Update();
+                QueueRedraw();
             }
         }
         
@@ -27,7 +26,7 @@ namespace TinyScreen.addons.StagedProgressBar {
             set {
                 _gap = value;
                 UpdateLayout();
-                Update();
+                QueueRedraw();
             }
         }
 
@@ -46,15 +45,16 @@ namespace TinyScreen.addons.StagedProgressBar {
             get => _progress;
             set {
                 _progress = value;
-                Update();
+                QueueRedraw();
             }
         }
 
         // Set progress with animation
         public void SetProgress(float progress) {
-            _tween.StopAll();
-            _tween.InterpolateProperty(this, "Progress", _progress, progress, 0.2f, Tween.TransitionType.Cubic);
-            _tween.Start();
+            _tween.Stop();
+            var a = _tween.TweenProperty(this, "Progress", progress, 0.2f)
+                .SetTrans(Tween.TransitionType.Cubic)
+                .FromCurrent();
         }
         
         // Layout for calculating sizes
@@ -75,14 +75,14 @@ namespace TinyScreen.addons.StagedProgressBar {
         private void DrawStages() {
             if (_stageStyle == null) 
                 return;
-            DrawStyleBox(_stageStyle, new Rect2(new Vector2(0, 0), RectSize));
+            DrawStyleBox(_stageStyle, new Rect2(new Vector2(0, 0), Size));
         }
         
         private void DrawProgress() {
             if (_progressStyle == null) 
                 return;
             
-            var size = RectSize;
+            var size = Size;
             size.x *= Progress;
             DrawStyleBox(_progressStyle, new Rect2(new Vector2(0, 0), size));
         }
@@ -91,7 +91,7 @@ namespace TinyScreen.addons.StagedProgressBar {
             var currentWidthPosition = 0f;
 
             for (int i = 0; i < Stages.Count; i++) {
-                var size = new Vector2(_layoutRoot.GetChild(i).LayoutGetWidth(), RectSize.y);
+                var size = new Vector2(_layoutRoot.GetChild(i).LayoutGetWidth(), Size.y);
                 DrawString(_textFont, new Vector2(currentWidthPosition + 5, size.y / 2 + 5), Stages.ElementAt(i).Key);
                 currentWidthPosition += size.x + _gap;
             }
@@ -102,7 +102,7 @@ namespace TinyScreen.addons.StagedProgressBar {
                 return;
             
             // Size minus gaps
-            var workingWidth = RectSize.x - _gap * (Stages.Count - 1);
+            var workingWidth = Size.x - _gap * (Stages.Count - 1);
             
             // How many parts in progress
             var overall = Stages.Aggregate(0, (acc, pair) => acc + pair.Value);
@@ -112,7 +112,7 @@ namespace TinyScreen.addons.StagedProgressBar {
             _layoutRoot.StyleSetFlexDirection(FlexDirection.Row);
             _layoutRoot.StyleSetWidth(workingWidth);
             _layoutRoot.StyleSetMaxWidth(workingWidth);
-            _layoutRoot.StyleSetMaxHeight(RectSize.y);
+            _layoutRoot.StyleSetMaxHeight(Size.y);
 
             // Calculate min width based on text width
             // Create child for layout
@@ -135,25 +135,22 @@ namespace TinyScreen.addons.StagedProgressBar {
             if (_maskImage == null) 
                 _maskImage = new Image();
             
-            _maskImage.Create((int)RectSize.x, (int)RectSize.y, false, Image.Format.Rgba8);
+            _maskImage.Create((int)Size.x, (int)Size.y, false, Image.Format.Rgba8);
             
             // Get sizes of stages and place gap on image between them
             var currentWidthPosition = 0f;
             for (int i = 0; i < Stages.Count - 1; i++) {
-                var size = new Vector2(_layoutRoot.GetChild(i).LayoutGetWidth(), RectSize.y);
-                var position = new Vector2(currentWidthPosition + size.x, 0);
-                _maskImage.FillRect(new Rect2(position, new Vector2(_gap, RectSize.y)), new Color(1,1,1,1));
+                var size = new Vector2(_layoutRoot.GetChild(i).LayoutGetWidth(), Size.y);
+                var position = new Vector2i((int)currentWidthPosition + (int)size.x, 0);
+                _maskImage.FillRect(new Rect2i(position, new Vector2i((int)_gap, (int)Size.y)), new Color(1,1,1,1));
                 currentWidthPosition += size.x + _gap;
             }
             
-            // Create texture
-            if (_maskTexture == null)   
-                _maskTexture = new ImageTexture();
-            
             // Update shared
-            _maskTexture.CreateFromImage(_maskImage);
-            ((ShaderMaterial)Material).SetShaderParam("mask", _maskTexture);
-            ((ShaderMaterial)Material).SetShaderParam("size", RectSize);
+            _maskTexture = ImageTexture.CreateFromImage(_maskImage);
+            
+            ((ShaderMaterial)Material).SetShaderParameter("mask", _maskTexture);
+            ((ShaderMaterial)Material).SetShaderParameter("size", Size);
         }
 
         public override void _Draw() {
@@ -179,12 +176,9 @@ namespace TinyScreen.addons.StagedProgressBar {
             base._Ready();
             SetNotifyTransform(true);
             SetNotifyLocalTransform(true);
-            
-            _tween = new Tween();
-            AddChild(_tween);
         }
 
-        public override void _Notification(int what) {
+        public override void _Notification(long what) {
             base._Notification(what);
 
             // We need these notifications, because if element is hidden or resized
@@ -194,7 +188,7 @@ namespace TinyScreen.addons.StagedProgressBar {
                 case NotificationTransformChanged:
                 case NotificationLocalTransformChanged:
                     UpdateLayout();
-                    Update();
+                    QueueRedraw();
                     break;
             }
         }

@@ -1,149 +1,143 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=2 format=3 uid="uid://b8ghmqkrlb5wn"]
 
-[ext_resource path="res://Src/Scripts/Onboarding/Update.cs" type="Script" id=1]
-[ext_resource path="res://Assets/Themes/default.tres" type="Theme" id=2]
+[ext_resource type="Script" path="res://Src/Scripts/Onboarding/Update.cs" id="1"]
 
-[node name="Update" type="MarginContainer"]
+[node name="Update" type="MarginContainer" node_paths=PackedStringArray("_subtitle", "_updateSize", "_currentVersion", "_latestVersion", "_versionsList", "_skipButton", "_changelogButton", "_updateButton", "_tryAgainButton", "_progressBar")]
+anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-theme = ExtResource( 2 )
-custom_constants/margin_right = 20
-custom_constants/margin_top = 20
-custom_constants/margin_left = 20
-custom_constants/margin_bottom = 20
-script = ExtResource( 1 )
-SubtitlePath = NodePath("CenterContainer/VBoxContainer/Subtitle")
-UpdateSizePath = NodePath("CenterContainer/VBoxContainer/Buttons/UpdateButton/UpdateSize")
-CurrentVersionPath = NodePath("CenterContainer/VBoxContainer/Versions/Current/Value")
-LatestVersionPath = NodePath("CenterContainer/VBoxContainer/Versions/Latest/Value")
-VersionsListPath = NodePath("CenterContainer/VBoxContainer/Versions")
-SkipButtonPath = NodePath("CenterContainer/VBoxContainer/Buttons/SkipButton")
-ChangelogButtonPath = NodePath("CenterContainer/VBoxContainer/Buttons/ChangesButton")
-UpdateButtonPath = NodePath("CenterContainer/VBoxContainer/Buttons/UpdateButton")
-TryAgainButtonPath = NodePath("CenterContainer/VBoxContainer/Buttons/TryAgainButton")
-ProgressBarPath = NodePath("CenterContainer/VBoxContainer/ProgressBar")
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1")
+_subtitle = NodePath("CenterContainer/VBoxContainer/Subtitle")
+_updateSize = NodePath("CenterContainer/VBoxContainer/Buttons/UpdateButton/UpdateSize")
+_currentVersion = NodePath("CenterContainer/VBoxContainer/Versions/Current/Value")
+_latestVersion = NodePath("CenterContainer/VBoxContainer/Versions/Latest/Value")
+_versionsList = NodePath("CenterContainer/VBoxContainer/Versions")
+_skipButton = NodePath("CenterContainer/VBoxContainer/Buttons/SkipButton")
+_changelogButton = NodePath("CenterContainer/VBoxContainer/Buttons/ChangesButton")
+_updateButton = NodePath("CenterContainer/VBoxContainer/Buttons/UpdateButton")
+_tryAgainButton = NodePath("CenterContainer/VBoxContainer/Buttons/TryAgainButton")
+_progressBar = NodePath("CenterContainer/VBoxContainer/ProgressBar")
 
 [node name="CenterContainer" type="CenterContainer" parent="."]
-margin_left = 20.0
-margin_top = 20.0
-margin_right = 1004.0
-margin_bottom = 580.0
+offset_right = 1152.0
+offset_bottom = 648.0
 
 [node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer"]
-margin_left = 242.0
-margin_top = 193.0
-margin_right = 741.0
-margin_bottom = 366.0
+offset_left = 366.0
+offset_top = 242.0
+offset_right = 785.0
+offset_bottom = 406.0
 alignment = 1
 
 [node name="Title" type="Label" parent="CenterContainer/VBoxContainer"]
-margin_right = 499.0
-margin_bottom = 38.0
-theme_type_variation = "OnboardingTitle"
+offset_right = 419.0
+offset_bottom = 37.0
+theme_type_variation = &"OnboardingTitle"
+theme_override_font_sizes/font_size = 24
 text = "Check for updates"
-align = 1
+horizontal_alignment = 1
 
 [node name="Subtitle" type="Label" parent="CenterContainer/VBoxContainer"]
-margin_top = 42.0
-margin_right = 499.0
-margin_bottom = 72.0
-rect_min_size = Vector2( 0, 30 )
-theme_type_variation = "OnboardingSubtitle"
+offset_top = 41.0
+offset_right = 419.0
+offset_bottom = 67.0
+theme_type_variation = &"OnboardingSubtitle"
 text = "Check if there is a new version of the application"
-align = 1
+horizontal_alignment = 1
 
 [node name="Versions" type="HBoxContainer" parent="CenterContainer/VBoxContainer"]
-margin_top = 76.0
-margin_right = 499.0
-margin_bottom = 136.0
-rect_min_size = Vector2( 0, 60 )
-custom_constants/separation = 10
+offset_top = 71.0
+offset_right = 419.0
+offset_bottom = 127.0
 alignment = 1
 
 [node name="Current" type="VBoxContainer" parent="CenterContainer/VBoxContainer/Versions"]
-margin_left = 129.0
-margin_right = 266.0
-margin_bottom = 60.0
+offset_left = 66.0
+offset_right = 234.0
+offset_bottom = 56.0
 
 [node name="Label" type="Label" parent="CenterContainer/VBoxContainer/Versions/Current"]
-margin_right = 137.0
-margin_bottom = 14.0
+offset_right = 168.0
+offset_bottom = 26.0
 text = "Your current version: "
 
 [node name="Value" type="Label" parent="CenterContainer/VBoxContainer/Versions/Current"]
-margin_top = 18.0
-margin_right = 137.0
-margin_bottom = 32.0
+offset_top = 30.0
+offset_right = 168.0
+offset_bottom = 56.0
 text = "1.0.0.0"
 
 [node name="Latest" type="VBoxContainer" parent="CenterContainer/VBoxContainer/Versions"]
-margin_left = 276.0
-margin_right = 370.0
-margin_bottom = 60.0
+offset_left = 238.0
+offset_right = 352.0
+offset_bottom = 56.0
 
 [node name="Label" type="Label" parent="CenterContainer/VBoxContainer/Versions/Latest"]
-margin_right = 94.0
-margin_bottom = 14.0
+offset_right = 114.0
+offset_bottom = 26.0
 text = "Latest version:"
 
 [node name="Value" type="Label" parent="CenterContainer/VBoxContainer/Versions/Latest"]
-margin_top = 18.0
-margin_right = 94.0
-margin_bottom = 32.0
+offset_top = 30.0
+offset_right = 114.0
+offset_bottom = 56.0
 text = "1.1.0.0"
 
 [node name="Buttons" type="HBoxContainer" parent="CenterContainer/VBoxContainer"]
-margin_top = 140.0
-margin_right = 499.0
-margin_bottom = 173.0
-custom_constants/separation = 15
+offset_top = 131.0
+offset_right = 419.0
+offset_bottom = 164.0
 
 [node name="SkipButton" type="Button" parent="CenterContainer/VBoxContainer/Buttons"]
-margin_right = 79.0
-margin_bottom = 33.0
+offset_right = 73.0
+offset_bottom = 33.0
 size_flags_horizontal = 3
-theme_type_variation = "OnboardingStartButton"
+theme_type_variation = &"OnboardingStartButton"
 text = "Skip"
 
 [node name="ChangesButton" type="Button" parent="CenterContainer/VBoxContainer/Buttons"]
-margin_left = 94.0
-margin_right = 238.0
-margin_bottom = 33.0
+offset_left = 77.0
+offset_right = 203.0
+offset_bottom = 33.0
 size_flags_horizontal = 3
-theme_type_variation = "OnboardingStartButton"
+theme_type_variation = &"OnboardingStartButton"
 text = "Change log"
 
 [node name="TryAgainButton" type="Button" parent="CenterContainer/VBoxContainer/Buttons"]
-margin_left = 253.0
-margin_right = 377.0
-margin_bottom = 33.0
+offset_left = 207.0
+offset_right = 318.0
+offset_bottom = 33.0
 size_flags_horizontal = 3
-theme_type_variation = "OnboardingStartButton"
+theme_type_variation = &"OnboardingStartButton"
 text = "Try again"
 
 [node name="UpdateButton" type="Button" parent="CenterContainer/VBoxContainer/Buttons"]
-margin_left = 392.0
-margin_right = 499.0
-margin_bottom = 33.0
+offset_left = 322.0
+offset_right = 419.0
+offset_bottom = 33.0
 size_flags_horizontal = 3
-theme_type_variation = "OnboardingStartButton"
+theme_type_variation = &"OnboardingStartButton"
 text = "Update"
 
 [node name="UpdateSize" type="Label" parent="CenterContainer/VBoxContainer/Buttons/UpdateButton"]
+anchors_preset = 12
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_top = 5.0
-margin_bottom = 19.0
+offset_top = -2.0
+offset_bottom = 24.0
+grow_horizontal = 2
+grow_vertical = 0
 size_flags_horizontal = 3
 text = "16 mb"
-align = 1
+horizontal_alignment = 1
 
 [node name="ProgressBar" type="ProgressBar" parent="CenterContainer/VBoxContainer"]
 visible = false
-margin_top = 177.0
-margin_right = 499.0
-margin_bottom = 197.0
-rect_min_size = Vector2( 0, 20 )
+offset_top = 177.0
+offset_right = 499.0
+offset_bottom = 197.0
 step = 1.0
 rounded = true

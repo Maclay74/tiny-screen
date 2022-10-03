@@ -1,18 +1,17 @@
-﻿using System;
+using System;
 using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
 using Common.Exceptions;
 using craftersmine.SteamGridDBNet;
 using Godot;
-using Path = System.IO.Path;
 
 namespace TinyScreen.Services {
-    public class ImageService {
+    public partial class ImageService {
 
         public ImageService() {
-            System.IO.Directory.CreateDirectory(Path.Combine(OS.GetUserDataDir(), "artwork"));
-            System.IO.Directory.CreateDirectory(Path.Combine(OS.GetUserDataDir(), "background"));
+            System.IO.Directory.CreateDirectory(System.IO.Path.Combine(OS.GetUserDataDir(), "artwork"));
+            System.IO.Directory.CreateDirectory(System.IO.Path.Combine(OS.GetUserDataDir(), "background"));
         }
 
         public enum ImageType {
@@ -30,16 +29,18 @@ namespace TinyScreen.Services {
                     url = await GetImageFromSteamGrid(name, type);
                 }
                 catch (Exception) {
-                    throw new LibraryGraphicsException();
+                    throw new LibraryGraphicsException("SteamGrid thew an error");
                 }
                 
                 // Fallback to generate
                 if (url.Length ==  0) {
                     // TODO Fallback to generate image    
+                    throw new LibraryGraphicsException("Unnable to find image :c ");
                 }
             }
-            var fileName = Guid.NewGuid() + Path.GetExtension(url);
-            var path = Path.Combine(OS.GetUserDataDir(), type.ToString().ToLower(), fileName);
+            var fileName = Guid.NewGuid() + System.IO.Path.GetExtension(url);
+            var path = System.IO.Path.Combine(OS.GetUserDataDir(), type.ToString().ToLower(), fileName);
+            Console.WriteLine("URL " + url);
             
             using (WebClient webClient = new WebClient()) {
                 webClient.DownloadFile(url, path) ; 
@@ -50,7 +51,7 @@ namespace TinyScreen.Services {
         }
 
         private async Task<string> GetImageFromSteamGrid(string gameName, ImageType type) {
-            SteamGridDb sgdb = new SteamGridDb(ProjectSettings.GetSetting("application/config/steamgrid/key") as string);
+            SteamGridDb sgdb = new SteamGridDb(ProjectSettings.GetSetting("application/config/steamgrid/key").AsString());
             var games = await sgdb.SearchForGamesAsync(gameName);
 
             SteamGridDbDimensions dimensions;

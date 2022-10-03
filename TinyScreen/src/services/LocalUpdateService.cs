@@ -1,14 +1,13 @@
-﻿using System;
+using System;
 using System.IO;
 using System.Net.Http;
 using System.Reflection;
 using System.Threading.Tasks;
 using Common.Extensions;
 using TinyScreen.Framework.Interfaces;
-using Path = System.IO.Path;
 
 namespace TinyScreen.Services {
-    public class LocalUpdateService: IUpdateService {
+    public partial class LocalUpdateService: IUpdateService {
         
         private string archiveUrl = "https://cdn.ayaneo.com/ayaneo/downloads/AYASpaceGlobalSetup1.0.1.144.zip";
         

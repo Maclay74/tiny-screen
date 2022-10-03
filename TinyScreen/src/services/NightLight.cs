@@ -1,8 +1,8 @@
-﻿using System;
+using System;
 using Microsoft.Win32;
 
 namespace TinyScreen.Services {
-    public class NightLight {
+    public partial class NightLight {
         private string _key =
             "Software\\Microsoft\\Windows\\CurrentVersion\\CloudStore\\Store\\DefaultAccount\\Current\\default$windows.data.bluelightreduction.bluelightreductionstate\\windows.data.bluelightreduction.bluelightreductionstate";
 

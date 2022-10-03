@@ -1,7 +1,6 @@
-﻿using System;
+using System;
 using ByteSizeLib;
 using Godot;
-using GodotOnReady.Attributes;
 using TinyScreen.Framework;
 using TinyScreen.Framework.Attributes;
 using TinyScreen.Framework.Interfaces;
@@ -9,31 +8,40 @@ using TinyScreen.Services;
 
 namespace TinyScreen.Scripts.Onboarding {
     public partial class Update : BaseRouter {
-        [OnReadyGet] private Label _subtitle;
-        [OnReadyGet] private Label _updateSize;
-        [OnReadyGet] private Label _currentVersion;
-        [OnReadyGet] private Label _latestVersion;
-        [OnReadyGet] private Control _versionsList;
-        [OnReadyGet] private Button _skipButton;
-        [OnReadyGet] private Button _changelogButton;
-        [OnReadyGet] private Button _updateButton;
-        [OnReadyGet] private Button _tryAgainButton;
-        [OnReadyGet] private ProgressBar _progressBar;
+        [Export] private Label _subtitle;
+        [Export] private Label _updateSize;
+        [Export] private Label _currentVersion;
+        [Export] private Label _latestVersion;
+        [Export] private Control _versionsList;
+        [Export] private Button _skipButton;
+        [Export] private Button _changelogButton;
+        [Export] private Button _updateButton;
+        [Export] private Button _tryAgainButton;
+        [Export] private ProgressBar _progressBar;
 
         [Inject] private IUpdateService _updateService;
         [Inject] private IHardwareService _hardwareService;
         [Inject] private ModalService _modalService;
 
-        [OnReady]
-        public void BindEvents() {
+        public override partial void _Ready();
+        
+        [Ready]
+        private void Start() {
             base._Ready();
 
-            // Bind buttons
-            _skipButton.Connect("pressed", this, nameof(OnSkipPress));
-            _changelogButton.Connect("pressed", this, nameof(OnChangelogPress));
-            _updateButton.Connect("pressed", this, nameof(OnUpdatePress));
-            _tryAgainButton.Connect("pressed", this, nameof(OnTryAgainPress));
+            _skipButton.Pressed += async () => {
+                if (await _modalService.Confirm(
+                        "Are you sure you want to skip update?\nOutdated version might not work correctly!",
+                        "Skip", "Back"))
+                    Navigate("/onboarding/library");
+            };
+
+            _changelogButton.Pressed += () => Navigate("changelog");
+            _updateButton.Pressed += () => Navigate("download");
+            _tryAgainButton.Pressed += () => Navigate("check");
+
         }
+
 
         [Route("check", true)]
         private async void Check(string path) {
@@ -76,7 +84,7 @@ namespace TinyScreen.Scripts.Onboarding {
             }
 
             // Latest version, nothing to do
-            OnSkipPress();
+            Navigate("/onboarding/library");
         }
 
         [Route("confirm")]
@@ -117,19 +125,5 @@ namespace TinyScreen.Scripts.Onboarding {
                 Navigate("error", "Error during downloading");
             }
         }
-
-        private async void OnSkipPress() {
-            if (await _modalService.Confirm(
-                "Are you sure you want to skip update?\nOutdated version might not work correctly!",
-                "Skip", "Back"))
-                Navigate("/onboarding/library");
-        }
-
-        private void OnUpdatePress() => Navigate("download");
-
-
-        private void OnTryAgainPress() => Navigate("check");
-
-        private void OnChangelogPress() => Navigate("changelog");
     }
 }

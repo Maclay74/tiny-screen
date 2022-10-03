@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Godot;
-using GodotOnReady.Attributes;
 using TinyScreen.Framework;
 using TinyScreen.Framework.Attributes;
 using TinyScreen.Scripts.Components.Library;
@@ -13,19 +12,21 @@ namespace TinyScreen.Scripts.Application.Games {
     public partial class Games : BaseRouter {
         [Inject] private LibraryService _libraryService;
 
-        [OnReadyGet] private Container _gamesContainer;
-        [OnReadyGet] private Container _foldersContainer;
+        [Export] private Container _gamesContainer;
+        [Export] private Container _foldersContainer;
 
         [Export] private PackedScene _gameCard;
         [Export] private PackedScene _folder;
+        
+        public override partial void _Ready();
 
-        [OnReady]
-        private void AddFolders() {
-
+        [Ready]
+        private void Start() {
+            base._Ready();
             var folders = new List<string> {"Arcade", "Racing", "Shooter", "Retro"};
-
+            
             foreach (var folderName in folders) {
-                var folderCard = _folder.Instance() as FolderCard;
+                var folderCard = _folder.Instantiate() as FolderCard;
                 folderCard.FolderName = folderName;
                 folderCard.OnPress = OnFolderPress;  
                 _foldersContainer.AddChild(folderCard);
@@ -33,7 +34,7 @@ namespace TinyScreen.Scripts.Application.Games {
             
             Navigate("folder/" + folders.ElementAt(0));
         }
-
+        
         private void OnFolderPress(string name) => Navigate("folder/" + name);
 
         [Route("folder")]

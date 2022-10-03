@@ -1,32 +1,23 @@
-[gd_resource type="Theme" load_steps=11 format=2]
+[gd_resource type="Theme" load_steps=5 format=3 uid="uid://s68nh7fxuqqs"]
 
-[ext_resource path="res://assets/fonts/montserrat/Montserrat-Bold.ttf" type="DynamicFontData" id=1]
-[ext_resource path="res://assets/fonts/montserrat/Montserrat-Regular.ttf" type="DynamicFontData" id=2]
-[ext_resource path="res://assets/fonts/montserrat/Montserrat-Medium.ttf" type="DynamicFontData" id=3]
-
-[sub_resource type="DynamicFont" id=4]
-size = 18
-use_filter = true
-font_data = ExtResource( 3 )
-
-[sub_resource type="StyleBoxFlat" id=3]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_j12ii"]
 resource_local_to_scene = true
 content_margin_left = 20.0
-content_margin_right = 20.0
 content_margin_top = 5.0
+content_margin_right = 20.0
 content_margin_bottom = 5.0
-bg_color = Color( 0.521569, 0.27451, 0.74902, 1 )
+bg_color = Color(0.521569, 0.27451, 0.74902, 1)
 corner_radius_top_left = 10
 corner_radius_top_right = 10
 corner_radius_bottom_right = 10
 corner_radius_bottom_left = 10
 
-[sub_resource type="StyleBoxFlat" id=5]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3n76l"]
 content_margin_left = 20.0
-content_margin_right = 20.0
 content_margin_top = 5.0
+content_margin_right = 20.0
 content_margin_bottom = 5.0
-bg_color = Color( 0.521569, 0.27451, 0.74902, 1 )
+bg_color = Color(0.521569, 0.27451, 0.74902, 1)
 border_width_left = 2
 border_width_top = 2
 border_width_right = 2
@@ -36,49 +27,35 @@ corner_radius_top_right = 10
 corner_radius_bottom_right = 10
 corner_radius_bottom_left = 10
 
-[sub_resource type="StyleBoxFlat" id=6]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_kqjej"]
 content_margin_left = 20.0
-content_margin_right = 20.0
 content_margin_top = 5.0
+content_margin_right = 20.0
 content_margin_bottom = 5.0
-bg_color = Color( 0.521569, 0.27451, 0.74902, 1 )
+bg_color = Color(0.521569, 0.27451, 0.74902, 1)
 corner_radius_top_left = 10
 corner_radius_top_right = 10
 corner_radius_bottom_right = 10
 corner_radius_bottom_left = 10
 
-[sub_resource type="StyleBoxFlat" id=7]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_nodjh"]
 content_margin_left = 20.0
-content_margin_right = 20.0
 content_margin_top = 5.0
+content_margin_right = 20.0
 content_margin_bottom = 5.0
-bg_color = Color( 0.47451, 0.254902, 0.67451, 1 )
+bg_color = Color(0.47451, 0.254902, 0.67451, 1)
 corner_radius_top_left = 10
 corner_radius_top_right = 10
 corner_radius_bottom_right = 10
 corner_radius_bottom_left = 10
-
-[sub_resource type="DynamicFont" id=2]
-use_mipmaps = true
-use_filter = true
-font_data = ExtResource( 2 )
-
-[sub_resource type="DynamicFont" id=1]
-size = 30
-use_mipmaps = true
-use_filter = true
-font_data = ExtResource( 1 )
 
 [resource]
-OnboardingStartButton/base_type = "Button"
-OnboardingStartButton/colors/font_color = Color( 1, 1, 1, 1 )
-OnboardingStartButton/fonts/font = SubResource( 4 )
-OnboardingStartButton/styles/disabled = SubResource( 3 )
-OnboardingStartButton/styles/focus = SubResource( 5 )
-OnboardingStartButton/styles/hover = SubResource( 3 )
-OnboardingStartButton/styles/normal = SubResource( 6 )
-OnboardingStartButton/styles/pressed = SubResource( 7 )
-OnboardingSubtitle/base_type = "Label"
-OnboardingSubtitle/fonts/font = SubResource( 2 )
-OnboardingTitle/base_type = "Label"
-OnboardingTitle/fonts/font = SubResource( 1 )
+OnboardingStartButton/base_type = &"Button"
+OnboardingStartButton/colors/font_color = Color(1, 1, 1, 1)
+OnboardingStartButton/styles/disabled = SubResource("StyleBoxFlat_j12ii")
+OnboardingStartButton/styles/focus = SubResource("StyleBoxFlat_3n76l")
+OnboardingStartButton/styles/hover = SubResource("StyleBoxFlat_j12ii")
+OnboardingStartButton/styles/normal = SubResource("StyleBoxFlat_kqjej")
+OnboardingStartButton/styles/pressed = SubResource("StyleBoxFlat_nodjh")
+OnboardingSubtitle/base_type = &"Label"
+OnboardingTitle/base_type = &"Label"

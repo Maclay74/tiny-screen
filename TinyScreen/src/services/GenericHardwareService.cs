@@ -1,10 +1,10 @@
-﻿using System;
+using System;
 using System.Runtime.InteropServices;
 using Microsoft.Win32;
 using TinyScreen.Framework.Interfaces;
 
 namespace TinyScreen.Services {
-    public class GenericHardwareService : IHardwareService {
+    public partial class GenericHardwareService : IHardwareService {
         
         
          public bool IsOnline() {

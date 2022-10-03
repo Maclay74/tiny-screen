@@ -1,6 +1,4 @@
 ﻿using Godot;
-using GodotOnReady.Attributes;
-
 namespace TinyScreen.scripts.modals {
 
     public struct AlertModalProperties {
@@ -8,22 +6,23 @@ namespace TinyScreen.scripts.modals {
         public string OkText;
     }
     
-    public partial class AlertModal: BaseModal<object> {
+    public partial class AlertModal: BaseModal {
         
-        [OnReadyGet] private Button _okButton;
-        [OnReadyGet] private Label _title;
+        [Export] private Button _okButton;
+        [Export] private Label _title;
 
         public AlertModalProperties Properties;
-        
-        [OnReady]
-        private void BindEvents() {
-            _okButton.Connect("pressed", this, nameof(OnOk));
+
+        public override void _Ready() {
+            base._Ready();
+            
+            _okButton.Pressed += async () => {
+                await FadeOut();
+                EmitSignal("Decision");
+            };
+            
             _title.Text = Properties.Title;
             _okButton.Text = Properties.OkText;
-        }
-
-        private void OnOk() {
-            Close(null);
         }
     }
 }

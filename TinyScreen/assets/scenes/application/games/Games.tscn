@@ -1,144 +1,48 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=4 format=3 uid="uid://bi0luig7v6a37"]
 
-[ext_resource path="res://Assets/Components/Library/GameCard.tscn" type="PackedScene" id=1]
-[ext_resource path="res://Assets/Components/Library/Folder.tscn" type="PackedScene" id=2]
-[ext_resource path="res://Src/Scripts/Application/Games/Games.cs" type="Script" id=3]
+[ext_resource type="PackedScene" uid="uid://cwnpq0wiho6j8" path="res://Assets/Components/Library/GameCard.tscn" id="1"]
+[ext_resource type="PackedScene" uid="uid://sa4ov4rjyxt" path="res://Assets/Components/Library/Folder.tscn" id="2"]
+[ext_resource type="Script" path="res://Src/Scripts/Application/Games/Games.cs" id="3"]
 
-[node name="Games" type="VBoxContainer"]
+[node name="Games" type="VBoxContainer" node_paths=PackedStringArray("_gamesContainer", "_foldersContainer")]
+anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
-script = ExtResource( 3 )
-GamesContainerPath = NodePath("Games/MarginContainer/ScrollContainer/HBoxContainer")
-FoldersContainerPath = NodePath("Folders/MarginContainer/GridContainer")
-_gameCard = ExtResource( 1 )
-_folder = ExtResource( 2 )
+script = ExtResource("3")
+_gamesContainer = NodePath("Games/MarginContainer/ScrollContainer/HBoxContainer")
+_foldersContainer = NodePath("Folders/MarginContainer/GridContainer")
+_gameCard = ExtResource("1")
+_folder = ExtResource("2")
 
 [node name="Folders" type="ScrollContainer" parent="."]
-margin_right = 1024.0
-margin_bottom = 10.0
-mouse_filter = 1
+offset_right = 1152.0
 size_flags_horizontal = 3
-scroll_vertical_enabled = false
 
 [node name="MarginContainer" type="MarginContainer" parent="Folders"]
-margin_bottom = 10.0
-mouse_filter = 1
-custom_constants/margin_bottom = 10
 
 [node name="GridContainer" type="HBoxContainer" parent="Folders/MarginContainer"]
 size_flags_horizontal = 3
-custom_constants/separation = 15
 
 [node name="Games" type="ScrollContainer" parent="."]
-margin_top = 18.0
-margin_right = 1024.0
-margin_bottom = 600.0
+offset_top = 4.0
+offset_right = 1152.0
+offset_bottom = 648.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
-scroll_vertical_enabled = false
 
 [node name="MarginContainer" type="MarginContainer" parent="Games"]
-margin_right = 1024.0
-margin_bottom = 582.0
-mouse_filter = 2
+offset_right = 1152.0
+offset_bottom = 644.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
-custom_constants/margin_bottom = 10
+mouse_filter = 2
 
 [node name="ScrollContainer" type="ScrollContainer" parent="Games/MarginContainer"]
-margin_right = 1024.0
-margin_bottom = 572.0
+offset_right = 1152.0
+offset_bottom = 644.0
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Games/MarginContainer/ScrollContainer"]
-margin_right = 1800.0
-margin_bottom = 256.0
-custom_constants/separation = 15
-
-[node name="GameCard" parent="Games/MarginContainer/ScrollContainer/HBoxContainer" instance=ExtResource( 1 )]
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_right = 150.0
-margin_bottom = 256.061
-rect_min_size = Vector2( 150, 256.061 )
-
-[node name="GameCard2" parent="Games/MarginContainer/ScrollContainer/HBoxContainer" instance=ExtResource( 1 )]
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_left = 165.0
-margin_right = 315.0
-margin_bottom = 256.061
-rect_min_size = Vector2( 150, 256.061 )
-
-[node name="GameCard3" parent="Games/MarginContainer/ScrollContainer/HBoxContainer" instance=ExtResource( 1 )]
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_left = 330.0
-margin_right = 480.0
-margin_bottom = 256.061
-rect_min_size = Vector2( 150, 256.061 )
-
-[node name="GameCard4" parent="Games/MarginContainer/ScrollContainer/HBoxContainer" instance=ExtResource( 1 )]
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_left = 495.0
-margin_right = 645.0
-margin_bottom = 256.061
-rect_min_size = Vector2( 150, 256.061 )
-
-[node name="GameCard5" parent="Games/MarginContainer/ScrollContainer/HBoxContainer" instance=ExtResource( 1 )]
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_left = 660.0
-margin_right = 810.0
-margin_bottom = 256.061
-rect_min_size = Vector2( 150, 256.061 )
-
-[node name="GameCard6" parent="Games/MarginContainer/ScrollContainer/HBoxContainer" instance=ExtResource( 1 )]
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_left = 825.0
-margin_right = 975.0
-margin_bottom = 256.061
-rect_min_size = Vector2( 150, 256.061 )
-
-[node name="GameCard7" parent="Games/MarginContainer/ScrollContainer/HBoxContainer" instance=ExtResource( 1 )]
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_left = 990.0
-margin_right = 1140.0
-margin_bottom = 256.061
-rect_min_size = Vector2( 150, 256.061 )
-
-[node name="GameCard8" parent="Games/MarginContainer/ScrollContainer/HBoxContainer" instance=ExtResource( 1 )]
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_left = 1155.0
-margin_right = 1305.0
-margin_bottom = 256.061
-rect_min_size = Vector2( 150, 256.061 )
-
-[node name="GameCard9" parent="Games/MarginContainer/ScrollContainer/HBoxContainer" instance=ExtResource( 1 )]
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_left = 1320.0
-margin_right = 1470.0
-margin_bottom = 256.061
-rect_min_size = Vector2( 150, 256.061 )
-
-[node name="GameCard10" parent="Games/MarginContainer/ScrollContainer/HBoxContainer" instance=ExtResource( 1 )]
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_left = 1485.0
-margin_right = 1635.0
-margin_bottom = 256.061
-rect_min_size = Vector2( 150, 256.061 )
-
-[node name="GameCard11" parent="Games/MarginContainer/ScrollContainer/HBoxContainer" instance=ExtResource( 1 )]
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_left = 1650.0
-margin_right = 1800.0
-margin_bottom = 256.061
-rect_min_size = Vector2( 150, 256.061 )

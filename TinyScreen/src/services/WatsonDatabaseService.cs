@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
@@ -10,7 +10,7 @@ using TinyScreen.Models;
 using Watson.ORM.Sqlite;
 
 namespace TinyScreen.Services {
-    public class WatsonDatabaseService: IDatabaseService {
+    public partial class WatsonDatabaseService: IDatabaseService {
 
         private const string DbName = "application.db";
         private WatsonORM _watson;
