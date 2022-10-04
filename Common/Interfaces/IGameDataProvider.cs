@@ -7,5 +7,5 @@ public interface IGameDataProvider {
 }
 
 public interface IGameDataProvider<T, T1> {
-    Task<bool> GetData(T dataType, string gameName, out T1 response);
+    Task<T1?> GetData(T dataType, string gameName);
 }

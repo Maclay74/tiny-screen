@@ -1,7 +1,10 @@
+using System;
+using Common.Framework;
 using Godot;
 using TinyScreen.Framework;
 using TinyScreen.Framework.Attributes;
 using TinyScreen.Framework.Interfaces;
+using TinyScreen.Services;
 
 namespace TinyScreen.scripts;
 
@@ -9,6 +12,8 @@ public partial class RootNode : BaseRouter {
     [Inject] private ISettingsService _settingsService;
 
     [Inject] private IDatabaseService _databaseService;
+
+    [Inject] private LibraryService _libraryService;
 
     [Export] private PackedScene Onboarding;
     [Export] private PackedScene Application;
@@ -18,7 +23,12 @@ public partial class RootNode : BaseRouter {
     public override partial void _Ready();
 
     [Ready]
-    public void Start() {
+    public async void Start() {
+        
+        Console.WriteLine(await _libraryService.GetData<ArtworkGameDataType, string?>("Fortnite"));
+        Console.WriteLine(await _libraryService.GetData<BackgroundGameDataType, string?>("Fortnite"));
+        
+        /*
         _databaseService.InitDatabase();
 
         if (!_settingsService.IsAppInstalled()) {
@@ -26,7 +36,7 @@ public partial class RootNode : BaseRouter {
         }
         else {
             Navigate("/application", false);
-        }
+        }*/
     }
 
     private void CheckScene() {
