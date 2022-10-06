@@ -10,5 +10,5 @@ public class LibrarySource {
         
     public int GamesCount { get; set; }
 
-    //public ICollection<Game>? Games { get; set; } = null;
+    public ICollection<Game>? Games { get; set; } = null;
 }
