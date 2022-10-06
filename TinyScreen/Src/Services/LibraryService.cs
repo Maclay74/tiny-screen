@@ -10,149 +10,150 @@ using ExpressionTree;
 using TinyScreen.Framework.Interfaces;
 using TinyScreen.Models;
 
-namespace TinyScreen.Services {
-    public partial class LibraryService {
+namespace TinyScreen.Services; 
 
-        private IDatabaseService _databaseService;
-        private ImageService _imageService;
-        private ModalService _modalService;
-        private IEnumerable<IGameDataProvider> _gameDataProviders;
+public class LibraryService {
 
-        public LibraryService(IDatabaseService databaseService, ImageService imageService, ModalService modalService, IEnumerable<IGameDataProvider> gameDataProviders) {
-            _databaseService = databaseService;
-            _imageService = imageService;
-            _modalService = modalService;
-            _gameDataProviders = gameDataProviders;
-        }
+    private IDatabaseService _databaseService;
+    private ImageService _imageService;
+    private ModalService _modalService;
+    private IEnumerable<IGameDataProvider> _gameDataProviders;
 
-        public void RunGame(int id) {
-            // TODO Implement
-        }
+    public LibraryService(IDatabaseService databaseService, ImageService imageService, ModalService modalService, IEnumerable<IGameDataProvider> gameDataProviders) {
+        _databaseService = databaseService;
+        _imageService = imageService;
+        _modalService = modalService;
+        _gameDataProviders = gameDataProviders;
+    }
+
+    public void RunGame(int id) {
+        // TODO Implement
+    }
         
-        public async Task UpdateSource(ILibrarySource source, EventHandler<float> onProgress) {
-            var sourceRecord = GetSourceRecord(source);
-            if (sourceRecord == null) return;
+    public async Task UpdateSource(ILibrarySource source, EventHandler<float> onProgress) {
+        /*var sourceRecord = GetSourceRecord(source);
+        if (sourceRecord == null) return;
 
-            var progress = new Progress<float>();
-            progress.ProgressChanged += onProgress;
+        var progress = new Progress<float>();
+        progress.ProgressChanged += onProgress;
 
-            var gamesInSource = source.GamesIds().Result.ToList();
-            var gamesInLibrary = GetAllGames(source).Select(g => g.SourceId).ToList();
+        var gamesInSource = source.GamesIds().Result.ToList();
+        var gamesInLibrary = GetAllGames(source).Select(g => g.SourceId).ToList();
 
-            var newGames = gamesInSource.Where(sourceId => !gamesInLibrary.Contains(sourceId)).ToArray();
-            var removedGames = gamesInLibrary.Where(sourceId => !gamesInSource.Contains(sourceId)).ToArray();
+        var newGames = gamesInSource.Where(sourceId => !gamesInLibrary.Contains(sourceId)).ToArray();
+        var removedGames = gamesInLibrary.Where(sourceId => !gamesInSource.Contains(sourceId)).ToArray();
 
-            if (removedGames.Length > 0) {
-                _databaseService.DeleteAll<Games>(new Expr("sourceId", OperatorEnum.In, removedGames.ToArray()));
-            }
-            
-            for (int i = 0; i < newGames.Length; i++) {
-                ((IProgress<float>) progress).Report((float)i / newGames.Length);
-                
-                await AddGameToLibrary(source, newGames[i], sourceRecord.Id);
-            }
+        if (removedGames.Length > 0) {
+            _databaseService.DeleteAll<Games>(new Expr("sourceId", OperatorEnum.In, removedGames.ToArray()));
         }
+            
+        for (int i = 0; i < newGames.Length; i++) {
+            ((IProgress<float>) progress).Report((float)i / newGames.Length);
+                
+            await AddGameToLibrary(source, newGames[i], sourceRecord.Id);
+        }*/
+    }
 
-        private async Task AddGameToLibrary(ILibrarySource source, string sourceId, int sourceRecordId) {
+    private async Task AddGameToLibrary(ILibrarySource source, string sourceId, int sourceRecordId) {
 
-            try {
-                // Throw source-level exception
-                var gameData = await source.Game(sourceId);
+        try {
+            // Throw source-level exception
+            var gameData = await source.Game(sourceId);
 
-                // Throw image-level exception
-                var gameRecord = new Games {
-                    SourceId = gameData.SourceId,
-                    Source = sourceRecordId,
-                    Name = gameData.Name,
-                    Description = gameData.Description,
-                    Artwork = await _imageService.Save(gameData.ArtworkUrl, ImageService.ImageType.Artwork,
-                        gameData.Name),
-                    Background = await _imageService.Save(gameData.BackgroundUrl, ImageService.ImageType.Background,
-                        gameData.Name),
-                    LastPlayed = new DateTime()
-                };
+            // Throw image-level exception
+            /*var gameRecord = new Game {
+                SourceId = gameData.SourceId,
+                Source = sourceRecordId,
+                Name = gameData.Name,
+                Description = gameData.Description,
+                Artwork = await _imageService.Save(gameData.ArtworkUrl, ImageService.ImageType.Artwork,
+                    gameData.Name),
+                Background = await _imageService.Save(gameData.BackgroundUrl, ImageService.ImageType.Background,
+                    gameData.Name),
+                LastPlayed = new DateTime()
+            };*/
 
-                // Throw db-level exception
-                _databaseService.Insert(gameRecord);
-            }
-            catch (LibrarySourceGameDataException) {
-                if (await _modalService.Confirm(
+            // Throw db-level exception
+            //_databaseService.Insert(gameRecord);
+        }
+        catch (LibrarySourceGameDataException) {
+            if (await _modalService.Confirm(
                     "Error with getting information from " + source.Name() + " about game #" + sourceId, "Try again",
                     "Skip the game")) {
-                    await AddGameToLibrary(source, sourceId, sourceRecordId);
-                }
-            }
-            catch (LibraryGraphicsException e) {
-                if (await _modalService.Confirm(
-                        $"Error downloading artwork or background for #{sourceId}:\n{e.Message}" , "Try again",
-                        "Skip the game")) {
-                    await AddGameToLibrary(source, sourceId, sourceRecordId);
-                }
-            }
-            catch (Exception e) {
-                if (await _modalService.Confirm(
-                        "Something went wrong with #" + sourceId, "Try again",
-                        "Skip the game")) {
-                    await AddGameToLibrary(source, sourceId, sourceRecordId);
-                }
+                await AddGameToLibrary(source, sourceId, sourceRecordId);
             }
         }
+        catch (LibraryGraphicsException e) {
+            if (await _modalService.Confirm(
+                    $"Error downloading artwork or background for #{sourceId}:\n{e.Message}" , "Try again",
+                    "Skip the game")) {
+                await AddGameToLibrary(source, sourceId, sourceRecordId);
+            }
+        }
+        catch (Exception e) {
+            if (await _modalService.Confirm(
+                    "Something went wrong with #" + sourceId, "Try again",
+                    "Skip the game")) {
+                await AddGameToLibrary(source, sourceId, sourceRecordId);
+            }
+        }
+    }
 
-        // Adds source to the table, but don't import games from it
-        public void AddSource(ILibrarySource source) {
+    // Adds source to the table, but don't import games from it
+    public void AddSource(ILibrarySource source) {
             
-            // Check if library source is already added
-            if (GetSourceRecord(source) != null) return;
+        // Check if library source is already added
+        if (GetSourceRecord(source) != null) return;
             
-            var record = new LibrarySources {
-                Name = source.Name(),
-                GamesCount = source.GamesCount()
-            };
+        /*var record = new LibrarySources {
+            Name = source.Name(),
+            GamesCount = source.GamesCount()
+        };
             
-            _databaseService.Insert(record);
-        }
+        _databaseService.Insert(record);*/
+    }
 
-        // RemoveAt source from the table, removes all games too 
-        public void RemoveSource(ILibrarySource source) {
-            // TODO Implement
-            // RemoveAt all games too
-        }
+    // RemoveAt source from the table, removes all games too 
+    public void RemoveSource(ILibrarySource source) {
+        // TODO Implement
+        // RemoveAt all games too
+    }
 
-        private LibrarySources GetSourceRecord(ILibrarySource source) {
-            return _databaseService.Select<LibrarySources>(new Expr("name", OperatorEnum.Equals, source.Name()));
-        }
+    private LibrarySource GetSourceRecord(ILibrarySource source) {
+        return null;//_databaseService.Select<LibrarySource>(new Expr("name", OperatorEnum.Equals, source.Name()));
+    }
         
-        public List<Games> GetAllGames(ILibrarySource source) {
-            var sourceRecord = GetSourceRecord(source);
-            var where = new Expr("source", OperatorEnum.Equals, sourceRecord.Id);
-            return _databaseService.SelectAll<Games>(where);
-        }
+    public List<Game> GetAllGames(ILibrarySource source) {
+        var sourceRecord = GetSourceRecord(source);
+        var where = new Expr("source", OperatorEnum.Equals, sourceRecord.Id);
+        return null; //_databaseService.SelectAll<Games>(where);
+    }
         
-        public List<Games> GetAllGames( int offset, int count, Expr expr = null, ResultOrder[] ro = null) {
-            return _databaseService.SelectAll<Games>(offset, count, expr, ro);
-        }
+    public List<Game> GetAllGames( int offset, int count, Expr expr = null, ResultOrder[] ro = null) {
+        return new List<Game>();// _databaseService.SelectAll<Games>(offset, count, expr, ro);
+    }
         
-        public List<Games> GetAllGames( ) {
-            return _databaseService.SelectAll<Games>(null);
-        }
+    public List<Game> GetAllGames( ) {
+        return new List<Game>();
+        //return _databaseService.SelectAll<Games>(null);
+    }
 
-        private IEnumerable<IGameDataProvider> GetProviders<T, T1>() {
+    private IEnumerable<IGameDataProvider> GetProviders<T, T1>() {
 
-            return _gameDataProviders
-                .Where(provider => provider is IGameDataProvider<T, T1>)
-                .OrderBy(provider => provider.Priority());
-        }
+        return _gameDataProviders
+            .Where(provider => provider is IGameDataProvider<T, T1>)
+            .OrderBy(provider => provider.Priority());
+    }
         
-        public async Task<T1> GetData<T, T1>(string gameName) where T: GameDataType, new() {
-            var dataType = new T();
+    public async Task<T1> GetData<T, T1>(string gameName) where T: GameDataType, new() {
+        var dataType = new T();
 
-            // Iterate over providers, try to get data for the game
-            foreach (var provider in  GetProviders<T, T1>()) {
-                if (await dataType.Accept<T1>(provider, gameName, out var data))
-                    return data;
-            }
-
-            return default;
+        // Iterate over providers, try to get data for the game
+        foreach (var provider in  GetProviders<T, T1>()) {
+            if (await dataType.Accept<T1>(provider, gameName, out var data))
+                return data;
         }
+
+        return default;
     }
 }

@@ -29,6 +29,6 @@
     <ReferencePathWithRefAssemblies Update="C:\Users\Mike\.nuget\packages\gameloop.vdf.jsonconverter\0.2.1\lib\netstandard1.0\Gameloop.Vdf.JsonConverter.dll" />
   </ItemGroup>
   <Target Name="CopyFiles" AfterTargets="AfterBuild">
-      <Copy SourceFiles="$(TargetDir)$(ProjectName).dll" DestinationFolder="$(SolutionDir)Plugins\" />
+    <Copy SourceFiles="$(TargetDir)$(ProjectName).dll" DestinationFolder="..\..\TinyScreen\Plugins\" />
   </Target>
 </Project>

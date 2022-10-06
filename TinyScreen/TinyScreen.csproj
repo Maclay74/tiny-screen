@@ -10,6 +10,12 @@
     <PackageReference Include="ByteSize" Version="2.1.1" />
     <PackageReference Include="craftersmine.SteamGridDB.Net" Version="1.1.2" />
     <PackageReference Include="FlexLayoutSharp" Version="1.0.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="7.0.0-rc.1.22426.7" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="7.0.0-rc.1.22426.7" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="7.0.0-rc.1.22426.7">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
     <PackageReference Include="Newtonsoft.Json" Version="13.0.2-beta2" />
     <PackageReference Include="SimpleInjector" Version="5.4.0" />
     <PackageReference Include="SQLitePCLRaw.bundle_winsqlite3" Version="2.1.2" />

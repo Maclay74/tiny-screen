@@ -5,7 +5,7 @@ namespace TinyScreen.Scripts.Components.Library {
     public partial class GameCard : AspectRatioContainer {
         [Export] private TextureRect _cover;
         
-        public Games Game;
+        public Game Game;
         private ImageTexture _texture;
         private Image _image;
         private System.Timers.Timer _updateTimer;

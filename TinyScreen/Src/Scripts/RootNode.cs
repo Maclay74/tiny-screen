@@ -1,3 +1,4 @@
+using System;
 using Godot;
 using TinyScreen.Framework;
 using TinyScreen.Framework.Attributes;
@@ -25,12 +26,14 @@ public partial class RootNode : BaseRouter {
     [Ready]
     public void Start() {
         
-        if (!_settingsService.IsAppInstalled()) {
+        _databaseService.InitDatabase();
+        
+        /*if (!_settingsService.IsAppInstalled()) {
             Navigate("/onboarding");
         }
         else {
             Navigate("/application", false);
-        }
+        }*/
     }
     
     private void CheckScene() {

@@ -21,6 +21,6 @@
   </ItemGroup>
   
   <Target Name="CopyFiles" AfterTargets="AfterBuild" Condition="'$(ProjectName)' != 'TemplateLibrarySource'">
-	  <Copy SourceFiles="$(TargetDir)$(ProjectName).dll" DestinationFolder="$(SolutionDir)Plugins\" />
+    <Copy SourceFiles="$(TargetDir)$(ProjectName).dll" DestinationFolder="..\..\TinyScreen\Plugins\" />
   </Target>
 </Project>

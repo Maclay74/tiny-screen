@@ -2,13 +2,13 @@ using System.Collections.Generic;
 
 namespace TinyScreen.Models; 
 
-public class LibrarySource {
+public class Folder {
         
     public int Id { get; set; }
-        
+    
     public string Name { get; set; }
-        
-    public int GamesCount { get; set; }
-        
+    
+    public string Artwork { get; set; }
+
     public ICollection<Game> Games { get; set; }
 }

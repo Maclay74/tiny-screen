@@ -14,7 +14,7 @@ namespace TinyScreen.Services {
 
         public bool IsAppInstalled() {
             return false;
-            return _databaseService.IsDatabaseExists();
+            return _databaseService.Exists();
         }
 
         public void InstallApp() {
@@ -25,7 +25,7 @@ namespace TinyScreen.Services {
         }
 
         public void Set(Setting setting, string value) {
-            var record = _databaseService.Select<Settings>(new Expr("name", OperatorEnum.Equals, setting));
+            /*var record = _databaseService.Select<Settings>(new Expr("name", OperatorEnum.Equals, setting));
 
             if (record == null) {
                 _databaseService.Insert(new Settings {
@@ -36,13 +36,15 @@ namespace TinyScreen.Services {
             }
 
             record.Value = value;
-            _databaseService.Update(record);
+            _databaseService.Update(record);*/
         }
 
         public string Get(Setting setting) {
-            var record = _databaseService.Select<Settings>(new Expr("name", OperatorEnum.Equals, setting));
-            if (record != null) return record.Value;
-            throw new Exception($"Setting {setting.ToString()} was not found");
+            //var record = _databaseService.Select<Settings>(new Expr("name", OperatorEnum.Equals, setting));
+            //if (record != null) return record.Value;
+            //throw new Exception($"Setting {setting.ToString()} was not found");
+
+            return "";
         }
     }
 }

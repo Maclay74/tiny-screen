@@ -19,7 +19,7 @@ namespace TinyScreen.Services {
             return  System.IO.Path.Combine(OS.GetUserDataDir(), DbName);
         }
 
-        public bool IsDatabaseExists() {
+        public bool Exists() {
             return System.IO.File.Exists(GetDatabasePath());
         }
 
