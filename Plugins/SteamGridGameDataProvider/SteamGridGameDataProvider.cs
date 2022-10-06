@@ -6,20 +6,35 @@ using craftersmine.SteamGridDBNet;
 
 namespace SteamGridGameDataProvider {
     
-    public class SteamGridGameDataProvider : IGameDataProvider, IGameDataProvider<ArtworkGameDataType, string?>, IGameDataProvider<ArtworkGameDataType, int?> {
+    public class SteamGridGameDataProvider : IGameDataProvider, IGameDataProvider<ArtworkGameDataType, string?>, IGameDataProvider<BackgroundGameDataType, string?> 
+    {
         public int Priority() => 10;
         
         private SteamGridDb _client;
         
-        public SteamGridGameDataProvider() {
+        public SteamGridGameDataProvider() 
+        {
             _client = new SteamGridDb("c6c3d47a9c8deeff0f9481aea822bec1");
         }
-        
-        async Task<string?> IGameDataProvider<ArtworkGameDataType, string?>.GetData(ArtworkGameDataType dataType, string gameName) {
 
+        private SteamGridDbDimensions GetSteamGridDbDimensions(GameDataType gameDataType) 
+        {
+            if (gameDataType.GetType() == typeof(ArtworkGameDataType))
+            {
+                return SteamGridDbDimensions.W600H900;
+            } 
+            else if (gameDataType.GetType() == typeof(BackgroundGameDataType))
+            {
+                return SteamGridDbDimensions.W660H930;
+            }
+            return default;
+        }
+        
+        async Task<string?> GetData(string gameName, SteamGridDbDimensions steamGridDbDimensions) 
+        {
             try {
                 var games = await _client.SearchForGamesAsync(gameName);
-
+                
                 if (games.Length == 0) return null;
                 
                 var grids = await _client.GetGridsByGameIdAsync(
@@ -27,7 +42,7 @@ namespace SteamGridGameDataProvider {
                     false,
                     false,
                     SteamGridDbStyles.AllGrids,
-                    SteamGridDbDimensions.W600H900,
+                    steamGridDbDimensions,
                     SteamGridDbFormats.All,
                     SteamGridDbTypes.Static
                 );
@@ -40,12 +55,15 @@ namespace SteamGridGameDataProvider {
                 return null;
             }
         }
+        
+        async Task<string?> IGameDataProvider<ArtworkGameDataType, string?>.GetData(ArtworkGameDataType dataType, string gameName)
+        {
+            return await GetData(gameName, SteamGridDbDimensions.W600H900);
+        }
 
-        async Task<int?> IGameDataProvider<ArtworkGameDataType, int?>.GetData(ArtworkGameDataType dataType, string gameName) {
-            if (gameName == "Fortnite")
-                return null;
-
-            return null;
+        async Task<string?> IGameDataProvider<BackgroundGameDataType, string?>.GetData(BackgroundGameDataType dataType, string gameName)
+        {
+            return await GetData(gameName, SteamGridDbDimensions.W660H930);
         }
     }
 }
