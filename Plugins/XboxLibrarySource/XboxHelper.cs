@@ -6,67 +6,67 @@ using Common.Interfaces;
 using Common.Extensions;
 using Microsoft.Win32;
 
-namespace XboxLibrarySource {
-    internal class XboxHelper {
-        private RegistryKey _registryKey;
+namespace XboxLibrarySource; 
 
-        public XboxHelper(RegistryKey registryKey) {
-            _registryKey = registryKey;
-        }
+internal class XboxHelper {
+    private RegistryKey _registryKey;
 
-        public int GamesCount() => GetInstalledGamesIds().Count;
+    public XboxHelper(RegistryKey registryKey) {
+        _registryKey = registryKey;
+    }
 
-        public List<string> GetInstalledGamesIds() {
-            var ids = new List<string>();
+    public int GamesCount() => GetInstalledGamesIds().Count;
 
-            foreach (var libKey in _registryKey.GetSubKeyNames()) {
-                var lib = _registryKey.OpenSubKey(libKey);
-                if (lib == null) continue;
+    public List<string> GetInstalledGamesIds() {
+        var ids = new List<string>();
 
-                foreach (var gameId in lib.GetSubKeyNames()) {
-                    ids.Add(gameId);
-                }
+        foreach (var libKey in _registryKey.GetSubKeyNames()) {
+            var lib = _registryKey.OpenSubKey(libKey);
+            if (lib == null) continue;
+
+            foreach (var gameId in lib.GetSubKeyNames()) {
+                ids.Add(gameId);
             }
-
-            return ids;
         }
 
-        public async Task<LibrarySourceGameData> GetGameInfo(string id) {
-            var name = await GameNameByPackageName(id);
+        return ids;
+    }
 
-            return new LibrarySourceGameData {
-                SourceId = id,
-                Name = name,
-                Description = "Game from Xbox", // TODO get information from internet
-                ArtworkUrl = "",
-                BackgroundUrl = "",
-            };
+    public async Task<LibrarySourceGameData> GetGameInfo(string id) {
+        var name = await GameNameByPackageName(id);
+
+        return new LibrarySourceGameData {
+            SourceId = id,
+            Name = name,
+            Description = "Game from Xbox", // TODO get information from internet
+            ArtworkUrl = "",
+            BackgroundUrl = "",
+        };
+    }
+
+    private async Task<string> GameNameByPackageName(string packageName) {
+        var pattern = new Regex("^([^*]+)_");
+        var match = pattern.Match(packageName);
+
+        if (!match.Success || match.Groups.Count == 0) {
+            return packageName;
         }
 
-        private async Task<string> GameNameByPackageName(string packageName) {
-            var pattern = new Regex("^([^*]+)_");
-            var match = pattern.Match(packageName);
+        var command = "\"&  echo (Get-StartApps | ? {$_.AppId -eq '" + packageName + "!App'}).Name \"";
 
-            if (!match.Success || match.Groups.Count == 0) {
-                return packageName;
+        var process = new Process {
+            StartInfo = {
+                UseShellExecute = false,
+                RedirectStandardOutput = true,
+                FileName = @"C:\windows\system32\windowspowershell\v1.0\powershell.exe",
+                Arguments = command
             }
+        };
 
-            var command = "\"&  echo (Get-StartApps | ? {$_.AppId -eq '" + packageName + "!App'}).Name \"";
+        process.Start();
+        string name = process.StandardOutput.ReadToEnd();
+        await process.WaitForExitAsync();
 
-            var process = new Process {
-                StartInfo = {
-                    UseShellExecute = false,
-                    RedirectStandardOutput = true,
-                    FileName = @"C:\windows\system32\windowspowershell\v1.0\powershell.exe",
-                    Arguments = command
-                }
-            };
-
-            process.Start();
-            string name = process.StandardOutput.ReadToEnd();
-            await process.WaitForExitAsync();
-
-            return name.Trim();
-        }
+        return name.Trim();
     }
 }

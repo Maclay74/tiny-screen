@@ -1,7 +1,7 @@
-namespace TinyScreen.Framework.Interfaces {
-    public interface IHardwareService {
+namespace TinyScreen.Framework.Interfaces; 
 
-        bool IsOnline();
+public interface IHardwareService {
 
-    }
+    bool IsOnline();
+
 }

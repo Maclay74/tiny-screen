@@ -1,25 +1,25 @@
 ﻿using System.Threading.Tasks;
 
-namespace Common.Interfaces {
-    public interface ILibrarySource {
-        string Name();
+namespace Common.Interfaces; 
 
-        byte[] Icon();
+public interface ILibrarySource {
+    string Name();
 
-        int GamesCount();
+    byte[] Icon();
 
-        bool IsInstalled();
+    int GamesCount();
 
-        Task<string[]> GamesIds();
+    bool IsInstalled();
 
-        Task<LibrarySourceGameData> Game(string sourceId);
-    }
+    Task<string[]> GamesIds();
+
+    Task<LibrarySourceGameData> Game(string sourceId);
+}
     
-    public class LibrarySourceGameData {
-        public string SourceId;
-        public string Name;
-        public string Description;
-        public string ArtworkUrl;
-        public string BackgroundUrl;
-    }
+public class LibrarySourceGameData {
+    public string SourceId;
+    public string Name;
+    public string Description;
+    public string ArtworkUrl;
+    public string BackgroundUrl;
 }

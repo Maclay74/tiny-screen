@@ -1,8 +1,7 @@
-using System;
 using System.Threading.Tasks;
 using Godot;
 
-namespace TinyScreen.scripts.modals; 
+namespace TinyScreen.Scripts.Modals; 
 
 public abstract partial class BaseModal : Node {
     

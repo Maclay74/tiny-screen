@@ -35,4 +35,7 @@
     <Compile Remove="Migrations\20221005191031_FolderBackground.cs" />
     <Compile Remove="Migrations\20221005191031_FolderBackground.Designer.cs" />
   </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Migrations" />
+  </ItemGroup>
 </Project>

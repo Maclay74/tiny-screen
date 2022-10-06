@@ -1,11 +1,11 @@
 ﻿using System;
 
-namespace Common.Exceptions {
-    public class LibrarySourceGameDataException : Exception { }
+namespace Common.Exceptions; 
 
-    public class LibraryGraphicsException : Exception {
-        public LibraryGraphicsException(string message) : base(message) { }
-    }
+public class LibrarySourceGameDataException : Exception { }
 
-    public class LibraryParseException : Exception { }
+public class LibraryGraphicsException : Exception {
+    public LibraryGraphicsException(string message) : base(message) { }
 }
+
+public class LibraryParseException : Exception { }

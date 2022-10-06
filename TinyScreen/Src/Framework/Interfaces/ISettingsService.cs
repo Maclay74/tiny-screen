@@ -1,20 +1,17 @@
-using System;
+namespace TinyScreen.Framework.Interfaces; 
 
-namespace TinyScreen.Framework.Interfaces {
-    
-    public interface ISettingsService {
-        bool IsAppInstalled();
+public interface ISettingsService {
+    bool IsAppInstalled();
 
-        void InstallApp();
+    void InstallApp();
 
-        void Set(Setting setting, string value);
+    void Set(Setting setting, string value);
 
-        string Get(Setting setting);
-    }
+    string Get(Setting setting);
+}
 
-    public enum Setting {
-        AutoUpdateApplication,
-        AutoUpdateLibrary,
-        StartWithWindows
-    }
+public enum Setting {
+    AutoUpdateApplication,
+    AutoUpdateLibrary,
+    StartWithWindows
 }

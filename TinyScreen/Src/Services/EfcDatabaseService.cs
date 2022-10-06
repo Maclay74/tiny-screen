@@ -8,7 +8,7 @@ using TinyScreen.Models;
 
 namespace TinyScreen.Services;
 
-public partial class EfcDatabaseService : DbContext, IDatabaseService {
+public class EfcDatabaseService : DbContext, IDatabaseService {
     public DbSet<Game>? Games { get; set; }
     public DbSet<Folder>? Folders { get; set; }
     private DbSet<LibrarySource>? LibrarySources { get; set; }
