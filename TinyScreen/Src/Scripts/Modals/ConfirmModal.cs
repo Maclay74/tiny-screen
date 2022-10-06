@@ -1,7 +1,6 @@
-﻿using System;
-using Godot;
+﻿using Godot;
 
-namespace TinyScreen.scripts.modals; 
+namespace TinyScreen.Scripts.Modals; 
 
 public struct ConfirmModalProperties {
     public string Title;

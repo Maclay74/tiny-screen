@@ -6,60 +6,60 @@ using Common.Exceptions;
 using Common.Framework;
 using Common.Interfaces;
 
-namespace RetroArchLibrarySource {
-    public class RetroArchLibrarySource : BaseLibrarySource {
-        private RetroArchHelper _retroArchHelper;
+namespace RetroArchLibrarySource; 
 
-        private List<IRetroArchInstallation> _installations = new List<IRetroArchInstallation> {
-            new StandaloneInstallation(), // Order is important!
-            new SteamInstallation()
-        };
+public class RetroArchLibrarySource : BaseLibrarySource {
+    private RetroArchHelper _retroArchHelper;
 
-        private IRetroArchInstallation _installation;
+    private List<IRetroArchInstallation> _installations = new List<IRetroArchInstallation> {
+        new StandaloneInstallation(), // Order is important!
+        new SteamInstallation()
+    };
 
-        public RetroArchLibrarySource() {
-            foreach (var installation in _installations) {
-                if (installation.Installed()) {
-                    _installation = installation;
-                    break;
-                }
-            }
+    private IRetroArchInstallation _installation;
 
-            _retroArchHelper = new RetroArchHelper(_installation);
-        }
-
-        public override string Name() {
-            return "RetroArch";
-        }
-
-        public override int GamesCount() {
-            if (!IsInstalled()) return 0;
-            return _retroArchHelper.GamesCount();
-        }
-
-        public override bool IsInstalled() {
-            return _installation != null && _installation.Installed();
-        }
-
-        public override async Task<string[]> GamesIds() {
-            try {
-                return _retroArchHelper
-                    .GetRomsInPlayLists().Select(game => game.SourceId)
-                    .ToArray();
-            }
-            catch (Exception) {
-                throw new LibraryParseException();
+    public RetroArchLibrarySource() {
+        foreach (var installation in _installations) {
+            if (installation.Installed()) {
+                _installation = installation;
+                break;
             }
         }
 
-        public override async Task<LibrarySourceGameData> Game(string sourceId) {
-            try {
-                return _retroArchHelper
-                    .GetRomsInPlayLists().Find(game => game.SourceId == sourceId);
-            }
-            catch (Exception) {
-                throw new LibrarySourceGameDataException();
-            }
+        _retroArchHelper = new RetroArchHelper(_installation);
+    }
+
+    public override string Name() {
+        return "RetroArch";
+    }
+
+    public override int GamesCount() {
+        if (!IsInstalled()) return 0;
+        return _retroArchHelper.GamesCount();
+    }
+
+    public override bool IsInstalled() {
+        return _installation != null && _installation.Installed();
+    }
+
+    public override async Task<string[]> GamesIds() {
+        try {
+            return _retroArchHelper
+                .GetRomsInPlayLists().Select(game => game.SourceId)
+                .ToArray();
+        }
+        catch (Exception) {
+            throw new LibraryParseException();
+        }
+    }
+
+    public override async Task<LibrarySourceGameData> Game(string sourceId) {
+        try {
+            return _retroArchHelper
+                .GetRomsInPlayLists().Find(game => game.SourceId == sourceId);
+        }
+        catch (Exception) {
+            throw new LibrarySourceGameDataException();
         }
     }
 }

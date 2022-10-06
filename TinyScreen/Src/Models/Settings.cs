@@ -1,17 +1,12 @@
-using Watson.ORM.Core;
 
-namespace TinyScreen.Models {
-    
-    [Table("settings")]
-    public partial class Settings {
+
+namespace TinyScreen.Models; 
+
+public class Settings {
         
-        [Column("id", true, DataTypes.Int, false)]
-        public int Id { get; set; }
+    public int Id { get; set; }
         
-        [Column("name", false, DataTypes.Nvarchar, 64, false)]
-        public string Name { get; set; }
+    public string Name { get; set; }
         
-        [Column("value", false, DataTypes.Nvarchar, 64, false)]
-        public string Value { get; set; }
-    }
+    public string Value { get; set; }
 }

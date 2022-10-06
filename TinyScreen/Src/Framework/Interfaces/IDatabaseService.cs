@@ -1,24 +1,32 @@
-using System.Collections.Generic;
-using DatabaseWrapper.Core;
-using ExpressionTree;
+﻿using System.Collections.Generic;
+using TinyScreen.Models;
 
-namespace TinyScreen.Framework.Interfaces {
-    public interface IDatabaseService {
-        bool IsDatabaseExists();
-        void InitDatabase();
+namespace TinyScreen.Framework.Interfaces; 
 
-        void Insert<T>(T record) where T : class, new();
+public interface IDatabaseService {
+    bool Exists();
+    void InitDatabase();
+        
+    // Library sources
 
-        T Update<T>(T obj) where T : class, new();
+    void Add(LibrarySource source);
+    LibrarySource? GetLibrarySourceByName(string name);
+        
+    public void Delete(LibrarySource source);
+    public void DeleteRange(List<LibrarySource> sources);
+       
+        
+        
+    // Games
 
-        T Select<T>(Expr expr, ResultOrder[] ro = null) where T : class, new();
+    List<Game>? GetAllGames(LibrarySource source);
+        
+    public void Delete(Game game);
+    public void DeleteRange(List<Game> games);
 
-        List<T> SelectAll<T>(Expr expr, ResultOrder[] ro = null) where T : class, new();
+    public void DeleteByOriginalIds(List<string> originalIds);
+        
+    void Add(Game game);
 
-        List<T> SelectAll<T>(int? offset, int? count, Expr expr, ResultOrder[] ro = null) where T : class, new();
 
-        void Delete<T>(T obj) where T : class, new();
-
-        void DeleteAll<T>(Expr expr) where T : class, new();
-    }
 }

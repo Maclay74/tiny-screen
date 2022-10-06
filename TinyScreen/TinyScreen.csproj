@@ -5,18 +5,23 @@
     <TargetFramework>net6.0</TargetFramework>
     <CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <Nullable>enable</Nullable>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="ByteSize" Version="2.1.1" />
     <PackageReference Include="craftersmine.SteamGridDB.Net" Version="1.1.2" />
     <PackageReference Include="FlexLayoutSharp" Version="1.0.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="7.0.0-rc.1.22426.7" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="7.0.0-rc.1.22426.7" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="7.0.0-rc.1.22426.7">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
     <PackageReference Include="Newtonsoft.Json" Version="13.0.2-beta2" />
     <PackageReference Include="SimpleInjector" Version="5.4.0" />
-    <PackageReference Include="SQLitePCLRaw.bundle_winsqlite3" Version="2.1.2" />
     <PackageReference Include="System.Net.Http" Version="4.3.4" />
     <PackageReference Include="System.Net.Http.Json" Version="7.0.0-rc.1.22426.10" />
     <PackageReference Include="System.Runtime.Loader" Version="4.3.0" />
-    <PackageReference Include="WatsonORM.Sqlite" Version="2.0.1.2" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Common\Common.csproj" />
@@ -25,5 +30,12 @@
     <ProjectReference Include="..\Plugins\RetroArchLibrarySource\RetroArchLibrarySource.csproj" />
     <ProjectReference Include="..\Plugins\SteamLibrarySource\SteamLibrarySource.csproj" />
     <ProjectReference Include="..\Plugins\XboxLibrarySource\XboxLibrarySource.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Remove="Migrations\20221005191031_FolderBackground.cs" />
+    <Compile Remove="Migrations\20221005191031_FolderBackground.Designer.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Migrations" />
   </ItemGroup>
 </Project>

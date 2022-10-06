@@ -1,10 +1,7 @@
-using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Reflection;
 using System.Runtime.Loader;
-using Common.Framework;
 using Common.Interfaces;
 using Godot;
 using SimpleInjector;
@@ -22,7 +19,7 @@ public partial class ContainerNode : Node {
         base._EnterTree();
         _container = new SimpleInjector.Container();
 
-        _container.Register<IDatabaseService, WatsonDatabaseService>(Lifestyle.Singleton);
+        _container.Register<IDatabaseService, EfcDatabaseService>(Lifestyle.Singleton);
         _container.Register<ISettingsService, DatabaseSettingsService>(Lifestyle.Singleton);
         _container.Register<IUpdateService, LocalUpdateService>(Lifestyle.Singleton);
         _container.Register<LibraryService>(Lifestyle.Singleton);
@@ -30,10 +27,6 @@ public partial class ContainerNode : Node {
         _container.Register<IHardwareService>(HardwareFactory.GetHardwareService, Lifestyle.Singleton);
         LoadPlugins();
         LoadNodes();
-        
-        // throws an error here
-        var a = _container.GetAllInstances<ILibrarySource>();
-        Console.WriteLine("Libs: " + a.Count());
     }
     
     [Injector]

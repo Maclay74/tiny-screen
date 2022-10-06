@@ -5,6 +5,6 @@
   </PropertyGroup>
 
   <Target Name="CopyFiles" AfterTargets="AfterBuild">
-    <Copy SourceFiles="$(TargetDir)$(ProjectName).dll" DestinationFolder="$(SolutionDir)Plugins\" />
+    <Copy SourceFiles="$(TargetDir)$(ProjectName).dll" DestinationFolder="..\TinyScreen\Plugins\" />
   </Target>
 </Project>
