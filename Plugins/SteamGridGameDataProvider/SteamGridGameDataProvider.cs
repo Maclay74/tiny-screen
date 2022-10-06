@@ -17,19 +17,6 @@ namespace SteamGridGameDataProvider {
             _client = new SteamGridDb("c6c3d47a9c8deeff0f9481aea822bec1");
         }
 
-        private SteamGridDbDimensions GetSteamGridDbDimensions(GameDataType gameDataType) 
-        {
-            if (gameDataType.GetType() == typeof(ArtworkGameDataType))
-            {
-                return SteamGridDbDimensions.W600H900;
-            } 
-            else if (gameDataType.GetType() == typeof(BackgroundGameDataType))
-            {
-                return SteamGridDbDimensions.W660H930;
-            }
-            return default;
-        }
-        
         async Task<string?> GetData(string gameName, SteamGridDbDimensions steamGridDbDimensions) 
         {
             try {
