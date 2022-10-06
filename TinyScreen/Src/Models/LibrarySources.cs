@@ -9,6 +9,6 @@ public class LibrarySource {
     public string Name { get; set; }
         
     public int GamesCount { get; set; }
-        
-    public ICollection<Game> Games { get; set; }
+
+    //public ICollection<Game>? Games { get; set; } = null;
 }

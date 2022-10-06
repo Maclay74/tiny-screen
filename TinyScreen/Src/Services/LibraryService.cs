@@ -5,8 +5,6 @@ using System.Threading.Tasks;
 using Common.Exceptions;
 using Common.Framework;
 using Common.Interfaces;
-using DatabaseWrapper.Core;
-using ExpressionTree;
 using TinyScreen.Framework.Interfaces;
 using TinyScreen.Models;
 
@@ -31,39 +29,39 @@ public class LibraryService {
     }
         
     public async Task UpdateSource(ILibrarySource source, EventHandler<float> onProgress) {
-        /*var sourceRecord = GetSourceRecord(source);
+        var sourceRecord = _databaseService.GetLibrarySourceByName(source.Name());
         if (sourceRecord == null) return;
 
-        var progress = new Progress<float>();
-        progress.ProgressChanged += onProgress;
+        //var progress = new Progress<float>();
+        //progress.ProgressChanged += onProgress;
 
         var gamesInSource = source.GamesIds().Result.ToList();
-        var gamesInLibrary = GetAllGames(source).Select(g => g.SourceId).ToList();
-
+        var gamesInLibrary = _databaseService.GetAllGames(sourceRecord)?.Select(g => g.OriginalId).ToList();
+        
         var newGames = gamesInSource.Where(sourceId => !gamesInLibrary.Contains(sourceId)).ToArray();
         var removedGames = gamesInLibrary.Where(sourceId => !gamesInSource.Contains(sourceId)).ToArray();
 
         if (removedGames.Length > 0) {
-            _databaseService.DeleteAll<Games>(new Expr("sourceId", OperatorEnum.In, removedGames.ToArray()));
+            _databaseService.DeleteByOriginalIds(removedGames.ToList());
         }
             
         for (int i = 0; i < newGames.Length; i++) {
-            ((IProgress<float>) progress).Report((float)i / newGames.Length);
+            //((IProgress<float>) progress).Report((float)i / newGames.Length);
                 
-            await AddGameToLibrary(source, newGames[i], sourceRecord.Id);
-        }*/
+            await AddGameToLibrary(source, newGames[i], sourceRecord);
+        }
     }
 
-    private async Task AddGameToLibrary(ILibrarySource source, string sourceId, int sourceRecordId) {
+    private async Task AddGameToLibrary(ILibrarySource source, string sourceId, LibrarySource sourceRecord) {
 
         try {
             // Throw source-level exception
             var gameData = await source.Game(sourceId);
 
             // Throw image-level exception
-            /*var gameRecord = new Game {
-                SourceId = gameData.SourceId,
-                Source = sourceRecordId,
+            var gameRecord = new Game {
+                OriginalId = gameData.SourceId,
+                Source = sourceRecord,
                 Name = gameData.Name,
                 Description = gameData.Description,
                 Artwork = await _imageService.Save(gameData.ArtworkUrl, ImageService.ImageType.Artwork,
@@ -71,30 +69,29 @@ public class LibraryService {
                 Background = await _imageService.Save(gameData.BackgroundUrl, ImageService.ImageType.Background,
                     gameData.Name),
                 LastPlayed = new DateTime()
-            };*/
-
-            // Throw db-level exception
-            //_databaseService.Insert(gameRecord);
+            };
+            
+            _databaseService.Add(gameRecord);
         }
         catch (LibrarySourceGameDataException) {
             if (await _modalService.Confirm(
                     "Error with getting information from " + source.Name() + " about game #" + sourceId, "Try again",
                     "Skip the game")) {
-                await AddGameToLibrary(source, sourceId, sourceRecordId);
+                await AddGameToLibrary(source, sourceId, sourceRecord);
             }
         }
         catch (LibraryGraphicsException e) {
             if (await _modalService.Confirm(
                     $"Error downloading artwork or background for #{sourceId}:\n{e.Message}" , "Try again",
                     "Skip the game")) {
-                await AddGameToLibrary(source, sourceId, sourceRecordId);
+                await AddGameToLibrary(source, sourceId, sourceRecord);
             }
         }
         catch (Exception e) {
             if (await _modalService.Confirm(
                     "Something went wrong with #" + sourceId, "Try again",
                     "Skip the game")) {
-                await AddGameToLibrary(source, sourceId, sourceRecordId);
+                await AddGameToLibrary(source, sourceId, sourceRecord);
             }
         }
     }
@@ -103,39 +100,15 @@ public class LibraryService {
     public void AddSource(ILibrarySource source) {
             
         // Check if library source is already added
-        if (GetSourceRecord(source) != null) return;
+        if (_databaseService.GetLibrarySourceByName(source.Name()) != null)
+            return;
             
-        /*var record = new LibrarySources {
+        var record = new LibrarySource {
             Name = source.Name(),
             GamesCount = source.GamesCount()
         };
-            
-        _databaseService.Insert(record);*/
-    }
-
-    // RemoveAt source from the table, removes all games too 
-    public void RemoveSource(ILibrarySource source) {
-        // TODO Implement
-        // RemoveAt all games too
-    }
-
-    private LibrarySource GetSourceRecord(ILibrarySource source) {
-        return null;//_databaseService.Select<LibrarySource>(new Expr("name", OperatorEnum.Equals, source.Name()));
-    }
         
-    public List<Game> GetAllGames(ILibrarySource source) {
-        var sourceRecord = GetSourceRecord(source);
-        var where = new Expr("source", OperatorEnum.Equals, sourceRecord.Id);
-        return null; //_databaseService.SelectAll<Games>(where);
-    }
-        
-    public List<Game> GetAllGames( int offset, int count, Expr expr = null, ResultOrder[] ro = null) {
-        return new List<Game>();// _databaseService.SelectAll<Games>(offset, count, expr, ro);
-    }
-        
-    public List<Game> GetAllGames( ) {
-        return new List<Game>();
-        //return _databaseService.SelectAll<Games>(null);
+        _databaseService.Add(record);
     }
 
     private IEnumerable<IGameDataProvider> GetProviders<T, T1>() {
