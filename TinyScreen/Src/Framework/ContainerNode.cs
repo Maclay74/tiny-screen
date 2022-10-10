@@ -20,7 +20,7 @@ public partial class ContainerNode : Node {
         _container = new SimpleInjector.Container();
 
         _container.Register<IDatabaseService, EfcDatabaseService>(Lifestyle.Singleton);
-        _container.Register<ISettingsService, DatabaseSettingsService>(Lifestyle.Singleton);
+        _container.Register<ApplicationService>(Lifestyle.Singleton);
         _container.Register<IUpdateService, LocalUpdateService>(Lifestyle.Singleton);
         _container.Register<LibraryService>(Lifestyle.Singleton);
         _container.Register<ImageService>(Lifestyle.Singleton);

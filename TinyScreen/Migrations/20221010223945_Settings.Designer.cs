@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TinyScreen.Services;
 
@@ -10,9 +11,11 @@ using TinyScreen.Services;
 namespace TinyScreen.Migrations
 {
     [DbContext(typeof(EfcDatabaseService))]
-    partial class EfcDatabaseServiceModelSnapshot : ModelSnapshot
+    [Migration("20221010223945_Settings")]
+    partial class Settings
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "7.0.0-rc.1.22426.7");

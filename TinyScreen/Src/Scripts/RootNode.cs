@@ -2,18 +2,19 @@ using Godot;
 using TinyScreen.Framework;
 using TinyScreen.Framework.Attributes;
 using TinyScreen.Framework.Interfaces;
+using TinyScreen.Services;
 
 namespace TinyScreen.scripts;
 
 public partial class RootNode : BaseRouter {
-    [Inject] private ISettingsService _settingsService;
+    [Inject] private ApplicationService _application;
 
     [Inject] private IDatabaseService _databaseService;
 
     [Export] private PackedScene Onboarding;
     [Export] private PackedScene Application;
 
-    private BaseRouter _currentScene;
+    private BaseRouter? _currentScene;
 
     public override partial void _Ready();
 
@@ -21,7 +22,7 @@ public partial class RootNode : BaseRouter {
     public void Start() {
         _databaseService.InitDatabase();
 
-        if (!_settingsService.IsAppInstalled()) {
+        if (!_application.IsInstalled()) {
             Navigate("/onboarding");
         }
         else {
@@ -45,7 +46,7 @@ public partial class RootNode : BaseRouter {
     private async void OnboardingRoute(string path) {
         CheckScene();
         await ToSignal(GetTree(), "process_frame");
-        _currentScene.Navigate(path);
+        _currentScene?.Navigate(path);
     }
 
     [Route("application")]
@@ -56,6 +57,6 @@ public partial class RootNode : BaseRouter {
         _currentScene = Application.Instantiate() as BaseRouter;
         AddChild(_currentScene);
         await ToSignal(GetTree(), "process_frame");
-        _currentScene.Navigate(path);
+        _currentScene?.Navigate(path);
     }
 }

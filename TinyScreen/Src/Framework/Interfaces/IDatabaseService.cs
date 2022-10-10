@@ -27,6 +27,11 @@ public interface IDatabaseService {
     public void DeleteByOriginalIds(List<string> originalIds);
         
     void Add(Game game);
+    
+    
+    // Settings
 
+    public void SetSettings(string name, string value);
 
+    public string GetSettings(string name);
 }
