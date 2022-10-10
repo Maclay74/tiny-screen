@@ -1,7 +1,7 @@
 using Godot;
 using TinyScreen.Framework;
 using TinyScreen.Framework.Attributes;
-using TinyScreen.Framework.Interfaces;
+using TinyScreen.Services;
 
 namespace TinyScreen.Scripts.Onboarding; 
 
@@ -11,17 +11,16 @@ public partial class Onboarding : BaseRouter {
     [Export] public PackedScene LibraryScene;
     [Export] public PackedScene FinishScene;
 
-    [Inject] private ISettingsService _settingsService;
+    [Inject] private ApplicationService _application;
 
-    private Control _currentScene;
-    private Tween _tween;
+    private Control? _currentScene;
+    private Tween? _tween;
         
     public override partial void _Ready();
 
     [Ready]
     private void Start() {
-        base._Ready();
-        _settingsService.InstallApp();
+        _application.Install();
     }
 
     private async void TransitionToScene(PackedScene newScene, string path) {

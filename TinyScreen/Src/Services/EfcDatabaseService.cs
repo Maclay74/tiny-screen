@@ -9,8 +9,11 @@ using TinyScreen.Models;
 namespace TinyScreen.Services;
 
 public class EfcDatabaseService : DbContext, IDatabaseService {
-    public DbSet<Game>? Games { get; set; }
+    private DbSet<Game>? Games { get; set; }
+    
     public DbSet<Folder>? Folders { get; set; }
+    
+    public DbSet<Settings>? Settings { get; set; }
     private DbSet<LibrarySource>? LibrarySources { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) {
@@ -70,5 +73,28 @@ public class EfcDatabaseService : DbContext, IDatabaseService {
         var games = Games?.AsQueryable().Where(g => originalIds.Contains(g.OriginalId));
         if (games != null && games.Any())
             Games?.RemoveRange(games);
+    }
+    
+    // Settings
+    
+    public void SetSettings(string name, string value) {
+        var record = Settings.FirstOrDefault(s => s.Name == name);
+        
+        if (record == null) {
+            Settings.Add(new Settings {
+                Name = name,
+                Value = value
+            });
+        }
+        else {
+            record.Value = value;
+            Settings.Update(record);
+        }
+
+        SaveChanges();
+    }
+
+    public string GetSettings(string name) {
+        return Settings.FirstOrDefault(s => s.Name == name)?.Value;
     }
 }
