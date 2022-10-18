@@ -19,6 +19,8 @@ public interface IDatabaseService {
 
     List<Game>? GetAllGames(LibrarySource source);
     List<Game>? GetAllGames();
+
+    Game? GetGame(int id);
         
     public void Delete(Game game);
     public void DeleteRange(List<Game> games);

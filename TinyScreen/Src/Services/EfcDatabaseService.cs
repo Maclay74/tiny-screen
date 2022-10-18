@@ -63,6 +63,10 @@ public class EfcDatabaseService : DbContext, IDatabaseService {
     public List<Game>? GetAllGames() {
         return Games?.ToList();
     }
+    
+    public Game? GetGame(int id) {
+        return Games?.FirstOrDefault(f => f.Id == id);
+    }
 
     public void Delete(Game game) {
         Games?.Remove(game);

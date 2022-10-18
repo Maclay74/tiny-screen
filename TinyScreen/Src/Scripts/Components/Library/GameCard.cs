@@ -1,3 +1,4 @@
+using System;
 using Godot;
 using TinyScreen.Models;
 
@@ -5,12 +6,14 @@ namespace TinyScreen.Scripts.Components.Library;
 
 public partial class GameCard : AspectRatioContainer {
     [Export] private TextureRect _cover;
+    [Export] private Button _button;
         
     public Game Game;
     private ImageTexture _texture;
     private Image _image;
     private System.Timers.Timer _updateTimer;
     private const float UpdateEventDelay = 0.1f;
+    public Action OnPress;
 
     public override void _Ready() {
         base._Ready();
@@ -20,6 +23,8 @@ public partial class GameCard : AspectRatioContainer {
         _image = Image.LoadFromFile(Game.Artwork);
         _texture = ImageTexture.CreateFromImage(_image);
         _cover.Texture = _texture;
+        
+        _button.Pressed += () => OnPress();
     }
         
     private void UpdateLayout() {

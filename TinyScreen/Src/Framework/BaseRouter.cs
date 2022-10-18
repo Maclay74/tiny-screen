@@ -39,20 +39,23 @@ public sealed class RouteState : IEquatable<RouteState> {
 }
 
 public abstract partial class BaseRouter : Control {
-    private static Queue<RouteState> _history = new();
+    private static Stack<RouteState> _history = new();
 
     public void Navigate(string path, params object[] args) {
         var state = new RouteState(path, args);
-        _history.Enqueue(state);
-        var currentState = _history.LastOrDefault();
+        _history.Push(state);
+
+        Console.WriteLine($"[Navigate] path: {state.Path} args: {String.Join(",", state.Args)}");
         
-        // Console.WriteLine($"[Navigate] path: {path}");
-        
-        FollowRoute(currentState.Path, currentState.Args);
+        FollowRoute(state.Path, state.Args);
     }
 
     public void Back() {
-        var state = _history.Dequeue();
+        _history.Pop();
+        var state = _history.Last();
+        
+        Console.WriteLine($"[Back] path: {state.Path} args: {String.Join(",", state.Args)}");
+        
         FollowRoute(state.Path, state.Args);
     }
 
@@ -64,9 +67,9 @@ public abstract partial class BaseRouter : Control {
         
         var newArgs = new object[] { pathLeft }.Concat(args).ToArray();
         
-        // Console.WriteLine($"[FollowRoute] path: {path} method: {routeMethod.Name} pathLeft: {pathLeft}");
+        Console.WriteLine($"[FollowRoute] root: {GetRoot(path).Name} path: {path} method: {routeMethod.Name} pathLeft: {pathLeft} args: {String.Join(",", newArgs)}");
         
-        routeMethod.Invoke(GetRoot(pathLeft), newArgs);
+        routeMethod.Invoke(GetRoot(path), newArgs);
     }
     
     private BaseRouter GetRoot(string path) {

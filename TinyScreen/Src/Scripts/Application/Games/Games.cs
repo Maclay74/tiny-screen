@@ -11,7 +11,6 @@ namespace TinyScreen.Scripts.Application.Games;
 
 public partial class Games : BaseRouter {
     [Inject] private LibraryService _libraryService;
-    
     [Inject] private IDatabaseService _databaseService;
 
     [Export] private Container _gamesContainer;
@@ -19,6 +18,7 @@ public partial class Games : BaseRouter {
 
     [Export] private PackedScene _gameCard;
     [Export] private PackedScene _folder;
+    [Export] private PackedScene _gameOverlay;
         
     public override partial void _Ready();
 
@@ -36,7 +36,7 @@ public partial class Games : BaseRouter {
     }
 
     [Route("folder")]
-    private void OpenFolder(string id) {
+    private void Folder(string id) {
         var folder = _databaseService.GetFolder(Int32.Parse(id));
         
         // Draw games!
@@ -45,9 +45,18 @@ public partial class Games : BaseRouter {
         foreach (var game in folder.Games) {
             var gameCard = _gameCard.Instantiate() as GameCard;
             gameCard.Game = game;
+            gameCard.OnPress = () => Navigate("game/" + game.Id);
             _gamesContainer.AddChild(gameCard);
         }
-       
+    }
+
+    [Route("game")]
+    private void Game(string id) {
+        var game = _databaseService.GetGame(Int32.Parse(id));
+        
+        var overlay = _gameOverlay.Instantiate() as Game;
+        overlay.GameItem = game;
+        AddChild(overlay);
     }
 
     private void ClearGames() {

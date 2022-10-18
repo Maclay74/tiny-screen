@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://Src/Scripts/Components/Library/GameCard.cs" id="2"]
 [ext_resource type="Texture2D" uid="uid://dmbamhr8h6hvx" path="res://Assets/Components/Library/game-1.png" id="2_4xxnb"]
 
-[node name="GameCard" type="AspectRatioContainer" node_paths=PackedStringArray("_cover")]
+[node name="GameCard" type="AspectRatioContainer" node_paths=PackedStringArray("_cover", "_button")]
 custom_minimum_size = Vector2i(184, 282)
 anchors_preset = 15
 anchor_right = 1.0
@@ -17,6 +17,7 @@ ratio = 0.66
 stretch_mode = 0
 script = ExtResource("2")
 _cover = NodePath("Button/Cover")
+_button = NodePath("Button")
 
 [node name="Button" type="Button" parent="."]
 custom_minimum_size = Vector2i(184, 282)
