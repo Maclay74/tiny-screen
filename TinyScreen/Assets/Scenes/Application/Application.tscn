@@ -22,7 +22,6 @@ _gamesButton = NodePath("MarginContainer/Wrapper/TopMenu/GamesButton")
 _settingsButton = NodePath("MarginContainer/Wrapper/TopMenu/SettingsButton")
 
 [node name="Background" type="ColorRect" parent="."]
-layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -31,7 +30,6 @@ grow_vertical = 2
 color = Color(0.0980392, 0.101961, 0.129412, 1)
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
-layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -45,45 +43,39 @@ theme_override_constants/margin_right = 15
 theme_override_constants/margin_bottom = 15
 
 [node name="Wrapper" type="VBoxContainer" parent="MarginContainer"]
-layout_mode = 2
 offset_left = 15.0
 offset_top = 15.0
 offset_right = 1137.0
 offset_bottom = 633.0
 
 [node name="TopMenu" type="HBoxContainer" parent="MarginContainer/Wrapper"]
-layout_mode = 2
 offset_right = 1122.0
 offset_bottom = 31.0
 
 [node name="HomeButton" type="Button" parent="MarginContainer/Wrapper/TopMenu"]
-layout_mode = 2
 offset_right = 55.0
 offset_bottom = 31.0
 text = "Home"
 
 [node name="GamesButton" type="Button" parent="MarginContainer/Wrapper/TopMenu"]
-layout_mode = 2
 offset_left = 59.0
 offset_right = 121.0
 offset_bottom = 31.0
 text = "Games"
 
 [node name="SettingsButton" type="Button" parent="MarginContainer/Wrapper/TopMenu"]
-layout_mode = 2
 offset_left = 125.0
 offset_right = 195.0
 offset_bottom = 31.0
 text = "Settings"
 
 [node name="HSeparator" type="HSeparator" parent="MarginContainer/Wrapper"]
-layout_mode = 2
 offset_top = 35.0
 offset_right = 1122.0
 offset_bottom = 39.0
 
 [node name="Content" type="Control" parent="MarginContainer/Wrapper"]
-layout_mode = 2
+layout_mode = 3
 anchors_preset = 0
 offset_top = 43.0
 offset_right = 1122.0

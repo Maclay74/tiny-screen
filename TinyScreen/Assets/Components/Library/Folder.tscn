@@ -1,8 +1,12 @@
-[gd_scene load_steps=2 format=3 uid="uid://sa4ov4rjyxt"]
+[gd_scene load_steps=3 format=3 uid="uid://sa4ov4rjyxt"]
 
 [ext_resource type="Script" path="res://Src/Scripts/Components/Library/FolderCard.cs" id="1"]
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lha85"]
+bg_color = Color(1, 1, 1, 0.0784314)
+
 [node name="Folder" type="AspectRatioContainer" node_paths=PackedStringArray("_label", "_button")]
+custom_minimum_size = Vector2i(150, 150)
 offset_left = 182.0
 offset_right = 349.0
 offset_bottom = 167.0
@@ -16,6 +20,7 @@ _button = NodePath("Button")
 offset_right = 167.0
 offset_bottom = 167.0
 mouse_filter = 1
+theme_override_styles/normal = SubResource("StyleBoxFlat_lha85")
 
 [node name="CenterContainer" type="CenterContainer" parent="Button"]
 anchors_preset = 15

@@ -49,7 +49,7 @@ public partial class Application : BaseRouter {
             _content.AddChild(_currentScene);
             await ToSignal(GetTree(), "process_frame");
             if (_currentScene is BaseRouter router)
-                router.Navigate(path);
+                router.FollowRoute(path);
             return;
         }
 
@@ -93,7 +93,7 @@ public partial class Application : BaseRouter {
             _content.AddChild(newSceneInstance);
             await ToSignal(GetTree(), "process_frame");
             if (_currentScene is BaseRouter router)
-                router.Navigate(path);
+                router.FollowRoute(path);
 
             await ToSignal(_tween, "finished");
 

@@ -46,7 +46,7 @@ public partial class RootNode : BaseRouter {
     private async void OnboardingRoute(string path) {
         CheckScene();
         await ToSignal(GetTree(), "process_frame");
-        _currentScene?.Navigate(path);
+        _currentScene?.FollowRoute(path);
     }
 
     [Route("application")]
@@ -57,6 +57,6 @@ public partial class RootNode : BaseRouter {
         _currentScene = Application.Instantiate() as BaseRouter;
         AddChild(_currentScene);
         await ToSignal(GetTree(), "process_frame");
-        _currentScene?.Navigate(path);
+        _currentScene?.FollowRoute(path);
     }
 }

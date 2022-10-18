@@ -16,12 +16,10 @@ public partial class GameCard : AspectRatioContainer {
         base._Ready();
         //_image.Load(System.IO.Path.Combine(OS.GetUserDataDir(), Game.Artwork));
         // TODO replace with relative paths
-            
-        if (Game != null) {
-            _image = Image.LoadFromFile(Game.Artwork);
-            _texture = ImageTexture.CreateFromImage(_image);
-            _cover.Texture = _texture;
-        }
+
+        _image = Image.LoadFromFile(Game.Artwork);
+        _texture = ImageTexture.CreateFromImage(_image);
+        _cover.Texture = _texture;
     }
         
     private void UpdateLayout() {
