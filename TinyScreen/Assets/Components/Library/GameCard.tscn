@@ -1,17 +1,17 @@
 [gd_scene load_steps=3 format=3 uid="uid://cwnpq0wiho6j8"]
 
-[ext_resource type="Texture2D" uid="uid://dmbamhr8h6hvx" path="res://Assets/Components/Library/game-1.png" id="1"]
 [ext_resource type="Script" path="res://Src/Scripts/Components/Library/GameCard.cs" id="2"]
+[ext_resource type="Texture2D" uid="uid://dmbamhr8h6hvx" path="res://Assets/Components/Library/game-1.png" id="2_4xxnb"]
 
 [node name="GameCard" type="AspectRatioContainer" node_paths=PackedStringArray("_cover")]
+custom_minimum_size = Vector2i(184, 282)
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_right = -642.0
-offset_bottom = -26.0
+offset_right = -968.0
+offset_bottom = -366.0
 grow_horizontal = 2
 grow_vertical = 2
-size_flags_horizontal = 3
 mouse_filter = 2
 ratio = 0.66
 stretch_mode = 0
@@ -19,19 +19,17 @@ script = ExtResource("2")
 _cover = NodePath("Button/Cover")
 
 [node name="Button" type="Button" parent="."]
-offset_top = -75.3636
-offset_right = 510.0
-offset_bottom = 697.364
-focus_mode = 1
-mouse_filter = 1
-button_mask = 2
-flat = true
+custom_minimum_size = Vector2i(184, 282)
+offset_right = 184.0
+offset_bottom = 282.0
 
 [node name="Cover" type="TextureRect" parent="Button"]
+custom_minimum_size = Vector2i(184, 0)
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("1")
-stretch_mode = 1
+texture = ExtResource("2_4xxnb")
+ignore_texture_size = true
+stretch_mode = 4

@@ -1,9 +1,9 @@
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using Godot;
 using TinyScreen.Framework;
 using TinyScreen.Framework.Attributes;
+using TinyScreen.Framework.Interfaces;
 using TinyScreen.Scripts.Components.Library;
 using TinyScreen.Services;
 
@@ -11,6 +11,8 @@ namespace TinyScreen.Scripts.Application.Games;
 
 public partial class Games : BaseRouter {
     [Inject] private LibraryService _libraryService;
+    
+    [Inject] private IDatabaseService _databaseService;
 
     [Export] private Container _gamesContainer;
     [Export] private Container _foldersContainer;
@@ -22,23 +24,36 @@ public partial class Games : BaseRouter {
 
     [Ready]
     private void Start() {
-        base._Ready();
-        var folders = new List<string> {"Arcade", "Racing", "Shooter", "Retro"};
-            
-        foreach (var folderName in folders) {
+        var folders = _databaseService.GetAllFolders();
+        foreach (var folder in folders!) {
             var folderCard = _folder.Instantiate() as FolderCard;
-            folderCard.FolderName = folderName;
-            folderCard.OnPress = OnFolderPress;  
+            folderCard.FolderName = folder.Name;
+            folderCard.OnPress = () => Navigate("folder/" + folder.Id);  
             _foldersContainer.AddChild(folderCard);
         }
             
-        Navigate("folder/" + folders.ElementAt(0));
+        FollowRoute("folder/" + folders.ElementAt(0).Id);
     }
-        
-    private void OnFolderPress(string name) => Navigate("folder/" + name);
 
     [Route("folder")]
-    private void OpenFolder(string path) {
-        Console.WriteLine(path);
+    private void OpenFolder(string id) {
+        var folder = _databaseService.GetFolder(Int32.Parse(id));
+        
+        // Draw games!
+        ClearGames();
+        
+        foreach (var game in folder.Games) {
+            var gameCard = _gameCard.Instantiate() as GameCard;
+            gameCard.Game = game;
+            _gamesContainer.AddChild(gameCard);
+        }
+       
+    }
+
+    private void ClearGames() {
+        foreach (var child in _gamesContainer.GetChildren()) {
+            _gamesContainer.RemoveChild(child);
+        }
+        _gamesContainer.QueueRedraw();
     }
 }

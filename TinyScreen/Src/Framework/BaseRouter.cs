@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Text.RegularExpressions;
@@ -6,9 +7,9 @@ using Godot;
 using TinyScreen.Framework.Attributes;
 using TinyScreen.scripts;
 
-namespace TinyScreen.Framework; 
+namespace TinyScreen.Framework;
 
-public sealed class RouteState: IEquatable<RouteState> {
+public sealed class RouteState : IEquatable<RouteState> {
     public string Path;
     public object[] Args;
 
@@ -27,7 +28,7 @@ public sealed class RouteState: IEquatable<RouteState> {
         if (ReferenceEquals(null, obj)) return false;
         if (ReferenceEquals(this, obj)) return true;
         if (obj.GetType() != this.GetType()) return false;
-        return Equals((RouteState) obj);
+        return Equals((RouteState)obj);
     }
 
     public override int GetHashCode() {
@@ -36,49 +37,68 @@ public sealed class RouteState: IEquatable<RouteState> {
         }
     }
 }
-    
-public abstract partial class BaseRouter : Control {
 
-    protected RouteState _currentState;
+public abstract partial class BaseRouter : Control {
+    private static Queue<RouteState> _history = new();
 
     public void Navigate(string path, params object[] args) {
-            
-        Console.WriteLine($"[{this.Name}] Path: " + (path.Length > 0 ? path : "Default"));
-            
-        BaseRouter root = path.ElementAtOrDefault(0) == '/' ? GetRoot() : this;
-        var rootType = root.GetType();
-        path = Regex.Replace(path, "^/", ""); // RemoveAt slash from the beginning
-
-        if (rootType.IsSubclassOf(typeof(BaseRouter))) {
-            var routes = rootType.GetMethods(BindingFlags.NonPublic | BindingFlags.Instance)
-                .Where(m => m.GetCustomAttributes(typeof(RouteAttribute)).Any());
-                
-            foreach (var route in routes) {
-                RouteAttribute attribute = route.GetCustomAttribute(typeof(RouteAttribute)) as RouteAttribute;
-                var pathLeft = Regex.Replace(path, attribute?.Path + "([/]?)", "");
-                var newArgs = new object[] {pathLeft}.Concat(args).ToArray();
-                var state = new RouteState(pathLeft, newArgs);
-                var isDefault = pathLeft.Length == 0 && attribute.IsDefault;
-                var match = Regex.Match(path, "^" + attribute?.Path);
-                    
-                //Console.WriteLine($"[{Name}]: {path} / {attribute?.Path} {match.Success}");
-                    
-                if (match.Success || isDefault) {
-                      
-                    //Console.WriteLine($"[{Name}]: {route.Name}");
-                    if (_currentState == null || !_currentState.Equals(state)) {
-                        _currentState = state;
-                        route.Invoke(root, newArgs);
-                    }
-                }
-            }
-        }
-        else {
-            throw new Exception($"{Name}({rootType.Name}) should be a subclass of BaseRouter");
-        }
+        var state = new RouteState(path, args);
+        _history.Enqueue(state);
+        var currentState = _history.LastOrDefault();
+        
+        // Console.WriteLine($"[Navigate] path: {path}");
+        
+        FollowRoute(currentState.Path, currentState.Args);
     }
 
-    private BaseRouter GetRoot() {
-        return GetNode<RootNode>("/root/Root");
+    public void Back() {
+        var state = _history.Dequeue();
+        FollowRoute(state.Path, state.Args);
+    }
+
+    public void FollowRoute(string path, params object[] args) {
+        FindRouteMethod(path, out var routeMethod, out var pathLeft);
+
+        if (routeMethod == null)
+            return;
+        
+        var newArgs = new object[] { pathLeft }.Concat(args).ToArray();
+        
+        // Console.WriteLine($"[FollowRoute] path: {path} method: {routeMethod.Name} pathLeft: {pathLeft}");
+        
+        routeMethod.Invoke(GetRoot(pathLeft), newArgs);
+    }
+    
+    private BaseRouter GetRoot(string path) {
+        return path.ElementAtOrDefault(0) == '/' ? GetNode<RootNode>("/root/Root") : this;
+    }
+
+    private void FindRouteMethod(string path, out MethodInfo? methodInfo, out string pathLeft) {
+        var root = GetRoot(path).GetType();
+        path = Regex.Replace(path, "^/", ""); // RemoveAt slash from the beginning
+        methodInfo = null;
+        pathLeft = path;
+
+        if (!root.IsSubclassOf(typeof(BaseRouter))) {
+            throw new Exception($"{Name}({root.Name}) should be a subclass of BaseRouter");
+        }
+
+        var routes = root
+            .GetMethods(BindingFlags.NonPublic | BindingFlags.Instance)
+            .Where(m => m.GetCustomAttributes(typeof(RouteAttribute)).Any());
+
+        foreach (var route in routes) {
+            RouteAttribute? attribute = route.GetCustomAttribute(typeof(RouteAttribute)) as RouteAttribute;
+            pathLeft = Regex.Replace(path, attribute?.Path + "([/]?)", "");
+
+            var isDefault = pathLeft.Length == 0 && attribute.IsDefault;
+            var match = Regex.Match(path, "^" + attribute?.Path);
+
+            if (!match.Success && !isDefault)
+                continue;
+
+            methodInfo = route;
+            return;
+        }
     }
 }

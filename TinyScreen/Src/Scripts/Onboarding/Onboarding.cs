@@ -31,7 +31,7 @@ public partial class Onboarding : BaseRouter {
             AddChild(_currentScene);
             await ToSignal(GetTree(), "process_frame");
             if (_currentScene is BaseRouter router)
-                router.Navigate(path);
+                router.FollowRoute(path);
             return;
         }
 
@@ -73,7 +73,7 @@ public partial class Onboarding : BaseRouter {
                 
             AddChild(newSceneInstance);
             if (newSceneInstance is BaseRouter router)
-                router.Navigate(path);
+                router.FollowRoute(path);
 
             await ToSignal(_tween, "finished");
 

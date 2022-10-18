@@ -14,12 +14,11 @@ public interface IDatabaseService {
         
     public void Delete(LibrarySource source);
     public void DeleteRange(List<LibrarySource> sources);
-       
-        
-        
+
     // Games
 
     List<Game>? GetAllGames(LibrarySource source);
+    List<Game>? GetAllGames();
         
     public void Delete(Game game);
     public void DeleteRange(List<Game> games);
@@ -34,4 +33,11 @@ public interface IDatabaseService {
     public void SetSettings(string name, string value);
 
     public string GetSettings(string name);
+    
+    
+    // Folders 
+
+    List<Folder>? GetAllFolders();
+
+    Folder? GetFolder(int id);
 }

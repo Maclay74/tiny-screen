@@ -17,7 +17,8 @@ public class EfcDatabaseService : DbContext, IDatabaseService {
     private DbSet<LibrarySource>? LibrarySources { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) {
-        optionsBuilder.UseSqlite(@"DataSource=application.db;");
+        optionsBuilder
+            .UseSqlite(@"DataSource=application.db;");
     }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder) { }
@@ -58,6 +59,10 @@ public class EfcDatabaseService : DbContext, IDatabaseService {
     public List<Game>? GetAllGames(LibrarySource source) {
         return Games?.Where(g => g.Source.Id == source.Id).ToList();
     }
+    
+    public List<Game>? GetAllGames() {
+        return Games?.ToList();
+    }
 
     public void Delete(Game game) {
         Games?.Remove(game);
@@ -96,5 +101,15 @@ public class EfcDatabaseService : DbContext, IDatabaseService {
 
     public string GetSettings(string name) {
         return Settings.FirstOrDefault(s => s.Name == name)?.Value;
+    }
+    
+    // Folders
+
+    public List<Folder>? GetAllFolders() {
+        return Folders?.ToList();
+    }
+
+    public Folder? GetFolder(int id) {
+        return Folders?.FirstOrDefault(f => f.Id == id);
     }
 }

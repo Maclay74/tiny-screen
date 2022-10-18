@@ -12,13 +12,13 @@ public partial class FolderCard : AspectRatioContainer {
     private const float UpdateEventDelay = 0.1f;
 
     public string FolderName;
-    public Action<string> OnPress;
+    public Action OnPress;
 
     public override void _Ready() {
         base._Ready();
         _label.Text = FolderName;
 
-        _button.Pressed += () => OnPress(FolderName);
+        _button.Pressed += () => OnPress();
 
     }
         

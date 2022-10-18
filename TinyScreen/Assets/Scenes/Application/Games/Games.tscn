@@ -19,7 +19,9 @@ _gameCard = ExtResource("1")
 _folder = ExtResource("2")
 
 [node name="Folders" type="ScrollContainer" parent="."]
+custom_minimum_size = Vector2i(0, 150)
 offset_right = 1152.0
+offset_bottom = 150.0
 size_flags_horizontal = 3
 
 [node name="MarginContainer" type="MarginContainer" parent="Folders"]
@@ -27,8 +29,14 @@ size_flags_horizontal = 3
 [node name="GridContainer" type="HBoxContainer" parent="Folders/MarginContainer"]
 size_flags_horizontal = 3
 
+[node name="HSeparator" type="HSeparator" parent="."]
+custom_minimum_size = Vector2i(0, 30)
+offset_top = 154.0
+offset_right = 1152.0
+offset_bottom = 184.0
+
 [node name="Games" type="ScrollContainer" parent="."]
-offset_top = 4.0
+offset_top = 188.0
 offset_right = 1152.0
 offset_bottom = 648.0
 size_flags_horizontal = 3
@@ -36,13 +44,15 @@ size_flags_vertical = 3
 
 [node name="MarginContainer" type="MarginContainer" parent="Games"]
 offset_right = 1152.0
-offset_bottom = 644.0
+offset_bottom = 460.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 mouse_filter = 2
 
 [node name="ScrollContainer" type="ScrollContainer" parent="Games/MarginContainer"]
 offset_right = 1152.0
-offset_bottom = 644.0
+offset_bottom = 460.0
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Games/MarginContainer/ScrollContainer"]
+offset_right = 1152.0
+size_flags_horizontal = 3
