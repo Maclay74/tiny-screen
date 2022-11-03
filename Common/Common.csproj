@@ -2,6 +2,7 @@
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
     <RootNamespace>Common</RootNamespace>
+    <Nullable>enable</Nullable>
   </PropertyGroup>
 
   <Target Name="CopyFiles" AfterTargets="AfterBuild">

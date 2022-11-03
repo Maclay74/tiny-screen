@@ -117,13 +117,14 @@ public class LibraryService {
             .Where(provider => provider is IGameDataProvider<T, T1>)
             .OrderBy(provider => provider.Priority());
     }
-        
-    public async Task<T1> GetData<T, T1>(string gameName) where T: GameDataType, new() {
+    
+    public async Task<T1?> GetData<T, T1>(string gameName) where T: GameDataType, new() {
         var dataType = new T();
 
         // Iterate over providers, try to get data for the game
         foreach (var provider in  GetProviders<T, T1>()) {
-            if (await dataType.Accept<T1>(provider, gameName, out var data))
+            var data = await dataType.Accept<T1>(provider, gameName);
+            if (data != null)
                 return data;
         }
 
